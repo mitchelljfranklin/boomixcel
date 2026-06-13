@@ -56,6 +56,6 @@ OTHER
 
 All features are configurable via the extension options page.
 
-DISCLAIMER: Boomi has no affiliation with this extension and does not support it, endorse its use, or provide any promises or warranties.
+DISCLAIMER: Please note that Boomi has no association with this extension and does not sanction its use. They do not offer any guarantees or warranties in relation to its functionality.
 
 Source code: https://github.com/mitchelljfranklin/BoomiXcel

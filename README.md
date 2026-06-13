@@ -45,7 +45,7 @@
 </p>
 
 > <p align="center">⚠️ <b>DISCLAIMER</b> ⚠️</p>
-> <p align="center"><b>Boomi has no affiliation with this extension and does not support it, endorse its use, or provide any promises or warranties.</b></p>
+> <p align="center"><b>Please note that Boomi has no association with this extension and does not sanction its use. They do not offer any guarantees or warranties in relation to its functionality.</b></p>
 
 ---
 
