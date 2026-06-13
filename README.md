@@ -8,7 +8,7 @@
   <h6 align="center">A New Name for a New Age</h6>
 
   <p align="center">
-    A Browser extension that enhances the Boomi Platform web UI
+    A Browser extension that enhances the Boomi Integration Platform web UI
     <br />
     <br />
     <a href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko">Chrome Store</a>
