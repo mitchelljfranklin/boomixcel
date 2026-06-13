@@ -47,9 +47,12 @@ function ExpandPalette(toggle, el) {
 function InitCollapsiblePanel(p) {
   var el = p.children[1];
   var cdp = p.children[2];
+  if (!el || !cdp) return null;
   var cd = cdp.children[0];
+  if (!cd) return null;
   var ebt = cd.children[0];
   var cbt = cd.children[2];
+  if (!ebt || !cbt) return null;
 
   el.attributes["PaletteWidth"] = DefaultPaletteWidth;
   el.attributes["ShapePaletteParent"] = el.children[0];
@@ -94,7 +97,8 @@ var docObserver = new MutationObserver((mutations) => {
 
       for (var i = 1; i < ps.length; i++) {
         if (!ps[i].attributes["sizeobserved"]) {
-          resizeObserver.observe(InitCollapsiblePanel(ps[i]));
+          var el = InitCollapsiblePanel(ps[i]);
+          if (el) resizeObserver.observe(el);
 
           ps[i].attributes["sizeobserved"] = true;
         }

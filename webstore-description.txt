@@ -19,20 +19,23 @@ BUILD CANVAS
 - Non-connected endpoints glow for visibility; hover an endpoint to quick-add a Stop shape
 - Trace path highlighting during test execution
 - Note group overlays — colored semi-transparent bounding boxes created from process notes
+- View in Process Reporting quick-link icon next to the Description link
 
 EDITING
 - CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes)
 - Markdown rendering in process descriptions and notes
 - Resizable SQL editor in Database Operation shapes
+- Copy raw document content from the Document Viewer dialog
 
 NAVIGATION & LAYOUT
 - Hide the header to reclaim build space
 - Collapse-all-folders button in Process Reporting and Deployed Process screens
 - Single-click anywhere on a process folder/title to expand (instead of the tiny icon)
-- Open dropdown menu items in a new tab
+- Open dropdown menu items in a new tab (old and new Boomi UI)
 - Reverse modal button order (OK/Cancel instead of Cancel/OK)
 - Remove sticky revision notification from the build view
 - Adjust connection operation screen sizing
+- Keep the Boomi footer bar always visible (configurable)
 
 PROCESS REPORTING
 - Custom auto-refresh interval
@@ -44,6 +47,7 @@ OTHER
 - Icon set selection for shapes (Legacy, Modern, Minimal, etc.)
 - Old-style play/pause icons in deployed processes
 - Copy component ID/URL from the build canvas
+- Automatically rename downloaded documents to `_.`
 - Post-deployment schedule reminder
 - Platform status check on every page
 - Tab names simplified (account name removed, configurable)
