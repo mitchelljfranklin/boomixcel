@@ -112,6 +112,8 @@
 - Per-version changelog popup shown once after each update
 - Settings-changed notification prompting a page reload
 
+<p align="right"><sub><a href="#contents">↑ Back to top</a></sub></p>
+
 ---
 
 ## Screenshots
@@ -130,6 +132,8 @@
   <img src="WebStore%20images/Image3.png" alt="Process reporting with auto-refresh and table wrap" width="700">
   <br /><sub>📊 Process reporting — custom auto-refresh, table text wrapping, and collapse-all-folders</sub>
 </p>
+
+<p align="right"><sub><a href="#contents">↑ Back to top</a></sub></p>
 
 ---
 
@@ -294,6 +298,8 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 npm run build
 # 3. Upload zips from build/ to each browser store
 ```
+
+<p align="right"><sub><a href="#contents">↑ Back to top</a></sub></p>
 
 ---
 
