@@ -152,13 +152,16 @@ Do not modify or re-integrate without understanding why they were removed.
 
 All code must be written in a human-readable format — this applies equally to hand-written and AI-generated code. Avoid minified, obfuscated, or machine-optimized code in any source files.
 
-- Use descriptive variable and function names (not single-letter names except for trivial loop counters)
-- Use consistent indentation and whitespace
-- Break long lines into multiple lines for readability
-- Write clear, self-documenting code — avoid cryptic one-liners
-- Keep source files as plain, readable JavaScript/CSS/HTML (no minification outside the build step)
-
 The **only** minification happens in the build step (`npm run build`). All `.js`, `.css`, and `.html` files in `src/` must remain unminified and readable.
+
+## CSS convention — `boomi.css` is the single stylesheet
+
+All CSS rules **must** be added to `library/css/boomi.css`. Do **not**:
+- Set inline `style=""` attributes on elements in HTML
+- Set `element.style.*` or `element.style.cssText` in JavaScript
+- Add `<style>` blocks to `options.html` or any other HTML file
+
+If JavaScript needs to apply a style, add or remove a **class** (`element.classList.add` / `remove`) and define the style for that class in `boomi.css`. This keeps all visual rules in one auditable place and avoids CSP issues with inline styles in content scripts.
 
 ## No linter / formatter / test suite
 

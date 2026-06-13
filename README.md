@@ -251,7 +251,8 @@ Three storage backends are used:
 
 ### Conventions
 
-- **Human-readable source code** — all `.js`, `.css`, and `.html` files in `src/` must be written in a human-readable format, whether hand-written or AI-generated. Use descriptive names, consistent indentation, and clear structure. Minification happens only at build time via esbuild — never commit minified or obfuscated source code.
+- **Human-readable source code** — all `.js`, `.css`, and `.html` files in `src/` must be written in a human-readable format, whether hand-written or AI-generated. Minification happens only at build time via esbuild — never commit minified or obfuscated source code.
+- **CSS convention** — all styling goes in `library/css/boomi.css`. Never use inline `style=""` attributes, `element.style.*` in JS, or `<style>` blocks. Use classes (`element.classList.add`/`remove`) and define the rules in `boomi.css`. This applies to every file — options page, content scripts, everything.
 - **Options page form contract** — every form control on `options.html` must have both `class="option"` and a `name` attribute. `options.js` discovers controls via `.option` and uses `name` as the `chrome.storage.sync` key. New toggles also need a corresponding key read in `listenerGlobal.js`. Each control should have a `data-default` attribute for the Reset button. On/off options use toggle switches (`.toggle-switch` checkboxes) serialized as `"on"`/`"off"` strings.
 - **Options page CSS** — all options page styling lives in `library/css/boomi.css` under `/* Options page */`. Never add inline `<style>` blocks or `style=""` attributes to `options.html`, and never set element styles in `options.js`. The options page loads `boomi.css` in its `<head>`.
 - **arrive.js cleanup** — scripts using `document.arrive()` on a reusable selector should call `document.unbindArrive(selector)` after the first match to prevent duplicate handlers
