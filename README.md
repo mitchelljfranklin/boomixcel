@@ -276,7 +276,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/quickclickComponent.js` | content | Double-click quick-shape popup |
 | `content/menuOpen.js` | content | Open-in-new-tab icon on dropdown menus |
 | `content/reminders.js` | content | Post-deployment schedule reminder |
-| `content/clickComponents.js` | content | Header show/hide toggle |
+| `content/headerActions.js` | content | Header show/hide toggle, copy component ID/URL, update overlay close |
 | `content/updateNotification.js` | content | Per-version changelog popup |
 | `content/iconSets.js` | content | Icon set data for shape styling |
 | `content/listenerGlobal.js` | content | Reads config from storage, caches it, runs the DOM poller |

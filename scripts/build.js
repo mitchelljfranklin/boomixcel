@@ -13,7 +13,7 @@ const CONTENT_ORDER = [
   "contentScript.js",
   "global.js",
   "boomi.js",
-  "clickComponents.js",
+  "headerActions.js",
   "dashboard.js",
   "buildPallet.js",
   "shortCuts.js",
