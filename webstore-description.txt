@@ -1,0 +1,66 @@
+Boomi Xcel v1.7.4.7
+The Boomi Integration Platform Extension
+
+A browser extension that enhances the Boomi Integration Platform web UI at platform.boomi.com with powerful productivity tools, visual improvements, and workflow optimizations.
+
+---
+
+KEYBOARD SHORTCUTS
+
+- Ctrl+Alt+S: Save the current flow
+- Ctrl+Alt+T: Test the current flow
+- Configurable shortcut (default ~): Toggle full-screen mode
+
+BUILD CANVAS
+
+- Capture the entire process flow as a PNG with transparency, zoom, and note-expansion options
+- Remove the canvas dot grid for a cleaner workspace (pairs well with dark mode)
+- Double-click to add shapes via a quick-shape popup
+- Restored old-style shape connector palette
+- Non-connected endpoints glow for visibility; hover an endpoint to quick-add a Stop shape
+- Trace path highlighting during test execution
+- Note group overlays: colored semi-transparent bounding boxes created from process notes
+
+EDITING
+
+- CodeMirror editor for Message, Notify, and Command shapes with JSON, XML, HTML, and SQL modes
+- Markdown rendering in process descriptions and notes
+- Resizable SQL editor in Database Operation shapes
+
+NAVIGATION AND LAYOUT
+
+- Hide the header to reclaim build space
+- Collapse-all-folders button in Process Reporting and Deployed Process screens
+- Single-click anywhere on a process folder or title to expand (instead of the tiny icon)
+- Open dropdown menu items in a new tab
+- Reverse modal button order (OK/Cancel instead of Cancel/OK)
+- Remove sticky revision notification from the build view
+- Adjust connection operation screen sizing
+
+PROCESS REPORTING
+
+- Custom auto-refresh interval
+- Table text wrapping (always / never / toggle on header hover)
+- Auto-updating pending executions clock
+- Default dashboard view set to 7 days
+
+ADDITIONAL FEATURES
+
+- Icon set selection for shapes (Legacy, Modern, Minimal, Minimal Inverted, Refreshed Inverted)
+- Old-style play and pause icons in deployed processes
+- Copy component ID and URL from the build canvas
+- Post-deployment schedule reminder
+- Platform status check on every page
+- Simplified tab names (account name removed, configurable)
+- Page-specific favicons for each Boomi subdomain (AtomSphere, MdmSphere, ApiSphere, Flow)
+- Auto-check default build filters (Process, Process Property, Cross Reference Table, API Service)
+- Per-version changelog popup shown once after each update
+- Settings-changed notification prompting a page reload
+
+---
+
+All features are configurable via the extension options page.
+
+DISCLAIMER: Boomi has no affiliation with this extension and does not support it, endorse its use, or provide any promises or warranties.
+
+Source code: https://github.com/mitchelljfranklin/BoomiXcel
