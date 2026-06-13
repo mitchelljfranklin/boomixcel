@@ -4,181 +4,280 @@
     <img src="logo/extensionLogo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Boomi Platform Enhancer Extension</h3>
+  <h3 align="center">Boomi Xcel <br> The Boomi Integration Platform Extenstion!</h3>
+  <h6 align="center">A New Name for a New Age<h6>
 
   <p align="center">
-    Provides User Enhancements to the Boomi Platform
+    A Browser extension that enhances the Boomi Platform web UI
     <br />
     <br />
-    <a href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko">View Chrome Store</a>
+    <a href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko">Chrome Store</a>
     ·
-        <a href="https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active">View Firefox Store</a>
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active">Firefox Add-ons</a>
     ·
-    <a href="https://github.com/matt-flaig/Boomi-Platform-Extension/issues">Request a feature</a>
+    <a href="https://github.com/matt-flaig/Boomi-Platform-Extension/issues">Request a Feature</a>
   </p>
-  <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;" align="center">
-    <a href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko">
-      <img src="logo/chrome-web-store-badge-border.png" width="248" alt="Image 1">
-    </a>
-    <a href="https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active">
-      <img src="logo/firefox-add-on-badge-border-resized.png" width="248" alt="Image 2">
-    </a>
-  </div>
 </p>
 
-<h2 align="center">Disclaimer</h2>
-  <p align="center">Boomi has no affiliation with this extension and does not support it, endorse its use, or provide any promises or warranties (as per legal requirements)
-  </p>
+<h2 align="center"><b>Disclaimer</b></h2>
+<p align="center">Boomi has no affiliation with this extension and does not support it, endorse its use, or provide any promises or warranties.</p>
 
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
+---
 
-- [Table of Contents](#table-of-contents)
-- [About The Project](#about-the-project)
-  - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Roadmap](#roadmap)
-- [Discussion](#discussion)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
+## Features
+
+**Keyboard Shortcuts**
+- `Ctrl+Alt+S` — Save the current flow
+- `Ctrl+Alt+T` — Test the current flow
+- Configurable shortcut for full-screen toggle (default: `~`)
+
+**Build Canvas**
+- Capture the entire process flow as a PNG (with transparency, zoom, and note-expansion options)
+- Remove the canvas dot grid (works well with dark mode)
+- Double-click to add shapes via a quick-shape popup
+- Restored old-style shape connector palette
+- Non-connected endpoints glow for visibility; hover an endpoint to quick-add a Stop shape
+- Trace path highlighting during test execution
+- Note group overlays — colored semi-transparent bounding boxes created from process notes
+
+**Editing**
+- CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes)
+- Markdown rendering in process descriptions and notes
+- Resizable SQL editor in Database Operation shapes
+
+**Navigation & Layout**
+- Hide the header to reclaim build space
+- Collapse-all-folders button in Process Reporting and Deployed Process screens
+- Single-click anywhere on a process folder/title to expand (instead of the tiny icon)
+- Open dropdown menu items in a new tab
+- Reverse modal button order (OK/Cancel instead of Cancel/OK)
+- Remove sticky revision notification from the build view
+- Adjust connection operation screen sizing
+
+**Process Reporting**
+- Custom auto-refresh interval
+- Table text wrapping (always / never / toggle on header hover)
+- Auto-updating pending executions clock
+- Default dashboard view set to 7 days
+
+**Other**
+- Icon set selection for shapes (Legacy, Modern, Minimal, etc.)
+- Old-style play/pause icons in deployed processes
+- Copy component ID/URL from the build canvas
+- Post-deployment schedule reminder
+- Platform status check on every page
+- Tab names simplified (account name removed, configurable)
+- Page-specific favicons for each Boomi subdomain (AtomSphere, MdmSphere, ApiSphere, Flow)
+- Auto-check default build filters (Process, Process Property, Cross Reference Table, API Service)
+- Per-version changelog popup shown once after each update
+- Settings-changed notification prompting a page reload
+
+---
+
+## Screenshots
+
+![](WebStore%20images/Image1.png)
+![](WebStore%20images/Image2.png)
+![](WebStore%20images/Image3.png)
+![](WebStore%20images/Image4.png)
+
+---
+
+## Installing
+
+Visit one of the browser stores:
+
+- [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko)
+- [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active)
+
+Click **Install** — the extension auto-enables on `https://platform.boomi.com/*`.
+
+---
+
+## Development
+
+### Setup
+
+```bash
+npm install
+```
+
+### Load the extension
+
+1. Open `chrome://extensions` (or `about:debugging` in Firefox)
+2. Enable **Developer Mode**
+3. Click **Load unpacked** and select the `src/` directory
+4. Visit `https://platform.boomi.com/`
+
+### Build
+
+```bash
+npm run build        # bundle content scripts, generate browser manifests, create zips
+npm run watch        # rebuild content scripts on file changes
+```
+
+`npm run build` produces three upload-ready zips in `build/`:
+
+| File | Manifest | Notes |
+|------|----------|-------|
+| `boomi-platform-enhancer-X.Y.Z-Chrome.zip` | V3 | includes `update_url` |
+| `boomi-platform-enhancer-X.Y.Z-Firefox.zip` | V2 | flat `web_accessible_resources` |
+| `boomi-platform-enhancer-X.Y.Z-Edge.zip` | V3 | no `update_url` |
+
+All manifests are generated from `src/manifest.json` — the single source of truth.
+
+### Project Structure
+
+```
+src/
+  manifest.json              ← Chrome V3 base manifest
+  library/
+    boomiapp/
+      content/               ← content-script context (bundled → bundle.js)
+      page/                  ← page context (individually injected)
+      options.js             ← options page logic
+    css/                     ← injected stylesheets
+    inject/                  ← third-party libs (CodeMirror, arrive.js, etc.)
+    jquery/                  ← jQuery 3.7.1
+scripts/
+  build.js                   ← esbuild bundler + manifest generator + zipper
+build/                       ← release zips (output)
+```
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+### Architecture
 
-The Boomi Platform Enhancer Extension came about from the need to adjust the current default Boomi Web Platform IDE and display to provide a more desirable layout and adjustments to make development and general usage with in the Boomi Cloud platform more robust. 
+The extension runs scripts in two separate contexts:
 
+**Content-context (`content/`)** — runs in the extension's isolated sandbox. Scripts here are bundled by esbuild into a single `bundle.js` (order defined by `CONTENT_ORDER` in `scripts/build.js`). They have access to `chrome.*` APIs, `document.arrive()`, and `CodeMirror`. Config is read directly from `chrome.storage.sync` and cached in a shared `BoomiPlatform` variable within the bundle's IIFE scope. **All feature scripts live here.**
 
-Here's why:
-* I wanted more functionality and better overall setup; so instead of waiting I just did.
-* Boomi takes community feedback however its not perfect and unless its gets a score of XXX it does not really get a look at and to me these feel a must.
+**Page-context (`page/`)** — only `fullscreen.js`, because Chrome restricts the Fullscreen API from the isolated world. It is injected via `<script>` tag by `contentScript.js` and receives config through a minimal `postMessage`.
 
+**Rule of thumb:**
+| If the script... | Place it in... |
+|---|---|
+| Uses `chrome.*`, `document.arrive()`, `CodeMirror`, or `shortcut.add()` | `content/` |
+| Needs Fullscreen API (`element.requestFullscreen`) | `page/` |
+
+### Configuration flow
+
+```text
+options.html → options.js
+    ↓ chrome.storage.sync.set()
+content/listenerGlobal.js
+    ↓ chrome.storage.sync.get(null) → var BoomiPlatform = config
+content/*.js
+    ↓ reads BoomiPlatform.someKey from shared bundle scope
+content/contentScript.js
+    ↓ postMessage(fullscreen keys only) → page/fullscreen.js
+```
+
+Three storage backends are used:
+- **`chrome.storage.sync`** — user preferences (feature toggles, refresh interval, shortcuts). Read directly by `listenerGlobal.js` and cached.
+- **`chrome.storage.local`** — transient UI state (header visibility toggle)
+- **`localStorage`** — per-version changelog suppression (`boomiplatenhanUpdateNot{version}`)
+
+### Conventions
+
+- **Human-readable source code** — all `.js`, `.css`, and `.html` files in `src/` must be written in a human-readable format, whether hand-written or AI-generated. Use descriptive names, consistent indentation, and clear structure. Minification happens only at build time via esbuild — never commit minified or obfuscated source code.
+- **arrive.js cleanup** — scripts using `document.arrive()` on a reusable selector should call `document.unbindArrive(selector)` after the first match to prevent duplicate handlers
+- **jQuery** — use 3.7.1. Loaded at `document_start` in the isolated context
+- **No build output committed** — `content/bundle.js` and `node_modules/` are gitignored
+
+### Debugging
+
+Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode). Both content-script and page-context output appear in the main page console when inspecting `https://platform.boomi.com/`. Bundle stack traces include the original source filename (esbuild injects `// src/library/boomiapp/content/...` comments).
+
+### Script reference
+
+| Script | Context | Purpose |
+|---|---|---|
+| `content/contentScript.js` | content | Entry point — injects fullscreen.js, checks platform status |
+| `content/global.js` | content | Shared utilities — URL parsing, dashboard default, alert dialogs |
+| `content/boomi.js` | content | Core enhancements — header toggle, copy component ID, capture flow |
+| `content/shortCuts.js` | content | Keyboard shortcuts — Ctrl+Alt+S save, Ctrl+Alt+T test |
+| `content/messageEditor.js` | content | CodeMirror editor for Message/Notify/Command shapes |
+| `content/buildPallet.js` | content | Restored old-style shape connector palette |
+| `content/scheduleIcons.js` | content | Old play/pause icons in deployed processes |
+| `content/buildFilters.js` | content | Default process filters |
+| `content/filterButtons.js` | content | Collapse-all-folders, single-click tree navigation |
+| `content/quickclickComponent.js` | content | Double-click quick-shape popup |
+| `content/menuOpen.js` | content | Open-in-new-tab icon on dropdown menus |
+| `content/reminders.js` | content | Post-deployment schedule reminder |
+| `content/clickComponents.js` | content | Header show/hide toggle |
+| `content/updateNotification.js` | content | Per-version changelog popup |
+| `content/iconSets.js` | content | Icon set data for shape styling |
+| `content/listenerGlobal.js` | content | Reads config from storage, caches it, runs the DOM poller |
+| `content/canvas.js` | content | Canvas grid toggle |
+| `content/customRefresh.js` | content | Custom process-reporting refresh interval |
+| `content/shapes.js` | content | Endpoint glow, trace path highlighting |
+| `content/descriptionMarkdown.js` | content | Markdown in process descriptions |
+| `content/tableWrap.js` | content | Table text-wrap toggles |
+| `content/modalButtons.js` | content | Reverse modal OK/Cancel order |
+| `content/notes.js` | content | Markdown in note elements |
+| `content/imageCapture.js` | content | Process flow → PNG capture |
+| `content/groups.js` | content | Note group overlays on canvas |
+| `content/connectionOperations.js` | content | Connection operation screen sizing |
+| `content/versionNotification.js` | content | Close button on revision notification |
+| `page/fullscreen.js` | page | Full-screen toggle (page context required) |
+| `options.js` | options | Options page save/restore |
+
+`Old Scripts but want to keep/` contains archived scripts (previous versions of features, unused experiments). They are not loaded by any manifest — do not modify or re-integrate them without first understanding why they were removed.
+
+### To release
+
+```bash
+# 1. Bump version in package.json
+# 2. Build
+npm run build
+# 3. Upload zips from build/ to each browser store
+```
+
+---
 
 ### Built With
-The main frameworks of this extension and IDE used to build this extension.
-* [JQuery](https://jquery.com)
-* [JavaScript](https://www.javascript.com/)
-* [Visual Studio Code](https://code.visualstudio.com/)
 
+- **[esbuild](https://esbuild.github.io/)** — content-script bundling
+- **[jQuery 3.7](https://jquery.com/)** — DOM manipulation
+- **[CodeMirror](https://codemirror.net/)** — code editor for Message/Notify shapes
+- **[arrive.js](https://github.com/uzairfarooq/arrive)** — DOM mutation observer
+- **[showdown](https://github.com/showdownjs/showdown)** — Markdown rendering
+- **[rasterizeHTML.js](https://github.com/cburgmer/rasterizeHTML.js)** — process flow image capture
 
-
-## Getting Started
-
-To get started simply visit one of the following Browser App Stores: Notice - This will not be published onto the MS Edge Store due to MS requireing Access to Boomi to test to align with MS Policy
-* [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko) 
-* [Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active/)
-
-and install the addon; once done it will auto-enable when on the Boomi Web Platform.
-
-
-### Installation
-
-1. Visit one of the following Browser App Stores: Notice - This will not be published onto the MS Edge Store due to MS requireing Access to Boomi to test to align with MS Policy
-   * [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko).
-   * [Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active/)
-2. Click Install
-
-
-## Usage
-
-The following provides the current abilities of the released extension for use within the Boomi Web Platform:
-
-* Keyboard Shortcuts
-  * Ctrl+Alt + S = Save Current Flow
-  * Ctrl+Alt + T = Test Current Flow
-  * ~ = Toggle Full Screen - On/Off
-* Adjustments to the portal for integration around font sizing, header and menu sizing to provide more build and processing space within the default view.
-* Account dashboard now defaults to 7 days instead of the maximum value.
-* Shapes that don't have a end connection will glow.
-* Quickly add stop shape to flow by hovering over end arrow and clicking stop.
-* Add components directly within the build tab by double clicking the flow and selecting from a drop down.
-* Capture the entire flow without resize and save to a local image by using the "Capture Process Flow" button above the build canvas.
-* Hover over flow shape to see the connection points it make.
-* Use notes to group tasks and provide information relating to multiple areas of the flow.
-* Add Markdown in the process description or notes to show better visual formatting.
-* When tables (for example Process Reporting list view) is displayed there's an option to tabble wrap - Always/Never Wrap or Toggle when Hover over Header..
-* Ability to assign keyboard button to easily go into and out of Full Screen Mode - default is the `~` key.
-* JSON & XML Viewing toggle added to Message and Notify Shapes; will format the JSON and add the ' quote padding automatically.
-* Capture a diagram of your process flow easily via the "Capture Process Flow" button; will capture the entire flow and save an image to a local file.
-  * Options available are - Use Transparent Background, Zoom Size and Ability to Expand all notes to capture the note detail
-* Debug has been enhanced to provide more robust coloring, this includes glowing colors, item selection and error emphasis.
-* Ability to Remove the Canvas Build Background (dots) which works well with dark modes.
-* Save Reminder – When packaging a component you will be reminded to save the process as Boomi doesn't save automatically when packaging.
-* Schedule Reminder - Once a deployment has occurred or been deployed to another environment the notification message will also provide a reminder to setup a schedule (if enabled).
-* Easily copy the current Component URL/ID using the Copy Component ID Button (In the ⚙️ action button above the build canvas).
-* Build Shape "connector" Pallet has been restored back to its better life before Boomi UX decided to change it and make it unusable.
-* Enable the selection of Icon Sets within the option to define user experience instead of default Boomi UX.
-* In Process Reporting, Pending Executions runtime clock/timer now auto-updates - Note: Auto Refresh must be turned on for this to work.
-* Define a custom refresh period and have process reporting auto refresh to your needs.
-* Expand the Element Selection Screen within Shapes to provide more visual room for ease of use.
-* Platform Status Detail - Shows if operational or if any Boomi systems are not operational.
-* Brand new code editor attached to Message, Notify and Command Shape, click Edit message to open up a dedicated code window with choice of code display
-* Tab names remove the account name to enable better display of tabs function i.e. Build, Reporting etc. Toggle Option Available.
-* New Icon against Drop Down Menu items i.e. Manage to allow you to click and open in new tab instead of the same window.
-* Default SQL Editor in Data Base Operation code area is now resizable for use with larger screens.
-* Connector Operation Screen for HTTP has increased sizing on Request details for better use.
-* Ability to Collapse All Processes into Folders in the Process Reporting Process Filter screen.
-* Ability to Collapse All Processes into Folders in the Deployed Process Screen in Atom Management.
-* Ability to remove the sticky revision notification from the build view.
-* Ability to adjust Schedule Section Icons in Atom Management to the old style prior to the new release due to new icons being hard to define based on a little color difference.
-* Ability to reverse the modal button layout to match side panel layout i.e. OK - Cancel instead of new default of Cancel - OK.
-* Ability to single-anywhere on a process folder or title to open (Instead of the tiny icon to expand).
-* Document viewer has been changed to Mono-Spaced to provide all round better display.
-* Document downloads are automatically renamed from the default timestamp filename to a meaningful name based on the process name, execution timestamp, and detected file type (e.g. MyProcess_20260405_153958.json). Supports JSON, XML, EDI, CSV, and TXT.
-
-
-<br><br>
-
-
-  ![](/WebStore%20images/Image1.png)
-  ![](/WebStore%20images/Image2.png)
-  ![](/WebStore%20images/Image3.png)
-  ![](/WebStore%20images/Image4.png)
-
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the Issues tab for a list of proposed features (and known issues).
-
-## Discussion
-Join the Boomi Discord [#extension-enhancer](https://discord.gg/XcXRrYHVUa) channel for updates, discussion and more!
-
+---
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are welcome. Please [open an issue](https://github.com/matt-flaig/Boomi-Platform-Extension/issues) before starting substantial work to discuss the change.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Making changes
 
+1. Fork and create a branch from `main` (`git checkout -b feature/your-feature`)
+2. See the [Architecture](#architecture) section above for where to place new files:
+   - **Content-context** → `src/library/boomiapp/content/`, add to `CONTENT_ORDER` in `scripts/build.js`
+   - **Page-context** (Fullscreen API only) → `src/library/boomiapp/page/`, add to `web_accessible_resources` in `src/manifest.json`
+3. Verify the extension loads and works on `https://platform.boomi.com/`
+4. Run `npm run build` and confirm it finishes without errors
+5. Commit with a clear message describing what changed and why
+6. Push and open a pull request against the `main` branch
 
+---
 
+## Discussion
+
+Join the [Boomi Discord — #extension-enhancer](https://discord.gg/XcXRrYHVUa) for updates and discussion.
+
+---
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License.
 
-
-
-<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* **Tony Banik** - Developer of Boomi Tools that provided me with some of the best ideas that are implemented or being implemented into this extension.
-* [Baptiste BIEBER](https://github.com/baptistebieber) - Developer of Boomi Extension that provided idea for future enhancements
-* **Noah Skelton** - Developer of the Build Pallet Fix Script used to return the UX for Shapes back to what it was
-* [Matthew Flaig ](https://github.com/matt-flaig) - Ongoing Contributer and developer of Extension who without the extension would not be as updated
-* [Boomi](https://boomi.com/)
-* [Boomi Community](https://community.boomi.com/)
-* [Choose an Open Source License](https://choosealicense.com)
-* [Visual Studio Code](https://code.visualstudio.com/)
 
+- **Tony Banik** — Boomi Tools developer, source of many ideas
+- [**Baptiste BIEBER**](https://github.com/baptistebieber) — Boomi Extension developer
+- **Noah Skelton** — Build Pallet Fix script
+- [**Matthew Flaig**](https://github.com/matt-flaig) — Ongoing contributor and maintainer
+- [**Boomi Community**](https://community.boomi.com/)

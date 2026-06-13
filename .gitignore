@@ -1,2 +1,5 @@
-
+node_modules/
 .vscode/settings.json
+
+# Build output
+src/library/boomiapp/content/bundle.js
