@@ -4,8 +4,8 @@
     <img src="logo/extensionLogo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Boomi Xcel <br> The Boomi Integration Platform Extenstion!</h3>
-  <h6 align="center">A New Name for a New Age<h6>
+  <h3 align="center">Boomi Xcel <br> The Boomi Integration Platform Extension!</h3>
+  <h6 align="center">A New Name for a New Age</h6>
 
   <p align="center">
     A Browser extension that enhances the Boomi Platform web UI
@@ -116,6 +116,10 @@ npm run build        # bundle content scripts, generate browser manifests, creat
 npm run watch        # rebuild content scripts on file changes
 ```
 
+> On Windows, PowerShell execution policy may block `npm`. Use `cmd /c "npm run build"` as a fallback. esbuild warnings (e.g. duplicate object keys) are non-fatal — the build still completes and produces zips.
+
+**When to rebuild:** only changes to `src/library/boomiapp/content/*.js` and `src/manifest.json` require a rebuild. Editing `options.html`, `options.js`, or `page/fullscreen.js` does not.
+
 `npm run build` produces three upload-ready zips in `build/`:
 
 | File | Manifest | Notes |
@@ -181,6 +185,7 @@ Three storage backends are used:
 ### Conventions
 
 - **Human-readable source code** — all `.js`, `.css`, and `.html` files in `src/` must be written in a human-readable format, whether hand-written or AI-generated. Use descriptive names, consistent indentation, and clear structure. Minification happens only at build time via esbuild — never commit minified or obfuscated source code.
+- **Options page form contract** — every form control on `options.html` must have both `class="option"` and a `name` attribute. `options.js` discovers controls via `.option` and uses `name` as the `chrome.storage.sync` key. New toggles also need a corresponding key read in `listenerGlobal.js`.
 - **arrive.js cleanup** — scripts using `document.arrive()` on a reusable selector should call `document.unbindArrive(selector)` after the first match to prevent duplicate handlers
 - **jQuery** — use 3.7.1. Loaded at `document_start` in the isolated context
 - **No build output committed** — `content/bundle.js` and `node_modules/` are gitignored
