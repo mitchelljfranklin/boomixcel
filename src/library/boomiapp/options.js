@@ -37,16 +37,26 @@ function updateDirtyIndicator() {
 document.addEventListener("change", updateDirtyIndicator);
 document.addEventListener("input", updateDirtyIndicator);
 
+function showToast(message, duration) {
+  duration = duration || 3000;
+  var container = document.getElementById("toast-container");
+  var toast = document.createElement("div");
+  toast.className = "toast-popup";
+  toast.innerHTML = message;
+  container.appendChild(toast);
+  requestAnimationFrame(function () { toast.classList.add("show"); });
+  setTimeout(function () {
+    toast.classList.remove("show");
+    setTimeout(function () { toast.remove(); }, 300);
+  }, duration);
+}
+
 function save_options() {
   var options = getFormState();
   chrome.storage.sync.set(options, function () {
     SAVED_STATE = getFormState();
     updateDirtyIndicator();
-    var status = document.getElementById("status");
-    status.style.display = "";
-    setTimeout(function () {
-      status.style.display = "none";
-    }, 1500);
+    showToast("<strong>Saved!</strong> Reload the Boomi platform tab for changes to take effect.");
   });
 }
 
@@ -98,11 +108,7 @@ function reset_defaults() {
     }
   });
   updateDirtyIndicator();
-  document.getElementById("status").style.display = "";
-  document.getElementById("status").innerHTML = "<strong>Defaults restored.</strong> Click Save to apply.";
-  setTimeout(function () {
-    document.getElementById("status").style.display = "none";
-  }, 2000);
+  showToast("<strong>Defaults restored.</strong> Click Save to apply.", 4000);
 }
 
 document.addEventListener("DOMContentLoaded", restore_options);

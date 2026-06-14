@@ -3,7 +3,6 @@
     <head> 
         <title>BoomiXcel Options</title>         
         <link href="library/css/bootstrap.min.css" rel="stylesheet"> 
-        <link rel="stylesheet" href="library/css/blocks.css"> 
         <link rel="stylesheet" href="library/css/boomi.css"> 
     </head>     
     <body class="options-page"> 
@@ -129,9 +128,7 @@
                     <button id="reset" type="button" class="btn btn-reset fw-bold" title="Reset all options to defaults">&#8634; Reset</button>
                 </div>
             </form>                                         
-            <div id="status" class="alert alert-success w-100 text-center mt-3" style="display: none;">
-                <strong>Success!</strong> Settings saved. Reload the Boomi platform tab for changes to take effect.
-            </div>                                         
+            <div class="toast-container" id="toast-container"></div>                                         
         </div>
         <script src="library/boomiapp/options.js"></script>         
     </body>     
