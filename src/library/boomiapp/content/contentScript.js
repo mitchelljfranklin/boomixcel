@@ -102,7 +102,6 @@ chrome.storage.onChanged.addListener((e) => {
   });
 
   removeBoomiOverlay("BoomiUpdateOverlay");
-  if (overlay) overlay.remove();
   document
     .getElementsByTagName("body")[0]
     .insertAdjacentHTML("beforeend", alert_html);

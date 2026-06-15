@@ -59,18 +59,6 @@ QUICK SETTINGS POPUP
 - Click the toolbar icon for instant access to the most-used feature toggles — no need to open the full options page
 - Changes save immediately; reload the page to apply
 
-##  Installing
-
-Visit one of the browser stores:
-
-      
-      
-
-      
-      
-
-Click Install — the extension auto-enables on `https://platform.boomi.com/*`.
-
 ---
 
 All features are configurable via the extension options page.
