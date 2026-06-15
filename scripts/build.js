@@ -70,8 +70,8 @@ function generateWebstoreDescription(version) {
 
   const readme = fs.readFileSync(readmePath, "utf-8");
 
-  // Extract the Features section (from "## Features" to next "---" divider)
-  const featuresMatch = readme.match(/## [^\n]*Features\n([\s\S]*?)\n---/);
+  // Extract the Features section (from "## ✨ Features" to next "## " heading)
+  const featuresMatch = readme.match(/## [^\n]*Features\n([\s\S]*?)\n(?=## )/);
   if (!featuresMatch) {
     console.log("  Skipping webstore description: Features section not found");
     return;
