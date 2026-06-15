@@ -16,6 +16,7 @@ function renderToggles() {
   chrome.storage.sync.get(null, function (items) {
     TOGGLE_LIST.forEach(function (item) {
       var val = items[item.key];
+      if (val === undefined) val = item.defaultVal;
       var enabled = val === "on" || val === true;
 
       var row = document.createElement("div");
