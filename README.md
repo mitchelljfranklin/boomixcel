@@ -242,6 +242,11 @@ No other sites are accessed.
 npm install          # install dependencies (esbuild, archiver)
 ```
 
+**Prerequisites:**
+- **Node.js** >= 18
+- **npm** >= 9
+- **gh CLI** >= 2 (optional, required for `npm run release` — [install guide](https://github.com/cli/cli#installation))
+
 ### Load the extension
 
 1. Open `chrome://extensions` (or `about:debugging` in Firefox)
