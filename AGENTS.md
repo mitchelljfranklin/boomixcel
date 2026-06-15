@@ -225,6 +225,8 @@ All CSS rules **must** be added to `library/css/boomi.css`. Do **not**:
 
 If JavaScript needs to apply a style, add or remove a **class** (`element.classList.add` / `remove`) and define the style for that class in `boomi.css`. This keeps all visual rules in one auditable place and avoids CSP issues with inline styles in content scripts.
 
+**Exception:** Computed or dynamic styles (e.g., `element.style.top` for drag positioning, `element.style.transform` for image capture scaling, `element.style.width` for palette resizing) are acceptable when the value cannot be known at CSS authoring time. Prefer classes whenever the value is static — for example, a button's base appearance should be a class, but its calculated pixel position on drag is fine as an inline style.
+
 **Modal dialogs** — all Boomi-style modal/notification dialogs must use `renderBoomiModal()` from `content/modalHelper.js`. Do not write inline modal HTML. See the JSDoc in `modalHelper.js` for parameter documentation.
 
 **Toast notifications** — use `showToast(message, duration, type)` from `content/toastHelper.js` for transient notifications. Available in content scripts (via bundle) and the options page (via direct `<script>` tag). Do not write inline toast HTML or use `alert()`.

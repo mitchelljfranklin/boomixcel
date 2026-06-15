@@ -359,6 +359,7 @@ async function main() {
       bundle: true,
       format: "iife",
       target: "es2015",
+      sourcemap: "inline",
     });
     await ctx.watch();
     console.log("Watching content scripts for changes...");

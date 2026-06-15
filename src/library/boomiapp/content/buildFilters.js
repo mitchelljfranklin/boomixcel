@@ -1,23 +1,12 @@
 document.arrive(".filter_popup", function (filteredScreen) {
-  var processFilter;
-  var processPropFilter;
-  var CrossFilter;
-
-  chrome.storage.sync.get(["Filter_process"], function (e) {
-    processFilter = e.Filter_process;
-  });
-  chrome.storage.sync.get(["Filter_processProp"], function (e) {
-    processPropFilter = e.Filter_processProp;
-  });
-  chrome.storage.sync.get(["Filter_crossref"], function (e) {
-    CrossFilter = e.Filter_crossref;
-  });
-  chrome.storage.sync.get(["Filter_api_service"], function (e) {
-    APIServFilter = e.Filter_api_service;
-  });
-
-  chrome.storage.sync.get(["apply_process_filters"], function (e) {
-    if (e.apply_process_filters === "on") {
+  chrome.storage.sync.get([
+    "Filter_process",
+    "Filter_processProp",
+    "Filter_crossref",
+    "Filter_api_service",
+    "apply_process_filters",
+  ], function (e) {
+    if (e.apply_process_filters !== "on") return;
       var matchingxref = document.evaluate(
         "//label[contains(text(),'Cross Reference Table')]",
         document,
@@ -47,11 +36,9 @@ document.arrive(".filter_popup", function (filteredScreen) {
         null,
       ).singleNodeValue;
 
-      document.getElementById(matchingprocess.htmlFor).checked = processFilter;
-      document.getElementById(matchingproprop.htmlFor).checked =
-        processPropFilter;
-      document.getElementById(matchingxref.htmlFor).checked = CrossFilter;
-      document.getElementById(matchingapiserv.htmlFor).checked = APIServFilter;
-    }
+      document.getElementById(matchingprocess.htmlFor).checked = e.Filter_process;
+      document.getElementById(matchingproprop.htmlFor).checked = e.Filter_processProp;
+      document.getElementById(matchingxref.htmlFor).checked = e.Filter_crossref;
+      document.getElementById(matchingapiserv.htmlFor).checked = e.Filter_api_service;
   });
 });
