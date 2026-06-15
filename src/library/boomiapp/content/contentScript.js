@@ -25,13 +25,15 @@ let wait_for_load = setInterval(() => {
     fetch("https://status.boomi.com/api/v2/status.json")
       .then((res) => res.json())
       .then((out) => {
-        if (
-          out.status.description === "All Systems Operational" &&
-          platformStatus
-        ) {
-          platformStatus.innerHTML = `<a href="https://status.boomi.com/" target="_blank"><p><b>Platform Status: </b><b style="color: green;"> All Operational</b></p></a>`;
-        } else {
-          platformStatus.innerHTML = `<a href="https://status.boomi.com/" target="_blank"><p><b>Platform Status: </b><b class="boomiDown" style="color: red;"> ${out.status.description}</b></p></a>`;
+        var indicator = out.status.indicator || "none";
+        var statusClass = "bph-status-" + indicator;
+        if (platformStatus) {
+          platformStatus.innerHTML =
+            '<a href="https://status.boomi.com/" target="_blank">' +
+            '<span class="bph-status-dot ' + statusClass + '"></span>' +
+            '<span class="bph-status-label">Platform Status:</span> ' +
+            '<span class="bph-status-text ' + statusClass + '">' + out.status.description + '</span>' +
+            '</a>';
         }
 
         document.getElementById("footer_links").insertAdjacentHTML(

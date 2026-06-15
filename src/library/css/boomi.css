@@ -12,6 +12,34 @@
   width: auto !important;
 }
 
+/* Platform status dot */
+.bph-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.bph-status-none   { color: #2e7d32; }
+.bph-status-minor  { color: #e65100; }
+.bph-status-major  { color: #c62828; }
+.bph-status-critical { color: #c62828; }
+.bph-status-maintenance { color: #1565c0; }
+
+.bph-status-dot.bph-status-none   { background: #2e7d32; }
+.bph-status-dot.bph-status-minor  { background: #e65100; }
+.bph-status-dot.bph-status-major  { background: #c62828; }
+.bph-status-dot.bph-status-critical { background: #c62828; }
+.bph-status-dot.bph-status-maintenance { background: #1565c0; }
+
+  height: 30px !important;
+  width: auto !important;
+}
+
 .qm-c-servicenav {
     height: 2.5em !important;
 }
