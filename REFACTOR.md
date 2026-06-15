@@ -1,6 +1,6 @@
 # BoomiXcel v1.8.0.0 — What's New
 
-Welcome to BoomiXcel 1.8.0.0! This release is a complete overhaul — a new name, a new look, and a ton of improvements under the hood. Here's everything that changed.
+Ilcome to BoomiXcel 1.8.0.0! This release is a complete overhaul — a new name, a new look, and a ton of improvements under the hood. Here's everything that changed.
 
 ---
 
@@ -9,8 +9,8 @@ Welcome to BoomiXcel 1.8.0.0! This release is a complete overhaul — a new name
 - [A New Name](#a-new-name)
 - [New Features You'll Notice](#new-features-youll-notice)
 - [Things That Got Better](#things-that-got-better)
-- [Things We Fixed](#things-we-fixed)
-- [What We Removed](#what-we-removed)
+- [Things I Fixed](#things-i-fixed)
+- [What I Removed](#what-i-removed)
 - [For Developers](#for-developers)
 - [Behind the Scenes](#behind-the-scenes)
 
@@ -18,7 +18,7 @@ Welcome to BoomiXcel 1.8.0.0! This release is a complete overhaul — a new name
 
 ## A New Name
 
-You may have known us as "Boomi Platform Enhancer." We're now **BoomiXcel**. Same extension, same features, just a cleaner name. You'll see it in your footer bar, the options page, and the toolbar popup.
+You may have known us as "Boomi Platform Enhancer." I're now **BoomiXcel**. Same extension, same features, just a cleaner name. You'll see it in your footer bar, the options page, and the toolbar popup.
 
 ---
 
@@ -41,7 +41,7 @@ Each toggle saves instantly. There's a **Reload Page** button to apply changes t
 
 ### Platform Status Just Got Clearer
 
-We still check Boomi's platform status on every page, but now there's a colored dot that tells you the state at a glance:
+I still check Boomi's platform status on every page, but now there's a colored dot that tells you the state at a glance:
 
 - Green dot = All Systems Operational
 - Orange dot = Partial Service Disruption
@@ -54,7 +54,7 @@ No more squinting at the footer text — the dot says it all.
 
 The footer now reads simply: `BoomiXcel v1.8.0.0 · Options`
 
-We dropped the "loaded" noise and the square brackets. Clicking the version takes you to the Chrome Web Store. Clicking "Options" opens your settings.
+I dropped the "loaded" noise and the square brackets. Clicking the version takes you to the Chrome Ib Store. Clicking "Options" opens your settings.
 
 ### Brand Logo Replacement
 
@@ -62,7 +62,7 @@ Want the BoomiXcel logo in your masthead instead of the standard Boomi one? Ther
 
 ### Better Favicons for Every Page
 
-If you have Unique Page Titles & Favicons enabled, you'll now see distinct favicons for every Boomi subdomain — AtomSphere, MdmSphere, ApiSphere, and Flow. We also fixed them so they actually show up on the new Boomi interface.
+If you have Unique Page Titles & Favicons enabled, you'll now see distinct favicons for every Boomi subdomain — AtomSphere, MdmSphere, ApiSphere, and Flow. I also fixed them so they actually show up on the new Boomi interface.
 
 ### Copy Document Content
 
@@ -100,7 +100,7 @@ Every on/off option in both the popup and the full settings page now uses the sa
 
 ### Better Favicon Reliability
 
-We rewrote how favicons update so they actually refresh in your browser tab. Previously the browser would sometimes cache the old icon and ignore the change. Now it always updates.
+I rewrote how favicons update so they actually refresh in your browser tab. Previously the browser would sometimes cache the old icon and ignore the change. Now it always updates.
 
 ### Firefox Should Actually Work Now
 
@@ -108,21 +108,21 @@ If you're a Firefox user, the extension had some behind-the-scenes issues with h
 
 ### webstore-description.txt Is Finally Generated Properly
 
-A build issue caused the store listing text to come out garbled. Now it correctly pulls the feature list from the README and formats it cleanly. (This matters when we submit updates to the Chrome Web Store and Firefox Add-ons.)
+A build issue caused the store listing text to come out garbled. Now it correctly pulls the feature list from the README and formats it cleanly. (This matters when I submit updates to the Chrome Ib Store and Firefox Add-ons.)
 
 ---
 
-## Things We Fixed
+## Things I Fixed
 
-Here's the full list of bugs we squashed:
+Here's the full list of bugs I squashed:
 
-- **Favicons not changing on the new Boomi UI.** The new interface uses different URL patterns, and our favicon code didn't recognize them. Now it does, with fallbacks for any page we haven't specifically customized.
+- **Favicons not changing on the new Boomi UI.** The new interface uses different URL patterns, and my favicon code didn't recognize them. Now it does, with fallbacks for any page I haven't specifically customized.
 - **Data URI format bug.** The SVG favicon data had an extra space that made it invalid. Removed.
 - **Popup toggles showed everything as OFF** for first-time users. Now they correctly show factory defaults (canvas grid ON, footer ON, etc.).
 - **Changing a toggle in the popup triggered the reload dialog.** The popup has its own Reload button — the modal was redundant. Now the popup quietly saves without prompting.
 - **buildFilters.js had a race condition.** The filter checkboxes could sometimes load in the wrong order, causing filters to not apply. Fixed by loading all filter settings in one go.
 - **Duplicate Connector key** was causing a build warning on every build. Cleaned up.
-- **Copy button in Document Viewer** was using CSS that bypassed our styling rules. Moved to proper CSS classes.
+- **Copy button in Document Viewer** was using CSS that bypassed my styling rules. Moved to proper CSS classes.
 - **SVG icons were duplicated** across two files. Consolidated into one shared file.
 - **An undeclared variable** in the settings-changed handler was silently failing. Removed.
 - **Pages without a footer** could cause a JavaScript error when the extension tried to inject the footer link. Added a safety check.
@@ -134,15 +134,15 @@ Here's the full list of bugs we squashed:
 
 ---
 
-## What We Removed
+## What I Removed
 
 Some things had to go to make room for better approaches:
 
 - **The `shortcut.js` library** — keyboard shortcuts now use native browser events. Nothing you'll notice as a user; your Ctrl+Alt+S save still works exactly the same.
 - **The Bootstrap popover on the options page** — replaced with a cleaner static alert banner. This also removed two JavaScript dependencies.
-- **Markdown rendering scripts** — Boomi's platform now handles markdown natively in note shapes, so we no longer need to.
-- **The `webRequest` permission** — we weren't using it, so we dropped it. Fewer permissions means a smaller security footprint.
-- **22 web_accessible_resources reduced to 3** — most of our scripts now run in the extension's sandbox rather than being exposed to web pages. This significantly tightens security without affecting any features.
+- **Markdown rendering scripts** — Boomi's platform now handles markdown natively in note shapes, so I no longer need to.
+- **The `webRequest` permission** — I wasn't using it, so I dropped it. Fewer permissions means a smaller security footprint.
+- **22 web_accessible_resources reduced to 3** — most of my scripts now run in the extension's sandbox rather than being exposed to web pages. This significantly tightens security without affecting any features.
 
 ---
 
@@ -152,7 +152,7 @@ If you're contributing to BoomiXcel, here's what changed under the hood:
 
 ### Build System
 
-We now have a real build pipeline. Running `npm run build` does everything: bundles content scripts, generates browser-specific manifests, creates zip packages for Chrome/Firefox/Edge, and generates the webstore description. There's also:
+I now have a real build pipeline. Running `npm run build` does everything: bundles content scripts, generates browser-specific manifests, creates zip packages for Chrome/Firefox/Edge, and generates the webstore description. There's also:
 
 - `npm run watch` — rebuilds automatically when you edit content scripts
 - `npm run release` — creates a GitHub release with auto-generated notes and attaches all three browser zips
@@ -163,7 +163,7 @@ Content scripts are now bundled by esbuild into a single file instead of loading
 
 ### New Documentation
 
-We added a bunch of docs to help contributors:
+I added a bunch of docs to help contributors:
 
 - **AGENTS.md** — developer reference covering architecture, conventions, script responsibilities, build process, and rules for keeping docs in sync
 - **USER_GUIDE.md** — end-user guide explaining every feature
@@ -185,7 +185,7 @@ Every push and pull request now runs a GitHub Actions workflow that builds the e
 
 ### Code Quality
 
-We established clear conventions:
+I established clear conventions:
 - `var` for declarations shared across files in the bundle
 - `const`/`let` for file-local declarations
 - All static CSS goes in `boomi.css` classes (computed/dynamic styles get an exception)
@@ -199,11 +199,11 @@ We established clear conventions:
 A few things changed that you'll never see but make the extension better:
 
 - **esbuild now bundles everything.** Instead of 21 separate network requests for content scripts, your browser loads one optimized file. This means faster load times and fewer points of failure.
-- **jQuery 4.0.** We're now on the latest jQuery release with better performance and modern browser support.
-- **Firefox builds are properly validated.** The CI pipeline checks that the Firefox manifest is structurally correct before we ship.
-- **The platform status check is more robust.** Instead of relying on the exact link text (which Boomi could change), we look for the link by its URL pattern. More future-proof.
-- **Permissions are tighter.** We removed an unused permission and dramatically reduced the number of internal scripts exposed to web pages. The extension now has a smaller surface area for potential issues.
-- **The build produces identical output on Windows, macOS, and Linux.** Previously, Windows line endings could cause the webstore description to come out wrong on different platforms. We now normalize line endings before processing.
+- **jQuery 4.0.** I're now on the latest jQuery release with better performance and modern browser support.
+- **Firefox builds are properly validated.** The CI pipeline checks that the Firefox manifest is structurally correct before I ship.
+- **The platform status check is more robust.** Instead of relying on the exact link text (which Boomi could change), I look for the link by its URL pattern. More future-proof.
+- **Permissions are tighter.** I removed an unused permission and dramatically reduced the number of internal scripts exposed to web pages. The extension now has a smaller surface area for potential issues.
+- **The build produces identical output on Windows, macOS, and Linux.** Previously, Windows line endings could cause the webstore description to come out wrong on different platforms. I now normalize line endings before processing.
 
 ---
 
