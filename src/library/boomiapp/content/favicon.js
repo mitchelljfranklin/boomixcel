@@ -70,11 +70,19 @@ function changeFaviconBasedOnPage() {
           svgIcon =
             "%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 189.77 189.77'%3E%3Cdefs%3E%3CclipPath id='clip-path' transform='translate(0 0)'%3E%3Crect class='cls-1' width='189.77' height='189.77'%3E%3C/rect%3E%3C/clipPath%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cg id='API_Management_Navy' data-name='API Management Navy'%3E%3Cg class='cls-2'%3E%3Cg class='cls-2'%3E%3Cpath class='cls-3' d='M94.89,0a94.88,94.88,0,1,0,94.88,94.88A94.88,94.88,0,0,0,94.89,0M84.35,65.84,64.48,77.29l0,35.12,19.91,11.53v24.35l-.06,0-40.95-23.7.07-59.48L84.35,41.51Zm62,58.85-40.93,23.57V123.93l19.85-11.44,0-35.14L105.43,65.83V41.46l0,0,40.94,23.69Z' transform='translate(0 0)' fill='%23023d58'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A";
           break;
+        default:
+          svgIcon =
+            "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 204.28 204.28'%3E%3Cdefs%3E%3Cstyle%3E.cls-1 %7B fill: %23033d58; %7D%3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpath class='cls-1' d='M102.14,0A102.14,102.14,0,1,0,204.28,102.14,102.14,0,0,0,102.14,0Zm0,181.58v-22.7a56.74,56.74,0,0,1,0-113.48V22.7a79.44,79.44,0,0,1,0,158.88Z'%3E%3C/path%3E%3Cpath class='cls-1' d='M157.91,102.14a55.77,55.77,0,0,0-55.77-55.77V157.91A55.77,55.77,0,0,0,157.91,102.14Z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A";
+          break;
       }
       break;
     case "flow":
       svgIcon =
         "%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 202.05 202.05'%3E%3Cdefs%3E%3CclipPath id='clip-path' transform='translate(-0.01 0)'%3E%3Crect class='cls-1' width='202.05' height='202.05'%3E%3C/rect%3E%3C/clipPath%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cg id='Flow_Navy' data-name='Flow Navy'%3E%3Cg class='cls-2'%3E%3Cg class='cls-2'%3E%3Cpath class='cls-3' d='M101,0a101,101,0,1,0,101,101A101,101,0,0,0,101,0M179.6,101a78.15,78.15,0,0,1-.9,11.22H137.48l-44.9,44.9H46.14a78.78,78.78,0,0,1-16-22.45H83.27l44.9-44.9H178.7a78.64,78.64,0,0,1,.9,11.23M100.23,22.49,55.38,67.35H30.13a78.64,78.64,0,0,1,70.1-44.86M23.34,89.79H64.67l44.9-44.89h46.35a79.22,79.22,0,0,1,16,22.45h-53L74,112.24H23.34a72,72,0,0,1,0-22.45m78.58,89.76,44.85-44.86H171.9a78.56,78.56,0,0,1-70,44.86' transform='translate(-0.01 0)' fill='%23023d58'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A";
+      break;
+    default:
+      svgIcon =
+        "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 204.28 204.28'%3E%3Cdefs%3E%3Cstyle%3E.cls-1 %7B fill: %23033d58; %7D%3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpath class='cls-1' d='M102.14,0A102.14,102.14,0,1,0,204.28,102.14,102.14,0,0,0,102.14,0Zm0,181.58v-22.7a56.74,56.74,0,0,1,0-113.48V22.7a79.44,79.44,0,0,1,0,158.88Z'%3E%3C/path%3E%3Cpath class='cls-1' d='M157.91,102.14a55.77,55.77,0,0,0-55.77-55.77V157.91A55.77,55.77,0,0,0,157.91,102.14Z'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A";
       break;
   }
 
@@ -90,7 +98,7 @@ function changeFaviconToEmoji(emoji) {
 }
 
 function changeFaviconToSVG(svgIcon) {
-  iconHrefData = "data:image/svg+xml, " + svgIcon;
+  var iconHrefData = "data:image/svg+xml, " + svgIcon;
   changeFaviconImage(iconHrefData);
 }
 
