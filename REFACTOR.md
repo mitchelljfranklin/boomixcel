@@ -106,10 +106,6 @@ I rewrote how favicons update so they actually refresh in your browser tab. Prev
 
 If you're a Firefox user, the extension had some behind-the-scenes issues with how it packaged itself for Firefox's extension format. That's fixed — the Firefox build now generates correctly.
 
-### Web Store Description Generated Properly
-
-A build issue caused the store listing text to come out garbled. Now it correctly pulls the feature list from the README and formats it cleanly. (This matters when I submit updates to the Chrome Web Store and Firefox Add-ons.)
-
 ---
 
 ## Things I Fixed
@@ -118,11 +114,8 @@ Here's the full list of bugs I squashed:
 
 - **Favicons not changing on the new Boomi UI.** The new interface uses different URL patterns, and my favicon code didn't recognize them. Now it does, with fallbacks for any page I haven't specifically customized.
 - **Data URI format bug.** The SVG favicon data had an extra space that made it invalid. Removed.
-- **Popup toggles showed everything as OFF** for first-time users. Now they correctly show factory defaults (canvas grid ON, footer ON, etc.).
 - **Changing a toggle in the popup triggered the reload dialog.** The popup has its own Reload button — the modal was redundant. Now the popup quietly saves without prompting.
 - **buildFilters.js had a race condition.** The filter checkboxes could sometimes load in the wrong order, causing filters to not apply. Fixed by loading all filter settings in one go.
-- **Duplicate Connector key** was causing a build warning on every build. Cleaned up.
-- **Copy button in Document Viewer** was using CSS that bypassed my styling rules. Moved to proper CSS classes.
 - **SVG icons were duplicated** across two files. Consolidated into one shared file.
 - **An undeclared variable** in the settings-changed handler was silently failing. Removed.
 - **Pages without a footer** could cause a JavaScript error when the extension tried to inject the footer link. Added a safety check.
@@ -165,17 +158,13 @@ Content scripts are now bundled by esbuild into a single file instead of loading
 
 I added a bunch of docs to help contributors:
 
-- **AGENTS.md** — developer reference covering architecture, conventions, script responsibilities, build process, and rules for keeping docs in sync
+- **AGENTS.md** — developer reference for AIagents covering architecture, conventions, script responsibilities, build process, and rules for keeping docs in sync
 - **USER_GUIDE.md** — end-user guide explaining every feature
 - **PRIVACY.md** — privacy policy and data handling
 - **SECURITY.md** — how to report vulnerabilities
 - **REFACTOR.md** — this file, a complete changelog from the old version
 - **Pull request template** — checklist for submitting changes
 - **Issue templates** — standardized bug report and feature request forms
-
-### CI/CD
-
-Every push and pull request now runs a GitHub Actions workflow that builds the extension on Node.js 18, 20, and 22, verifies all three browser zips are produced, and validates the Firefox manifest structure.
 
 ### Dependencies
 
@@ -190,7 +179,6 @@ I established clear conventions:
 - `const`/`let` for file-local declarations
 - All static CSS goes in `boomi.css` classes (computed/dynamic styles get an exception)
 - No implicit globals
-- Build scripts must produce identical output on Windows, macOS, and Linux
 
 ---
 
@@ -203,7 +191,6 @@ A few things changed that you'll never see but make the extension better:
 - **Firefox builds are properly validated.** The CI pipeline checks that the Firefox manifest is structurally correct before I ship.
 - **The platform status check is more robust.** Instead of relying on the exact link text (which Boomi could change), I look for the link by its URL pattern. More future-proof.
 - **Permissions are tighter.** I removed an unused permission and dramatically reduced the number of internal scripts exposed to web pages. The extension now has a smaller surface area for potential issues.
-- **The build produces identical output on Windows, macOS, and Linux.** Previously, Windows line endings could cause the webstore description to come out wrong on different platforms. I now normalize line endings before processing.
 
 ---
 
