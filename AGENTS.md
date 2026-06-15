@@ -76,7 +76,6 @@ content/*.js (in bundle)
 - **jQuery 4.0** — actively used for DOM manipulation. Loaded via content_scripts at `document_start` for the isolated context. The old `jquery-3.6.min.js` file is preserved in the repo for reference but not loaded.
 - **CodeMirror** — the custom code editor used in Message/Notify shapes (loaded at `document_start` in the isolated context)
 - **arrive.js** — mutation-observer library for DOM insertion detection (`document.arrive()`). Only available in the isolated context.
-- **shortcut.js** — keyboard shortcut library (bundled into `content/bundle.js`)
 - **showdown.min.js**, **rasterizeHTML.min.js** — loaded at `document_start` in the isolated context (used by content scripts for markdown rendering and image capture)
 
 ### arrive.js cleanup pattern
