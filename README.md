@@ -58,6 +58,8 @@
 - [Contributing](#-contributing)
 - [Discussion](#-discussion)
 - [Contributors](#-contributors)
+- [Privacy](#-privacy)
+- [Security](#-security)
 - [License](#-license)
 
 ---
@@ -357,6 +359,18 @@ Contributions are welcome. Please [open an issue](https://github.com/mitchelljfr
 ## 💬 Discussion
 
 Join the [Boomi Discord — #extension-enhancer](https://discord.gg/XcXRrYHVUa) for updates and discussion.
+
+---
+
+## 🔒 Privacy
+
+**Boomi Xcel does not collect, transmit, or store any data from your Boomi platform environment.** The extension runs entirely in your browser — no analytics, no telemetry, no external servers. Your preferences are saved locally and synced across your signed-in browsers via `chrome.storage.sync`. For full details, see [PRIVACY.md](PRIVACY.md).
+
+---
+
+## 🔐 Security
+
+Found a vulnerability? Please **do not** open a public issue. See [SECURITY.md](SECURITY.md) for responsible disclosure.
 
 ---
 
