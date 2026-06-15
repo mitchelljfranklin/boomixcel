@@ -237,20 +237,7 @@ function createGitHubRelease(version) {
     return;
   }
 
-  // Build release notes from the README Features section
-  let notes = "";
-  const readmePath = path.join(ROOT, "README.md");
-  if (fs.existsSync(readmePath)) {
-    const readme = fs.readFileSync(readmePath, "utf-8");
-    const featuresMatch = readme.match(/## ✨ Features\n([\s\S]*?)\n---/);
-    if (featuresMatch) {
-      notes = featuresMatch[1]
-        .replace(/<[^>]*>/g, "")
-        .replace(/<p align="right">[\s\S]*?<\/p>/g, "")
-        .trim();
-    }
-  }
-  if (!notes) notes = "See the README for full feature details.";
+  const notes = generateReleaseNotes(version);
 
   console.log(`\n  Creating GitHub release ${tag}...`);
 
@@ -266,6 +253,74 @@ function createGitHubRelease(version) {
     console.error("  Release creation failed. Ensure gh CLI is installed and authenticated.");
     console.error("  Run: gh auth login   or   export GITHUB_TOKEN=<your-token>");
   }
+}
+
+function generateReleaseNotes(version) {
+  // Find the most recent tag to diff against
+  let lastTag = "";
+  try {
+    lastTag = execFileSync("git", ["describe", "--tags", "--abbrev=0", "--match", "v*"], {
+      encoding: "utf-8",
+      cwd: ROOT,
+    }).trim();
+  } catch (e) {
+    // No prior tags — include all commits
+  }
+
+  const range = lastTag ? `${lastTag}..HEAD` : "HEAD";
+  let log = "";
+  try {
+    log = execFileSync("git", [
+      "log", range,
+      "--no-merges",
+      "--pretty=format:%s",
+    ], { encoding: "utf-8", cwd: ROOT }).trim();
+  } catch (e) {
+    // Could not get log — fallback
+  }
+
+  if (!log) return "See the README for full feature details.";
+
+  const commits = log.split("\n").filter(Boolean);
+
+  const categories = { feat: [], fix: [], docs: [], style: [], refactor: [], chore: [], other: [] };
+
+  commits.forEach((msg) => {
+    const match = msg.match(/^(\w+)(?:\(.+?\))?:\s*(.*)/);
+    if (match) {
+      const type = match[1];
+      const desc = match[2];
+      if (categories[type]) {
+        categories[type].push(desc);
+      } else {
+        categories.other.push(msg);
+      }
+    } else {
+      categories.other.push(msg);
+    }
+  });
+
+  const label = {
+    feat: "Features",
+    fix: "Bug Fixes",
+    docs: "Documentation",
+    style: "Styling & UI",
+    refactor: "Refactoring",
+    chore: "Maintenance",
+    other: "Other Changes",
+  };
+
+  let notes = "";
+  for (const [type, items] of Object.entries(categories)) {
+    if (items.length === 0) continue;
+    notes += `### ${label[type]}\n\n`;
+    items.forEach((item) => { notes += `- ${item}\n`; });
+    notes += "\n";
+  }
+
+  notes += `**Full Changelog:** https://github.com/mitchelljfranklin/BoomiXcel/compare/${lastTag || "commits"}...v${version}`;
+
+  return notes.trim();
 }
 
 async function main() {
