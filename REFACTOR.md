@@ -86,7 +86,7 @@ Checkboxes now appear in the Revision History modal next to each revision number
 
 ### View in Process Reporting from Deployed Processes
 
-A **View in Process Reporting** menu item now appears in the chevron context menu on deployed process lists (Atom/Runtime). It includes a heartbeat SVG icon and a subtle separator line. Clicking it opens the Process Reporting page in a new tab, which auto-applies a process name filter via a polling state machine: Add Filter → Process → type name → select checkbox → Apply. A confirming toast shows "Filtered for: {name}" when the filter is applied.
+A **View in Process Reporting** feature now provides quick access from two entry points: a heartbeat SVG quick-link icon next to the Description link on the build page, and a menu item with a separator line in the chevron context menu on deployed process lists (Atom/Runtime). Clicking either opens the Process Reporting page in a new tab, which auto-applies a process name filter via a polling state machine: Add Filter → Process → type native value setter → select checkbox → Apply. A confirming toast shows "Filtered for: {name}" when the filter is applied. The deployed process menu handles GWT's context menu lifecycle — the `<ul>` is reused across clicks with `innerHTML` cleared, so a retry injector polls for the execute link before injecting on every open.
 
 ### Copy Component XML
 
@@ -164,7 +164,6 @@ Here's the full list of bugs I squashed:
 - **`return false` in setInterval callbacks.** Pointless in this context — changed to plain `return`.
 - **Fragile DOM index for elapsed-time cell.** The counter code used `div[11]` to find the cell — added a null guard so it won't crash if Boomi changes their DOM structure.
 - **Hashchange listener was stacking.** Each re-entry into the refresh listener added another `hashchange` handler. Moved to module level so it registers once.
-- **"View in Process Reporting" menu item disappeared on second click.** GWT reuses the same context menu `<ul>` element — it clears `innerHTML` and repopulates on every chevron click. `document.arrive` only fired on first creation. Replaced with a polling retry injector that waits for GWT to repopulate, then injects on every click.
 - **Elapsed time counter red text not displaying.** The counter used inline `element.style.color = "red"` which Boomi's platform CSS can override with `!important` rules. Replaced with a CSS class (`bph-elapsed-active`) using `!important` at the extension stylesheet level, matching Boomi's cascade tier.
 - **Download renamer corrupted ZIP/binary files.** The `detectTypeFromText()` function misidentified binary content as CSV/TXT because the ASCII-range regex matched binary magic bytes (e.g., ZIP headers). Added `isBinaryContent()` helper that checks for null bytes and high ratio of non-printable characters — binary files now return `null`, so `background.js` falls back to the original extension from the download URL.
 - **Elapsed time counter visual overhaul.** Added a red left accent bar on active rows (`bph-processing-row`), a gradient red badge on the elapsed cell (`bph-elapsed-badge`), and a per-second scale bounce animation (`bph-elapsed-tick`) so the counter feels live.
