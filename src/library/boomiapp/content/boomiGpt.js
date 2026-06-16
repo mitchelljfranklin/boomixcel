@@ -11,9 +11,14 @@ function getComponentId(popup) {
 }
 
 function getRevisionColumnIndex(popup) {
-  var headerCells = popup.querySelectorAll(".headerTable td");
-  for (var i = 0; i < headerCells.length; i++) {
-    if (headerCells[i].textContent.trim() === "Revision") return i;
+  var headerRows = popup.querySelectorAll(".headerTable tbody tr");
+  for (var i = 0; i < headerRows.length; i++) {
+    var row = headerRows[i];
+    if (row.style.height === "0px") continue;
+    var cells = row.querySelectorAll("td");
+    for (var j = 0; j < cells.length; j++) {
+      if (cells[j].textContent.trim() === "Revision") return j;
+    }
   }
   return 0;
 }
