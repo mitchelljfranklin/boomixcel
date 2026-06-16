@@ -48,7 +48,7 @@ function renderBoomiModal(options) {
     ? '<span class="qm-c-alert__icon"><img src="' + SVG_INFO_ICON + '" alt="Information"></span>'
     : '<span class="qm-c-alert__icon"></span>';
 
-  return '<div class="center_panel ' + overlayClass + (modern ? ' bph-modern-modal' : '') + '" id="popup_on_popup_content" role="dialog" aria-modal="true" style="left: 50%; top: 50%; transform: translate(-50%, -50%); position: fixed; z-index: 10000;">'
+  return '<div class="center_panel ' + overlayClass + (modern ? ' bph-modern-modal' : '') + '" id="popup_on_popup_content" role="dialog" aria-modal="true">'
     + '<div class="popupContent ' + extraPopupClasses + '">'
     + '<div class="modal modal_top">'
     + '<div class="modal_contents">'

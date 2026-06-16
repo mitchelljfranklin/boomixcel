@@ -34,14 +34,14 @@ document.arrive(".gwt-ProcessPanel", function (panel) {
     $(".bpe-quickshape-popup").each(function () {
       $(this).remove();
     });
-    rendorQuickShapePopup(panel, dblclickEvent.offsetX, dblclickEvent.offsetY, dblclickEvent.clientX, dblclickEvent.clientY);
+    renderQuickShapePopup(panel, dblclickEvent.offsetX, dblclickEvent.offsetY, dblclickEvent.clientX, dblclickEvent.clientY);
   });
 });
 
 // --------------------------------------------------
 // Render and append quick shapes to panel
 // --------------------------------------------------
-function rendorQuickShapePopup(processPanel, offsetX, offsetY, clientX, clientY) {
+function renderQuickShapePopup(processPanel, offsetX, offsetY, clientX, clientY) {
   var quick_shape_added = { added: false, clientX: 0, clientY: 0 };
   var shapes_array = {};
   var shapes_array_html = "";
@@ -132,7 +132,7 @@ function rendorQuickShapePopup(processPanel, offsetX, offsetY, clientX, clientY)
     }
 
     $(".bpe-quickshape-shape").each(function () {
-      shape = $(this);
+      var shape = $(this);
       if (shape.attr("data-locator").toLowerCase().indexOf(filter) > -1) {
         shape.removeClass("no_display");
       } else {

@@ -38,7 +38,7 @@ var process_to_image = (process) => {
             '<label class="toggle"><input type="checkbox" class="transparent"><span class="slider"></span></label>' +
             '<span>Use Transparent Background</span>' +
             '</div>' +
-            '<select class="uiscale gwt-ListBox" style="padding-left: 10px; margin-left: 10px;">' +
+            '<select class="uiscale gwt-ListBox bph-capture-scale">' +
             '<option value="1.0" selected>1x (normal size)</option>' +
             '<option value="1.5">1.5x</option>' +
             '<option value="2.0">2x</option>' +

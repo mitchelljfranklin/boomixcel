@@ -418,7 +418,7 @@
 }
 
 .closeall_doing_action {
-    position: absolute;
+    position: absolute !important;
 }
 
 
@@ -931,7 +931,22 @@ small.helper { display: block; color: #6c757d; margin-top: 0.25rem; margin-botto
     color: #333;
 }
 
+.bph-capture-scale {
+    padding-left: 10px !important;
+    margin-left: 10px !important;
+}
+
 /* ── Modern modal styling ── */
+
+.bph-modern-modal,
+.center_panel.BoomiPlatformOverlay,
+.center_panel.BoomiUpdateOverlay {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    position: fixed !important;
+    z-index: 10000 !important;
+}
 
 .bph-modern-modal .popupContent {
     border-radius: 10px;
