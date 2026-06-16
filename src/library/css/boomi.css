@@ -365,6 +365,33 @@
     animation: refresh_pulse 0.4s ease;
 }
 
+/* Process Reporting — elapsed time counter */
+.bph-processing-row {
+    border-left: 3px solid #e53935 !important;
+}
+
+.bph-elapsed-badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+    font-weight: 700;
+}
+
+.bph-elapsed-active {
+    color: #e53935 !important;
+}
+
+@keyframes bph-elapsed-bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+.bph-elapsed-tick {
+    animation: bph-elapsed-bounce 0.35s ease;
+}
+
 .closeall_doing_action {
     background-color: #2ac07a !important;
     border-color: #2ac07a !important;

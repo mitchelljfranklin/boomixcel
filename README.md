@@ -396,7 +396,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/listenerGlobal.js` | content | Reads config from storage, caches it, runs the DOM poller |
 | `content/canvas.js` | content | Canvas grid toggle |
 | `content/customRefresh.js` | content | Custom auto-refresh with live countdown, pulse animation, last-refreshed tooltip, and persisted state across navigation |
-| `content/processDuration.js` | content | Live elapsed-time counter for in-progress executions on the Process Reporting page |
+| `content/processDuration.js` | content | Live elapsed-time counter with red accent row, gradient badge, per-second bounce — resets to `0:00` on stop |
 | `content/shapes.js` | content | Trace path highlight |
 | `content/endpointGlow.js` | content | Endpoint glow, quick-add Stop shape |
 | `content/tableWrap.js` | content | Table text-wrap toggles |

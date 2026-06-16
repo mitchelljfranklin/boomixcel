@@ -126,7 +126,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/listenerGlobal.js` | content | Reads config from `chrome.storage.sync`, caches in bundle scope, orchestrates feature listeners via MutationObserver + poller. Also handles shape icon styling injection. |
 | `content/canvas.js` | content | Canvas grid toggle (reads `BoomiPlatform.canvas_grid`) |
 | `content/customRefresh.js` | content | Custom process-reporting refresh interval — injects "Refresh Every XXs" button with live countdown, pulse animation, last-refreshed tooltip, and persisted state across navigation |
-| `content/processDuration.js` | content | Live elapsed-time counter for "In Process" executions on the Process Reporting page. Resets to `0:00` when auto-refresh stops. |
+| `content/processDuration.js` | content | Live elapsed-time counter for "In Process" executions on the Process Reporting page — red accent row, gradient badge cell, per-second bounce animation. Resets to `0:00` when auto-refresh stops. |
 | `content/shapes.js` | content | Trace path highlight during test execution |
 | `content/endpointGlow.js` | content | Non-connected endpoint glow and quick-add Stop shape |
 | `content/tableWrap.js` | content | Table text-wrap toggles |

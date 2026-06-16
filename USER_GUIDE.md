@@ -178,7 +178,7 @@ The dashboard view auto-selects your chosen time range on page load. Configure f
 - **Max**
 
 ### Pending Executions Clock
-When auto-refresh is enabled, a real-time elapsed time counter appears on the Process Reporting page for active processes, showing exactly how long each one has been running.
+When auto-refresh is enabled, a real-time elapsed time counter appears on the Process Reporting page for active processes. Active rows get a red left accent bar, the elapsed time displays as a gradient red badge, and the seconds digit bounces each time it updates so you can see it's live at a glance.
 
 ---
 

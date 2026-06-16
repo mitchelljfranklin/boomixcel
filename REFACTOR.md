@@ -124,7 +124,7 @@ The auto-refresh feature on Process Reporting got a thorough cleanup and visual 
 
 ### Process Duration Split Out
 
-The live elapsed-time counter for in-progress executions now lives in its own file (`processDuration.js`), separated from the auto-refresh logic (`customRefresh.js`). They were two unrelated features sharing one file — now they're cleanly divided with clear responsibilities.
+The live elapsed-time counter for in-progress executions now lives in its own file (`processDuration.js`), separated from the auto-refresh logic (`customRefresh.js`). They were two unrelated features sharing one file — now they're cleanly divided with clear responsibilities. The counter also got a visual overhaul: active rows have a red left accent bar, the elapsed time cell gets a gradient red badge treatment, and the seconds digit does a subtle scale bounce on each update tick.
 
 ---
 
@@ -148,6 +148,8 @@ Here's the full list of bugs I squashed:
 - **`return false` in setInterval callbacks.** Pointless in this context — changed to plain `return`.
 - **Fragile DOM index for elapsed-time cell.** The counter code used `div[11]` to find the cell — added a null guard so it won't crash if Boomi changes their DOM structure.
 - **Hashchange listener was stacking.** Each re-entry into the refresh listener added another `hashchange` handler. Moved to module level so it registers once.
+- **Elapsed time counter red text not displaying.** The counter used inline `element.style.color = "red"` which Boomi's platform CSS can override with `!important` rules. Replaced with a CSS class (`bph-elapsed-active`) using `!important` at the extension stylesheet level, matching Boomi's cascade tier.
+- **Elapsed time counter visual overhaul.** Added a red left accent bar on active rows (`bph-processing-row`), a gradient red badge on the elapsed cell (`bph-elapsed-badge`), and a per-second scale bounce animation (`bph-elapsed-tick`) so the counter feels live.
 
 ---
 
