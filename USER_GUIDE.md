@@ -103,9 +103,6 @@ When running tests, the connector lines highlight as you hover over shapes, maki
 ### Canvas Grid
 Remove the canvas dot grid for a cleaner workspace (configurable — pairs well with dark mode).
 
-### Note Group Overlays
-Process notes containing specific formatting create colored semi-transparent bounding boxes on the canvas. You can resize them by dragging the corner handle.
-
 ### View in Process Reporting
 Quick access to Process Reporting from two entry points: a heartbeat SVG icon next to the Description link on the build page, and a menu item with a separator line in the chevron context menu on deployed process lists (Atom/Runtime). Both open Process Reporting in a new tab and auto-apply a process name filter (Add Filter → Process → type name → select checkbox → Apply). A confirming toast shows "Filtered for: {name}" when the filter is applied.
 
