@@ -122,6 +122,10 @@ Every on/off option in both the popup and the full settings page now uses the sa
 
 I rewrote how favicons update so they actually refresh in your browser tab. Previously the browser would sometimes cache the old icon and ignore the change. Now it always updates.
 
+### Masthead Options Gear Icon
+
+A gear icon now appears in the masthead addons row next to Search, Help, Messages, and Agentstudio. Clicking it opens the BoomiXcel options page — no more scrolling to the footer to access settings. The footer still shows the version link but the "Options" text has been removed from it.
+
 ### Firefox Should Actually Work Now
 
 If you're a Firefox user, the extension had some behind-the-scenes issues with how it packaged itself for Firefox's extension format. That's fixed — the Firefox build now generates correctly.

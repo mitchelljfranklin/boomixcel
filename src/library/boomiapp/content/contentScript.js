@@ -35,14 +35,9 @@ let wait_for_load = setInterval(() => {
           footerLinks.insertAdjacentHTML(
           "afterbegin",
           `
-            <li><a class="alternate_link" target="_blank" href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko/">BoomiXcel v${chrome.runtime.getManifest().version}</a> · <a class="alternate_link" href="#" id="bph-options-link">Options</a></li>
+            <li><a class="alternate_link" target="_blank" href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko/">BoomiXcel v${chrome.runtime.getManifest().version}</a></li>
             `,
         );
-
-        document.getElementById("bph-options-link")?.addEventListener("click", function (clickEvent) {
-          clickEvent.preventDefault();
-          chrome.runtime.sendMessage({ type: "OPEN_OPTIONS" });
-        });
         }
 
         chrome.storage.sync.get(["mastfoot_show"], function (result) {
@@ -106,4 +101,34 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
     updateFullscreenConfig();
   });
+});
+
+// ── Masthead options gear icon ───────────────────────────────────────────────
+
+document.arrive('[data-testid="product-switcher-button"]', { existing: true }, function (switcherButton) {
+  var addonsList = switcherButton.closest("ul");
+  if (!addonsList || addonsList.querySelector(".bph-masthead-options-item")) return;
+
+  var listItem = document.createElement("li");
+  listItem.className = "bph-masthead-options-item";
+
+  var link = document.createElement("a");
+  link.className = "bph-masthead-options-link";
+  link.title = "BoomiXcel Options";
+  link.href = "#";
+  link.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+
+  link.addEventListener("click", function (clickEvent) {
+    clickEvent.preventDefault();
+    chrome.runtime.sendMessage({ type: "OPEN_OPTIONS" });
+  });
+
+  listItem.appendChild(link);
+
+  var firstItem = addonsList.querySelector("li");
+  if (firstItem) {
+    addonsList.insertBefore(listItem, firstItem);
+  } else {
+    addonsList.appendChild(listItem);
+  }
 });

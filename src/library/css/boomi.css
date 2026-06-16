@@ -12,6 +12,32 @@
   width: auto !important;
 }
 
+/* Masthead options gear icon */
+.bph-masthead-options-item {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.bph-masthead-options-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff !important;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.bph-masthead-options-link:hover {
+    color: #1B72C3 !important;
+}
+
+.bph-masthead-options-link svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
 /* Platform status dot */
 .bph-status-dot {
   display: inline-block;

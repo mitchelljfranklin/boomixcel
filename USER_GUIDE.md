@@ -249,5 +249,8 @@ After deploying a component, you'll receive a reminder to schedule it if appropr
 
 ## Footer & Branding
 
+### Masthead Options Gear
+A gear icon is added to the masthead icon row (next to Search, Help, Messages) providing quick access to the BoomiXcel options page without needing to scroll to the footer.
+
 ### Extension Footer Link
-A "BoomiXcel vX.Y.Z · Options" link appears in the Boomi footer bar, showing the current version and providing quick access to the options page.
+A "BoomiXcel vX.Y.Z" link appears in the Boomi footer bar showing the current version and linking to the Chrome Web Store.

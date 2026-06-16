@@ -119,6 +119,7 @@
 - Settings-changed notification prompting a page reload
 
 ⭐ **Other**
+- Options gear icon in the masthead — quick access to BoomiXcel settings without scrolling to the footer
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
