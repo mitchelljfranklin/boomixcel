@@ -72,17 +72,21 @@ function extractUpdateChangelog() {
   const content = fs.readFileSync(changelogPath, "utf-8").replace(/\r\n/g, "\n");
   const lines = content.split("\n");
   const items = [];
+  var intro = "";
 
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim();
+    if (!line) continue;
     if (line.startsWith("- ")) {
       items.push("<li><p>" + line.substring(2) + "</p></li>");
+    } else if (!intro) {
+      intro = "<p>" + line + "</p>";
     }
   }
 
   if (items.length === 0) return "";
 
-  var html = "<ul>" + items.join("") + "</ul>";
+  var html = intro + "<ul>" + items.join("") + "</ul>";
   return "var UPDATE_CHANGELOG_HTML = " + JSON.stringify(html) + ";\n";
 }
 

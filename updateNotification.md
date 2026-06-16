@@ -1,3 +1,5 @@
+Welcome to BoomiXcel — same extension you love, now with a fresh name and a massive overhaul under the hood. [See all changes](https://github.com/mitchelljfranklin/BoomiXcel/blob/1.8.0.0/REFACTOR.md)
+
 - Dashboard 7-day auto-select never fired — replaced guard condition with direct check for time range selectors and moved polling to centralized listener
 - Elapsed time counter red text not displaying — inline style.color was overridden by Boomi !important CSS, replaced with CSS class at matching cascade tier
 - Download renamer corrupted ZIP/binary files — binary content was misidentified as CSV/TXT, added isBinaryContent() helper with null byte and printable-ratio checks
