@@ -1,8 +1,4 @@
-var boomiGptState = {
-  prompt: null,
-  originalLinkHtml: null,
-  originalUsingText: null,
-};
+var boomiGptPrompt = null;
 
 function openBoomiGpt(promptText) {
   localStorage.setItem("bph_gpt_prompt", promptText);
@@ -12,6 +8,14 @@ function openBoomiGpt(promptText) {
 function getComponentId(popup) {
   var componentIdElement = popup.querySelector('[data-locator="formrow-component-id"]');
   return componentIdElement ? componentIdElement.textContent.trim() : "";
+}
+
+function getRevisionColumnIndex(popup) {
+  var headerCells = popup.querySelectorAll(".headerTable td");
+  for (var i = 0; i < headerCells.length; i++) {
+    if (headerCells[i].textContent.trim() === "Revision") return i;
+  }
+  return 0;
 }
 
 function updateRevisionSelection(popup) {
@@ -32,31 +36,34 @@ function updateRevisionSelection(popup) {
     }).sort(function (a, b) {
       return Number(a) - Number(b);
     });
-    var promptText = "compare " + componentId + " version " + revisions[0] + " and " + revisions[1];
-    boomiGptState.prompt = promptText;
+    boomiGptPrompt = "compare " + componentId + " version " + revisions[0] + " and " + revisions[1];
     gptLink.classList.add("bph-gpt-link-active");
     gptLink.textContent = "Compare v" + revisions[0] + " and v" + revisions[1] + " \u2192";
 
     var usingSpan = (gptLink.closest("label") || gptLink.parentElement).querySelector(".bph-gpt-using");
     if (usingSpan) usingSpan.textContent = ": ";
   } else {
-    boomiGptState.prompt = null;
+    boomiGptPrompt = null;
     gptLink.classList.remove("bph-gpt-link-active");
-    gptLink.innerHTML = boomiGptState.originalLinkHtml || gptLink.innerHTML;
+    gptLink.innerHTML = gptLink.dataset.originalHtml || gptLink.innerHTML;
 
     var usingSpan = (gptLink.closest("label") || gptLink.parentElement).querySelector(".bph-gpt-using");
-    if (usingSpan) usingSpan.textContent = boomiGptState.originalUsingText || usingSpan.textContent;
+    if (usingSpan) usingSpan.textContent = gptLink.dataset.originalUsingText || usingSpan.textContent;
   }
 }
 
 document.arrive(".gwt-HistoryPopup", { existing: true }, function (popup) {
-  if (popup.querySelector(".bph-rev-checkbox")) return;
+  if (popup.classList.contains("bph-rev-hooked")) return;
+  popup.classList.add("bph-rev-hooked");
 
   var dataRows = popup.querySelectorAll(".dataTable tbody tr");
   if (!dataRows.length) return;
 
+  var revisionColumnIndex = getRevisionColumnIndex(popup);
+
   dataRows.forEach(function (row) {
-    var revisionCell = row.querySelector("td:first-child");
+    var cells = row.querySelectorAll("td");
+    var revisionCell = cells[revisionColumnIndex];
     if (!revisionCell) return;
     var revisionNumber = revisionCell.textContent.trim();
     if (!/^\d+$/.test(revisionNumber)) return;
@@ -65,22 +72,25 @@ document.arrive(".gwt-HistoryPopup", { existing: true }, function (popup) {
     checkbox.type = "checkbox";
     checkbox.className = "bph-rev-checkbox";
     checkbox.dataset.rev = revisionNumber;
-    checkbox.addEventListener("change", function () {
-      updateRevisionSelection(popup);
-    });
 
     revisionCell.appendChild(checkbox);
+  });
+
+  popup.addEventListener("change", function (event) {
+    if (event.target.classList.contains("bph-rev-checkbox")) {
+      updateRevisionSelection(popup);
+    }
   });
 
   var gptLink = popup.querySelector(".boomiGptPanel label a, .boomiGptPanel a");
   if (!gptLink) return;
 
-  boomiGptState.originalLinkHtml = gptLink.innerHTML;
+  gptLink.dataset.originalHtml = gptLink.innerHTML;
   gptLink.href = "javascript:;";
   gptLink.addEventListener("click", function (clickEvent) {
     clickEvent.preventDefault();
-    if (boomiGptState.prompt) {
-      openBoomiGpt(boomiGptState.prompt);
+    if (boomiGptPrompt) {
+      openBoomiGpt(boomiGptPrompt);
     }
   });
 
@@ -99,7 +109,7 @@ document.arrive(".gwt-HistoryPopup", { existing: true }, function (popup) {
           usingSpan.className = "bph-gpt-using";
           afterNode.parentNode.insertBefore(usingSpan, afterNode);
           usingSpan.appendChild(afterNode);
-          boomiGptState.originalUsingText = usingSpan.textContent;
+          gptLink.dataset.originalUsingText = usingSpan.textContent;
           break;
         }
       }
@@ -108,8 +118,8 @@ document.arrive(".gwt-HistoryPopup", { existing: true }, function (popup) {
 });
 
 if (window.location.pathname.indexOf("BoomiAI") !== -1) {
-  var boomiGptPrompt = localStorage.getItem("bph_gpt_prompt");
-  if (boomiGptPrompt) {
+  var boomiGptPendingPrompt = localStorage.getItem("bph_gpt_prompt");
+  if (boomiGptPendingPrompt) {
     localStorage.removeItem("bph_gpt_prompt");
 
     var boomiGptAttempts = 0;
@@ -124,7 +134,7 @@ if (window.location.pathname.indexOf("BoomiAI") !== -1) {
       }
 
       var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
-      nativeSetter.call(textarea, boomiGptPrompt);
+      nativeSetter.call(textarea, boomiGptPendingPrompt);
       textarea.dispatchEvent(new Event("input", { bubbles: true }));
 
       setTimeout(function () {
