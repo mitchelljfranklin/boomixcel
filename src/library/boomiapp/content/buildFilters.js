@@ -1,4 +1,4 @@
-document.arrive(".filter_popup", function (filteredScreen) {
+document.arrive(".filter_options", { existing: true }, function (filteredScreen) {
   chrome.storage.sync.get([
     "Filter_process",
     "Filter_processProp",
