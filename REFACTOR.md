@@ -196,14 +196,19 @@ If you're contributing to BoomiXcel, here's what changed under the hood:
 
 ### Build System
 
-I now have a real build pipeline. Running `npm run build` does everything: bundles content scripts, generates browser-specific manifests, creates zip packages for Chrome/Firefox/Edge, and generates the webstore description. There's also:
+I now have a real build pipeline. Running `npm run build` does everything: bundles content scripts, reads `updateNotification.md` and injects its changelog as HTML into the bundle, generates browser-specific manifests, creates zip packages for Chrome/Firefox/Edge, and generates the webstore description. There's also:
 
 - `npm run watch` — rebuilds automatically when you edit content scripts
 - `npm run release` — creates a GitHub release with auto-generated notes and attaches all three browser zips
 
 ### Architecture
 
-Content scripts are now bundled by esbuild into a single file instead of loading 21+ individual scripts. All scripts share the same scope, so they can call each other's functions without polluting `window`. The only script that runs in the page context is `fullscreen.js` (because Chrome restricts the Fullscreen API).
+Content scripts are now bundled by esbuild into a single file instead of loading 38 individual scripts. All scripts share the same IIFE scope, so they can call each other's functions without polluting `window`. The only script that runs in the page context is `fullscreen.js` (because Chrome restricts the Fullscreen API). Key architectural patterns introduced:
+
+- **Centralized polling** — `listenerGlobal.js` runs a `listenerClass()` interval that watches for DOM elements via `:not(.bph-load-done)` selector, then calls feature-specific listener functions
+- **DOM detection** — `document.arrive()` (via arrive.js) watches for dynamically created elements and fires callbacks on insertion
+- **Shared factory** — `createCopyButton()` in `copyDocument.js` is a reusable factory for clipboard-copy buttons with tooltip, SVG swap feedback, and clipboard fallback
+- **Modal helper** — `renderBoomiModal()` with an opt-in `modern: true` parameter for rounded corners, softer shadows, and button gap styling
 
 ### New Documentation
 
@@ -225,12 +230,19 @@ I added a bunch of docs to help contributors:
 
 ### Code Quality
 
-I established clear conventions:
+I established clear conventions and performed a full audit of all 38 content scripts:
+
 - `var` for declarations shared across files in the bundle
 - `const`/`let` for file-local declarations
 - All static CSS goes in `boomi.css` classes (computed/dynamic styles get an exception)
+- No inline `style=""` attributes or `element.style.*` for static values
 - No implicit globals
 - **Variable names must be descriptive** — no single-letter or heavily abbreviated names (`el`, `e`, `cb`, `k`, `v`). Function parameters in callbacks must use meaningful names like `function (selector)` not `function (el)`.
+- **Convention audit completed** — fixed 5 implicit globals, converted 12 `const`/`let` to `var` for IIFE contract compliance, and renamed 44+ abbreviated variables across 18 files
+
+### Update Notification Changelog
+
+The in-app update notification now reads from a dedicated `updateNotification.md` file at the repo root (edited before each release). The build script converts its content to HTML, transforms `[text](url)` markdown links to clickable anchors, and injects it as `var UPDATE_CHANGELOG_HTML` into the bundle. Storage uses a single `bph_update_notification_version` key with automatic cleanup of legacy per-version keys.
 
 ---
 
