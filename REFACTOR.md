@@ -156,6 +156,7 @@ Here's the full list of bugs I squashed:
 - **Download renamer corrupted ZIP/binary files.** The `detectTypeFromText()` function misidentified binary content as CSV/TXT because the ASCII-range regex matched binary magic bytes (e.g., ZIP headers). Added `isBinaryContent()` helper that checks for null bytes and high ratio of non-printable characters — binary files now return `null`, so `background.js` falls back to the original extension from the download URL.
 - **Elapsed time counter visual overhaul.** Added a red left accent bar on active rows (`bph-processing-row`), a gradient red badge on the elapsed cell (`bph-elapsed-badge`), and a per-second scale bounce animation (`bph-elapsed-tick`) so the counter feels live.
 - **Convention audit and cleanup.** Full audit of all 31 content scripts against the project's code style rules. Fixed 5 implicit globals that would break under strict mode, converted 12 `const`/`let` declarations to `var` for cross-file IIFE contract compliance, and renamed 44+ abbreviated variables/parameters to descriptive names across 18 files.
+- **Reverse modal buttons not working on "No" dialogs.** The `modalButtons.js` listener checked `innerText === "Cancel"` but Boomi's "unsaved changes" modal uses "No". Also skipped a hidden spinner div that was incorrectly targeted by `lastChild`. Fixed by filtering visible `<button>` children from `.button_set` and matching both "Cancel" and "No".
 
 ---
 
