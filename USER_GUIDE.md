@@ -64,6 +64,7 @@ The options page groups settings into collapsible sections. Changes take effect 
 | **Build Canvas** | Endpoint notifications, trace path highlighting, table wrapping |
 | **Process Reporting** | Auto-refresh interval, dashboard default time range |
 | **Navigation & Shortcuts** | Full-screen shortcut key + modifiers, unique page titles/favicons, default filters |
+| **Defaults** | Default scripting language for new shapes |
 | **Reminders** | Post-deployment schedule reminder |
 
 A **↺ Reset** button restores all defaults. A yellow dot appears when you have unsaved changes.
@@ -117,6 +118,17 @@ When editing Message, Notify, or Command shapes, the standard text field is repl
 - **SQL** — syntax highlighting for Database Operation shapes
 
 The editor respects the Boomi dark/light theme.
+
+### Default Scripting Language
+
+When creating new shapes with scripting (Data Process, Custom Scripting, Business Rules), BoomiXcel can auto-select your preferred scripting language instead of always defaulting to Groovy 1.5. Configure from the Options page under **Defaults**:
+
+- **Off** — default, no auto-selection
+- **Groovy 1.5**
+- **Groovy 2.4**
+- **JavaScript**
+
+The extension only changes the dropdown when it first appears and does not override manual changes afterward.
 
 ### Copy Document Content
 When viewing a document in Process Reporting, a clipboard icon (📋) appears in the dialog header. Click to copy the raw document content, with a visible "Copied" confirmation.

@@ -128,6 +128,20 @@
                 </details>
 
                 <details class="option-group" open>
+                    <summary>&#9660; Defaults</summary>
+                    <div class="mb-3">
+                        <label for="default_scripting_language">Default Scripting Language:</label>
+                        <select id="default_scripting_language" name="default_scripting_language" class="option form-select" data-default="off">
+                            <option value="off">Off (Default)</option>
+                            <option value="Groovy 1.5">Groovy 1.5</option>
+                            <option value="Groovy 2.4">Groovy 2.4</option>
+                            <option value="JavaScript">JavaScript</option>
+                        </select>
+                        <small class="helper">Auto-selects this language when creating new Data Process, Custom Scripting, or Business Rules shapes.</small>
+                    </div>
+                </details>
+
+                <details class="option-group" open>
                     <summary>&#9660; Reminders</summary>
                     <div class="toggle-row">
                         <label for="reminder_schedule" class="toggle-label-row mb-0">Post-Deployment Schedule Reminder</label>

@@ -19,18 +19,22 @@ GM_addStyle(`
 `);
 
 function DisplayPalette(toggle, element) {
-  //Replace Expand Animation
-  element.children[0].children[1].style.display = toggle ? "none" : "";
-  element.children[0].children[1].style.left = toggle ? "-100%" : "0%";
-  element.children[0].children[1].children[0].style.display = toggle ? "none" : "";
+  if (!element || !element.children[0]) return;
+  var panel = element.children[0];
+  var firstChild = panel.children[1];
+  var secondChild = panel.children[2];
+  if (!firstChild || !secondChild) return;
 
-  element.children[0].children[2].style.display = toggle ? "" : "none";
-  element.children[0].children[2].style.left = toggle ? "0%" : "100%";
-  element.children[0].children[2].children[0].style.display = toggle ? "" : "none";
+  firstChild.style.display = toggle ? "none" : "";
+  firstChild.style.left = toggle ? "-100%" : "0%";
+  if (firstChild.children[0]) firstChild.children[0].style.display = toggle ? "none" : "";
 
-  //Toggle Buttons
-  element.attributes["ExpandButton"].disabled = toggle;
-  element.attributes["CloseButton"].disabled = !toggle;
+  secondChild.style.display = toggle ? "" : "none";
+  secondChild.style.left = toggle ? "0%" : "100%";
+  if (secondChild.children[0]) secondChild.children[0].style.display = toggle ? "" : "none";
+
+  if (element.attributes["ExpandButton"]) element.attributes["ExpandButton"].disabled = toggle;
+  if (element.attributes["CloseButton"]) element.attributes["CloseButton"].disabled = !toggle;
 }
 
 function ExpandPalette(toggle, element) {

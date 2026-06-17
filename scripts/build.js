@@ -36,6 +36,7 @@ const CONTENT_ORDER = [
   "iconSets.js",
   "modalButtons.js",
   "listenerGlobal.js",
+  "defaultScriptingLanguage.js",
   "canvas.js",
   "customRefresh.js",
   "processDuration.js",
