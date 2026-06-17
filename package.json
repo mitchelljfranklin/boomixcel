@@ -9,7 +9,7 @@
     "release": "node scripts/build.js --release"
   },
   "devDependencies": {
-    "archiver": "^8.0.0",
+    "archiver": "^7.0.0",
     "esbuild": "^0.28.1"
   }
 }

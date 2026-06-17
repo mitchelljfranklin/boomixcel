@@ -86,6 +86,7 @@
 ✏️ **Editing**
 - CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes)
 - Resizable SQL editor in Database Operation shapes
+- Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
 - Copy raw document content from the Document Viewer dialog
 - Copy clean XML from the Component XML popup (decodes HTML entities)
 - DB document table viewer — sortable, searchable, paginated table with "See table" toggle and maximize button
@@ -377,7 +378,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 ### Script reference
 
 <details>
-<summary>📂 <b>Click to expand — full script reference (42 files)</b></summary>
+<summary>📂 <b>Click to expand — full script reference (43 files)</b></summary>
 
 | Script | Context | Purpose |
 |---|---|---|
@@ -419,6 +420,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/svgAssets.js` | content | Shared SVG icon strings |
 | `content/modalHelper.js` | content | Boomi-style modal dialog helper |
 | `content/toastHelper.js` | content | Toast notification utility |
+| `content/defaultScriptingLanguage.js` | content | Auto-selects default scripting language for new shapes |
 | `page/fullscreen.js` | page | Full-screen toggle (page context required) |
 | `options.js` | options | Options page save/restore |
 | `popup/popup.js` | popup | Quick-settings popup with feature toggles |

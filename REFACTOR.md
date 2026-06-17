@@ -1,6 +1,6 @@
-# BoomiXcel v1.8.0.0 — What's New
+# BoomiXcel v2.0.0.rc.1 — What's New
 
-Welcome to BoomiXcel 1.8.0.0! This release is a complete overhaul — a new name, a new look, and a ton of improvements under the hood. Here's everything that changed.
+Welcome to BoomiXcel 2.0.0.rc.1! This release is a complete overhaul — a new name, a new look, and a ton of improvements under the hood. Here's everything that changed.
 
 ---
 
@@ -52,7 +52,7 @@ No more squinting at the footer text — the dot says it all.
 
 ### Cleaner Footer Bar
 
-The footer now reads simply: `BoomiXcel v1.8.0.0 · Options`
+The footer now reads simply: `BoomiXcel v2.0.0.0 · Options`
 
 I dropped the "loaded" noise and the square brackets. Clicking the version takes you to the Chrome Web Store. Clicking "Options" opens your settings.
 
@@ -79,6 +79,10 @@ The dashboard no longer always defaults to 7 days — you can now choose your pr
 ### DB Document Table Viewer
 
 When viewing a database document (DBSTART| format) in the Document Viewer dialog, a **See table** toggle switch appears in the top-right corner. Toggle it on to render the raw pipe-delimited data as a sortable, searchable, paginated table — all vanilla JavaScript, no external libraries. Click column headers to sort (with ▲/▼ indicators), use the search box to filter, and navigate with page buttons (25 rows per page). A **maximize/restore** button sits next to the toggle, letting you expand the dialog to 90% of the viewport. The raw document content is shared with the copy and download scripts so those features continue working even when the table view is active.
+
+### Default Scripting Language
+
+When creating new script shapes (Data Process, Custom Scripting, Business Rules), you can now set a preferred default scripting language. Instead of always defaulting to Groovy 1.5, BoomiXcel auto-selects your chosen language — Groovy 1.5, Groovy 2.4, or JavaScript. Configure it from the new "Defaults" section in the Options page.
 
 ### Boomi GPT Revision Compare
 

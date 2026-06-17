@@ -145,6 +145,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/svgAssets.js` | content | Shared SVG icon strings used across multiple content scripts |
 | `content/modalHelper.js` | content | Shared Boomi-style modal dialog renderer and cleanup utilities |
 | `content/toastHelper.js` | content | Shared toast notification utility used across content scripts and the options page |
+| `content/defaultScriptingLanguage.js` | content | Auto-selects default scripting language for Data Process, Custom Scripting, and Business Rules shapes — reads `default_scripting_language` from BoomiPlatform config |
 | `page/fullscreen.js` | page | Full-screen toggle via keyboard shortcut (page context required) |
 | `options.js` | (options page) | Options page save/restore logic |
 | `background.js` | background | MV3 service worker: handles download renaming and options-page-open message |
