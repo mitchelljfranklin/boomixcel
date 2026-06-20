@@ -301,3 +301,7 @@ After `npm run build` succeeds and **before any git commit**:
 2. Update any stale or outdated references
 3. Verify REFACTOR.md, README.md, USER_GUIDE.md, and AGENTS.md are all current
 4. **Do not commit until this is done.** This is a hard stop — the same way `npm run build` is a hard stop before testing.
+
+## No auto-push after build
+
+Running `npm run build` produces artifacts (`bundle.js`, manifests, zips) and bumps version references. These build outputs must be reviewed before pushing. **Do not auto-push after a build.** Always commit explicitly with a reviewed diff, then push on demand.
