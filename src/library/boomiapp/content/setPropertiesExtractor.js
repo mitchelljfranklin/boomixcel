@@ -183,7 +183,7 @@ function showSetPropertiesModal(results) {
     modern: true,
     body: bodyHtml,
     buttons: [
-      { className: "gwt-Button qm-button--primary-action action_button", text: "Close", attrs: ' data-locator="link-cancel"' },
+      { className: "gwt-Button qm-button--primary-action action_button", text: "Close", attrs: ' data-locator="link-cancel" onclick="javascript:document.querySelector(\'.BoomiPlatformOverlay\').remove();"' },
     ],
   });
 
