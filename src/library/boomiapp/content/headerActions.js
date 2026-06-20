@@ -115,3 +115,15 @@ document.arrive('[data-locator="link-description"]', { existing: true }, functio
 
   descLink.insertAdjacentElement('afterend', link);
 });
+
+// Show the Close button after Lock & Edit is clicked
+document.arrive('.lockandEditButtonNew', function (lockBtn) {
+  lockBtn.addEventListener('click', function () {
+    setTimeout(function () {
+      var closeBtn = document.querySelector('.save_controls .closeButtonNew');
+      if (closeBtn && closeBtn.style.display === 'none') {
+        closeBtn.style.display = '';
+      }
+    }, 200);
+  });
+});
