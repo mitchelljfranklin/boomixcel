@@ -59,6 +59,7 @@ OTHER
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
+- Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export
 - Automatically rename downloaded documents to `_.`
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
 

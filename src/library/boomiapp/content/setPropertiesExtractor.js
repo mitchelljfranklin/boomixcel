@@ -53,8 +53,19 @@ function waitForSelector(selector, textMatch, timeoutMs) {
 }
 
 function dispatchMouseClick(element) {
-  element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }));
-  element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }));
+  var rect = element.getBoundingClientRect();
+  var options = {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+    clientX: rect.left + rect.width / 2,
+    clientY: rect.top + rect.height / 2,
+    button: 0,
+    buttons: 1,
+  };
+  element.dispatchEvent(new MouseEvent('mousedown', options));
+  element.dispatchEvent(new MouseEvent('mouseup', options));
+  element.dispatchEvent(new MouseEvent('click', options));
 }
 
 async function extractAllSetProperties() {
