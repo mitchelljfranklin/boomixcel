@@ -96,7 +96,6 @@ async function extractAllSetProperties() {
   });
   if (wrappers.length === 0) return [];
 
-  let currentSelected = document.querySelector('.dragdrop-draggable.dragdrop-selected');
   let results = [];
 
   for (let wrapper of wrappers) {
@@ -157,8 +156,10 @@ async function extractAllSetProperties() {
     }
   }
 
-  if (currentSelected) {
-    dispatchMouseClick(currentSelected);
+  // Ensure the properties panel stays closed
+  let cancelButton = document.querySelector('.anchor_side_panel button[data-locator="button-cancel"]');
+  if (cancelButton) {
+    cancelButton.click();
   }
 
   return results;
