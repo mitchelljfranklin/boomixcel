@@ -1,6 +1,6 @@
 # BoomiXcel v2.0.0 — What's New
 
-Welcome to BoomiXcel 2.0.0.rc.1! This release is a complete overhaul — a new name, a new look, and a ton of improvements under the hood. Here's everything that changed.
+Welcome to BoomiXcel 2.0.0 This release is a complete overhaul — a new name, a new look, and a ton of improvements under the hood. Here's everything that changed.
 
 ---
 

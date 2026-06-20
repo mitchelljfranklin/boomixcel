@@ -1,1 +1,1 @@
-Welcome to BoomiXcel — same extension you love, now with a fresh name and a massive overhaul under the hood. [See all changes at](https://github.com/mitchelljfranklin/BoomiXcel/blob/master/REFACTOR.md)
+Welcome to BoomiXcel — same extension you love, now with a fresh name and a massive overhaul under the hood. [See all changes here.](https://github.com/mitchelljfranklin/BoomiXcel/blob/master/REFACTOR.md)
