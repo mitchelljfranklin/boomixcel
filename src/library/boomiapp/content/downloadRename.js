@@ -81,10 +81,13 @@ function extractDownloadContext(buttonElement) {
     document.getElementById('popup_on_popup_content_DocumentDialogContents') ||
     document.body;
 
+  const activeTabWidget = document.querySelector('.gwt-TabLayoutPanelTab-selected .build_closeable_tab_widget');
+  const activeTabName = activeTabWidget?.getAttribute('title');
   const processLinkEl = Array.from(document.querySelectorAll('[data-locator^="link-process-"]'))
     .find(function (linkElement) { return linkElement.textContent.trimStart().startsWith('Process:'); });
   const processTitleEl = document.querySelector('.form_title_label:not(.no_display)');
-  const processName = processLinkEl?.textContent?.trim().replace(/^Process:\s*/i, '')
+  const processName = activeTabName
+    ?? processLinkEl?.textContent?.trim().replace(/^Process:\s*/i, '')
     ?? processTitleEl?.textContent?.trim()
     ?? null;
 
