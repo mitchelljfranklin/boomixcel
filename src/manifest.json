@@ -3,7 +3,7 @@
     "manifest_version": 3,
     "name": "BoomiXcel",
     "description": "This extension enhances Boomi Web Platform in multiple ways to provide a more robust experience",
-    "version": "2.0.0.1",
+    "version": "2.1.0.0",
     "action": {
         "default_popup": "popup/popup.html",
         "default_icon": {
