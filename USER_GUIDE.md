@@ -24,7 +24,7 @@ BoomiXcel enhances the Boomi Integration Platform (`platform.boomi.com`) with po
 ## Installation
 
 1. Visit one of the browser stores:
-   - [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko)
+   - [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko)
    - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active)
 2. Click **Install**
 3. The extension auto-enables on `https://platform.boomi.com/*`

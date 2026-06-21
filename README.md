@@ -13,7 +13,7 @@
 
   <p align="center">
     <a href="https://github.com/mitchelljfranklin/BoomiXcel/releases">
-      <img src="https://img.shields.io/github/package-json/v/mitchelljfranklin/BoomiXcel?color=blue&style=for-the-badge" alt="Version">
+      <img src="https://img.shields.io/github/v/release/mitchelljfranklin/BoomiXcel?color=blue&style=for-the-badge" alt="Version">
     </a>
     <a href="https://github.com/mitchelljfranklin/BoomiXcel/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/license-GPLv3-blue?style=for-the-badge" alt="License">
@@ -29,7 +29,7 @@
     A Browser extension that enhances the Boomi Integration Platform web UI
     <br />
     <br />
-    <a href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko">
+    <a href="https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko">
       <img src="https://img.shields.io/badge/Chrome-Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Install from Chrome Web Store">
       <img src="https://img.shields.io/chrome-web-store/users/behhfojpggobllhaifocfcampokbfhko?color=4285F4&style=for-the-badge&label=%20" alt="Chrome Web Store users">
     </a>
@@ -140,7 +140,7 @@
 
 Visit one of the browser stores:
 
-<a href="https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko">
+<a href="https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko">
       <img src="https://img.shields.io/badge/Chrome-Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Install from Chrome Web Store">
       <img src="https://img.shields.io/chrome-web-store/users/behhfojpggobllhaifocfcampokbfhko?color=4285F4&style=for-the-badge&label=%20" alt="Chrome Web Store users">
 </a>
@@ -161,12 +161,12 @@ Click **Install** — the extension auto-enables on `https://platform.boomi.com/
 
 | Browser     | Minimum Version | Manifest | Store Listing                                                                                                          |
 | -------------| -----------------| ----------| ------------------------------------------------------------------------------------------------------------------------|
-| **Chrome**  | 88+             | V3       | [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko) |
+| **Chrome**  | 88+             | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
 | **Firefox** | 109+            | V2       | [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active)                       |
-| **Edge**    | 88+             | V3       | [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko) |
-| **Brave**   | 1.45+           | V3       | [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko) |
-| **Opera**   | 74+             | V3       | [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko) |
-| **Arc**     | 1.0+            | V3       | [Chrome Web Store](https://chrome.google.com/webstore/detail/boomi-platform-enhancer/behhfojpggobllhaifocfcampokbfhko) |
+| **Edge**    | 88+             | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
+| **Brave**   | 1.45+           | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
+| **Opera**   | 74+             | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
+| **Arc**     | 1.0+            | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
 
 > All Chromium-based browsers (Brave, Opera, Arc, Vivaldi, etc.) can install the extension from the Chrome Web Store.
 
