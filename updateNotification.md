@@ -1,3 +1,1 @@
-- Edit SQL on Database Operation query — An "Edit SQL" popout (CodeMirror) now appears on the SQL query field, and a corner drag handle lets you resize the query box
-- Resizable native script editor — Boomi's own inline script editor dialog (ACE) now has a corner drag handle to resize it
-- Bug Fix: Resizable editor popout — The CodeMirror Edit Message / Edit SQL popout fix now ensures it has a corner drag handle so you can resize the editor window
+- 
