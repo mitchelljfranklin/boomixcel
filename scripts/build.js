@@ -98,6 +98,34 @@ function convertMarkdownLinks(text) {
   return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
 }
 
+function decodeHtmlEntities(text) {
+  return text
+    .replace(/&nbsp;/g, " ")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
+function cleanInlineMarkdown(text) {
+  // Protect inline code span contents (e.g. `<ProcessName>_<timestamp>.<ext>`)
+  // so the HTML-tag stripper doesn't treat the angle-bracket placeholders as tags.
+  const codeSpans = [];
+  let working = text.replace(/`([^`]+)`/g, (match, inner) => {
+    codeSpans.push(inner);
+    return `\u0000${codeSpans.length - 1}\u0000`;
+  });
+
+  working = decodeHtmlEntities(
+    working
+      .replace(/<[^>]*>/g, "")
+      .replace(/\*\*(.+?)\*\*/g, "$1"),
+  );
+
+  return working.replace(/\u0000(\d+)\u0000/g, (match, index) => codeSpans[Number(index)]);
+}
+
 function generateWebstoreDescription(version) {
   const readmePath = path.join(ROOT, "README.md");
   const outputPath = path.join(ROOT, "webstore-description.txt");
@@ -110,44 +138,63 @@ function generateWebstoreDescription(version) {
   const readme = fs.readFileSync(readmePath, "utf-8");
 
   // Normalize line endings for cross-platform consistency
-  let features = readme.replace(/\r\n/g, "\n");
+  const normalizedReadme = readme.replace(/\r\n/g, "\n");
 
-  // Extract the Features section (from heading to next ## heading, handles \r\n and \n)
-  const featuresMatch = features.match(/## [^\n]*Features\n([\s\S]*?)\n(?=## )/);
+  // Extract the Features section heading + body (handles \r\n and \n)
+  const featuresMatch = normalizedReadme.match(
+    /## ([^\n]*Features)\n([\s\S]*?)\n(?=## )/,
+  );
   if (!featuresMatch) {
     console.log("  Skipping webstore description: Features section not found");
     return;
   }
 
-  features = featuresMatch[1];
+  const featuresHeading = cleanInlineMarkdown(featuresMatch[1].trim());
 
-  // Convert markdown to plain text
-  features = features
-    // Strip HTML tags
-    .replace(/<[^>]*>/g, "")
-    // Strip all emoji (broad unicode ranges + variation selectors)
-    .replace(/[\u{1F000}-\u{1FFFF}]/gu, "")
-    .replace(/[\u{2600}-\u{27BF}]/gu, "")
-    .replace(/[\u{2B00}-\u{2BFF}]/gu, "")
-    .replace(/[\u{FE00}-\u{FE0F}]/gu, "")
-    .replace(/[\u{200D}]/gu, "")
-    // Convert bold markers
-    .replace(/\*\*(.+?)\*\*/g, "$1")
-    // Remove markdown table entirely, replace with indented list
-    .replace(/^\| (.+?) \| (.+?) \|$/gm, (_, key, value) => {
-      const k = key.trim();
-      if (k.match(/^[-:]+$/) || k === "Shortcut") return "";
-      return `  - ${k}: ${value.trim()}`;
-    })
-    // Remove table separator rows (just in case)
-    .replace(/^\|[-| :]+\|$/gm, "")
-    // Convert category headers to uppercase (allow leading whitespace from stripped emoji)
-    .replace(/^\s*([A-Z][A-Za-z &\/]+)$/gm, (_, text) => `\n${text.toUpperCase()}`)
-    // Clean up extra blank lines (max 1 consecutive)
+  // Convert the features body line-by-line, preserving emoji and structure
+  const bodyLines = featuresMatch[2].split("\n");
+  const convertedLines = [];
+
+  for (let lineIndex = 0; lineIndex < bodyLines.length; lineIndex++) {
+    const rawLine = bodyLines[lineIndex];
+    const tableRowMatch = rawLine.match(/^\s*\|(.+)\|\s*$/);
+
+    if (tableRowMatch) {
+      const cells = tableRowMatch[1].split("|").map((cell) => cell.trim());
+
+      // Drop separator rows like |----|----|
+      if (cells.every((cell) => /^:?-+:?$/.test(cell))) {
+        continue;
+      }
+
+      const cleanedCells = cells.map((cell) => cleanInlineMarkdown(cell));
+      const nextLine = bodyLines[lineIndex + 1]
+        ? bodyLines[lineIndex + 1].trim()
+        : "";
+      const isHeaderRow = /^\|[-| :]+\|$/.test(nextLine);
+
+      convertedLines.push(
+        isHeaderRow ? cleanedCells.join("\t") : `- ${cleanedCells.join("\t")}`,
+      );
+      continue;
+    }
+
+    const cleanedLine = cleanInlineMarkdown(rawLine);
+
+    // Drop back-to-top navigation lines
+    if (/^\s*↑ Back to top\s*$/.test(cleanedLine)) {
+      continue;
+    }
+
+    convertedLines.push(cleanedLine);
+  }
+
+  const featuresBody = convertedLines
+    .join("\n")
     .replace(/\n{3,}/g, "\n\n")
-    // Remove back-to-top navigation lines
-    .replace(/^\s*↑ Back to top\s*$/gm, "")
     .trim();
+
+  const features = `${featuresHeading}\n\n${featuresBody}`;
 
   const description = [
     `Boomi Xcel v${version}`,
@@ -323,7 +370,7 @@ function createGitHubRelease(version) {
 }
 
 function generateReleaseNotes(version) {
-  // Find the most recent tag to diff against
+  // Find the most recent tag to diff against (for the compare link only)
   let lastTag = "";
   try {
     lastTag = execFileSync("git", ["describe", "--tags", "--abbrev=0", "--match", "v*"], {
@@ -331,63 +378,23 @@ function generateReleaseNotes(version) {
       cwd: ROOT,
     }).trim();
   } catch (e) {
-    // No prior tags — include all commits
+    // No prior tags
   }
 
-  const range = lastTag ? `${lastTag}..HEAD` : "HEAD";
-  let log = "";
-  try {
-    log = execFileSync("git", [
-      "log", range,
-      "--no-merges",
-      "--pretty=format:%s",
-    ], { encoding: "utf-8", cwd: ROOT }).trim();
-  } catch (e) {
-    // Could not get log — fallback
+  const compareLink = `**Full Changelog:** https://github.com/mitchelljfranklin/BoomiXcel/compare/${lastTag || "commits"}...v${version}`;
+
+  // Release notes come from updateNotification.md (already markdown bullets)
+  const changelogPath = path.join(ROOT, "updateNotification.md");
+  let changelog = "";
+  if (fs.existsSync(changelogPath)) {
+    changelog = fs.readFileSync(changelogPath, "utf-8").replace(/\r\n/g, "\n").trim();
   }
 
-  if (!log) return "See the README for full feature details.";
-
-  const commits = log.split("\n").filter(Boolean);
-
-  const categories = { feat: [], fix: [], docs: [], style: [], refactor: [], chore: [], other: [] };
-
-  commits.forEach((msg) => {
-    const match = msg.match(/^(\w+)(?:\(.+?\))?:\s*(.*)/);
-    if (match) {
-      const type = match[1];
-      const desc = match[2];
-      if (categories[type]) {
-        categories[type].push(desc);
-      } else {
-        categories.other.push(msg);
-      }
-    } else {
-      categories.other.push(msg);
-    }
-  });
-
-  const label = {
-    feat: "Features",
-    fix: "Bug Fixes",
-    docs: "Documentation",
-    style: "Styling & UI",
-    refactor: "Refactoring",
-    chore: "Maintenance",
-    other: "Other Changes",
-  };
-
-  let notes = "";
-  for (const [type, items] of Object.entries(categories)) {
-    if (items.length === 0) continue;
-    notes += `### ${label[type]}\n\n`;
-    items.forEach((item) => { notes += `- ${item}\n`; });
-    notes += "\n";
+  if (!changelog) {
+    return `See the README for full feature details.\n\n${compareLink}`;
   }
 
-  notes += `**Full Changelog:** https://github.com/mitchelljfranklin/BoomiXcel/compare/${lastTag || "commits"}...v${version}`;
-
-  return notes.trim();
+  return `## What's New in v${version}\n\n${changelog}\n\n${compareLink}`;
 }
 
 async function main() {
