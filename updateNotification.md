@@ -1,4 +1,4 @@
 - New Option to Highlight WARNING-level rows yellow in the Show Log dialog.
 - New Option to Auto-apply package notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field.
 - New Option to default the minimum log status for the Show Log dialog — DEBUG / INFO / WARNING / SEVERE.
-- NOTICE: Firefox users, be aware that the add-on store won't allow automatic updates to the new package. To ensure you they the latest version of BoomiXcel, please ask any users who rely on it to search for the new extension in the store and replace the existing one.
+- NOTICE: Firefox users, be aware that the add-on store won't allow automatic updates to the new package. To ensure that they have the latest version of BoomiXcel, please ask any users who relys on it to search for the new extension in the store and replace the existing one.
