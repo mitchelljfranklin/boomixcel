@@ -1,4 +1,4 @@
-Boomi Xcel v2.1.0.0
+Boomi Xcel v2.1.1.0
 The Boomi Integration Platform Extension
 
 A browser extension that enhances the Boomi Integration Platform web UI at platform.boomi.com with powerful productivity tools, visual improvements, and workflow optimizations.
