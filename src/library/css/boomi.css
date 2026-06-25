@@ -1248,3 +1248,8 @@ body.bph-resizing {
     top: -9999px;
     left: -9999px;
 }
+
+/*override the limtied map function text*/
+.functionViewInputLabel, .functionViewOutputLabel {
+    max-width: fit-content !important;
+}
