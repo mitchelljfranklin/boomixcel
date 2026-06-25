@@ -49,7 +49,12 @@
             "css": [
                 "library/css/boomi.css",
                 "library/css/cm/codemirror.css",
-                "library/css/cm/theme/twilight.css"
+                "library/css/cm/theme/twilight.css",
+                "library/css/cm/theme/eclipse.css",
+                "library/css/cm/theme/solarized.css",
+                "library/css/cm/theme/monokai.css",
+                "library/css/cm/theme/dracula.css",
+                "library/css/cm/theme/material.css"
             ],
             "js": [
                 "library/boomiapp/content/bundle.js"

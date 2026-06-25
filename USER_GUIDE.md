@@ -131,7 +131,7 @@ When editing Message, Notify, or Command shapes, the standard text field is repl
 - **HTML** — syntax highlighting
 - **SQL** — syntax highlighting for Database Operation shapes
 
-The editor respects the Boomi dark/light theme.
+By default the editor matches Boomi's dark/light theme, but you can pick a specific theme from the Options page under **Defaults → Code Editor Theme**: choose **Auto** (follow Boomi's light/dark mode), a light theme (**Default**, **Eclipse**, **Solarized Light**), or a dark theme (**Twilight**, **Solarized Dark**, **Monokai**, **Dracula**, **Material**). The chosen theme applies to the Message, Notify, Command, and SQL editor popouts.
 
 The popout has a **corner drag handle** at the bottom-right — drag it to resize the editor window (grows down and to the right). The size resets to the default each time you open it.
 

@@ -30,10 +30,7 @@ document.arrive(
         autoCloseBrackets: true,
       });
 
-      var theme = $("html").hasClass("qm-u-theme-dark")
-        ? "twilight"
-        : "default";
-      editor.setOption("theme", theme);
+      editor.setOption("theme", getCodeMirrorEditorTheme());
 
       enableEditorPopupResize(editor);
 
@@ -84,10 +81,7 @@ document.arrive(
         autoCloseBrackets: true,
       });
 
-      var theme = $("html").hasClass("qm-u-theme-dark")
-        ? "twilight"
-        : "default";
-      editor.setOption("theme", theme);
+      editor.setOption("theme", getCodeMirrorEditorTheme());
 
       enableEditorPopupResize(editor);
 

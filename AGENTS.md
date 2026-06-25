@@ -33,7 +33,7 @@ The build also reads `updateNotification.md` and injects its changelog items as 
 
 ### Bundle scope behavior
 
-esbuild wraps the bundle in an IIFE (`(() => { ... })()`). Functions and `var` declarations are scoped to that IIFE — they are shared between all content scripts inside the bundle but are **not** on `window`. This is how `global.js` functions (`getUrlpath()`, `dashboardDays()`, `getUrlParameter()`, `getGWTPageName()`, `showInformationAlertDialog()`) are callable from `pageInit.js`, `headerActions.js`, and other content scripts.
+esbuild wraps the bundle in an IIFE (`(() => { ... })()`). Functions and `var` declarations are scoped to that IIFE — they are shared between all content scripts inside the bundle but are **not** on `window`. This is how `global.js` functions (`getUrlpath()`, `dashboardDays()`, `getUrlParameter()`, `getGWTPageName()`, `showInformationAlertDialog()`, `getCodeMirrorEditorTheme()`) are callable from `pageInit.js`, `headerActions.js`, and other content scripts.
 
 The `listenerGlobal.js` sets a `var BoomiPlatform = {}` in the bundle scope, reads config from `chrome.storage.sync.get()`, and all other scripts reference `BoomiPlatform.key` from this shared IIFE-scoped variable.
 
@@ -89,7 +89,7 @@ content/*.js (in bundle)
 ## Key libraries / third-party code
 
 - **jQuery 4.0** — actively used for DOM manipulation. Loaded via content_scripts at `document_start` for the isolated context.
-- **CodeMirror** — the custom code editor used in Message, Notify, and Database Operation shapes (JSON, XML, HTML, SQL modes). Loaded at `document_start` in the isolated context.
+- **CodeMirror** — the custom code editor used in Message, Notify, and Database Operation shapes (JSON, XML, HTML, SQL modes). Loaded at `document_start` in the isolated context. Editor popout theming is configurable via the `codemirror_theme` option (read through `getCodeMirrorEditorTheme()` in `global.js`); theme CSS files live in `library/css/cm/theme/` and are registered in `manifest.json`'s `content_scripts[].css` array. The `auto` default mirrors Boomi's light/dark mode (`default`/`twilight`).
 - **arrive.js** — mutation-observer library for DOM insertion detection (`document.arrive()`). Only available in the isolated context.
 - **rasterizeHTML.min.js** — loaded at `document_start` in the isolated context (used by `imageCapture.js` for process flow → PNG capture)
 
@@ -108,7 +108,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | Script | Context | What it does |
 |---|---|---|
 | `content/contentScript.js` | content | Entry point. Detects page load via title change, injects `fullscreen.js`, injects masthead options gear icon, sets up platform status check, update notification dialog |
-| `content/global.js` | content | Utility functions: URL parsing, `dashboardDays()` (configurable dashboard time-range auto-selector), alert dialog helper |
+| `content/global.js` | content | Utility functions: URL parsing, `dashboardDays()` (configurable dashboard time-range auto-selector), alert dialog helper, `getCodeMirrorEditorTheme()` (resolves the configured editor popout theme) |
 | `content/pageInit.js` | content | Page-load detection, triggers navigation change and update notification checks |
 | `content/favicon.js` | content | Page-specific favicons with distinct colors per page, unique page titles, navigation state listeners |
 | `content/keyboardShortcuts.js` | content | Ctrl+Alt+S (save) |

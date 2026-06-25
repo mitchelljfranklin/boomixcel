@@ -152,6 +152,21 @@
                         </select>
                         <small class="helper">Auto-selects this language when creating new Data Process, Custom Scripting, or Business Rules shapes.</small>
                     </div>
+                    <div class="mb-3">
+                        <label for="codemirror_theme">Code Editor Theme:</label>
+                        <select id="codemirror_theme" name="codemirror_theme" class="option form-select" data-default="auto">
+                            <option value="auto">Auto (match Boomi light/dark)</option>
+                            <option value="default">Default (light)</option>
+                            <option value="eclipse">Eclipse (light)</option>
+                            <option value="solarized light">Solarized Light</option>
+                            <option value="solarized dark">Solarized Dark</option>
+                            <option value="twilight">Twilight (dark)</option>
+                            <option value="monokai">Monokai (dark)</option>
+                            <option value="dracula">Dracula (dark)</option>
+                            <option value="material">Material (dark)</option>
+                        </select>
+                        <small class="helper">Theme for the Message, Notify, Command, and SQL editor popouts. Auto follows Boomi's light/dark mode.</small>
+                    </div>
                 </details>
 
                 <details class="option-group" open>

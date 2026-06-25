@@ -54,10 +54,7 @@ document.arrive(
           break;
       }
 
-      var theme = $("html").hasClass("qm-u-theme-dark")
-        ? "twilight"
-        : "default";
-      editor.setOption("theme", theme);
+      editor.setOption("theme", getCodeMirrorEditorTheme());
 
       enableEditorPopupResize(editor);
 

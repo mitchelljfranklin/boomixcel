@@ -26,6 +26,7 @@ Shortcut	Action
 - CodeMirror SQL editor for Database Operation shapes — "Edit SQL" popout on the query field plus a corner drag handle to resize the query textarea
 - Resize Boomi's native inline script editor dialog with a corner drag handle
 - Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
+- Choose the code editor popout theme — Auto (matches Boomi light/dark) or a specific light/dark theme (configurable)
 - Copy raw document content from the Document Viewer dialog
 - Copy clean XML from the Component XML popup (decodes HTML entities)
 - DB document table viewer — sortable, searchable, paginated table with "See table" toggle and maximize button

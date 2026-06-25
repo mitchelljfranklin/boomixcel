@@ -73,3 +73,12 @@ function fancyTimeFormat(duration) {
   ret += "" + secs;
   return ret;
 }
+
+function getCodeMirrorEditorTheme() {
+  var configuredTheme =
+    typeof BoomiPlatform !== "undefined" ? BoomiPlatform.codemirror_theme : undefined;
+  if (!configuredTheme || configuredTheme === "auto") {
+    return $("html").hasClass("qm-u-theme-dark") ? "twilight" : "default";
+  }
+  return configuredTheme;
+}
