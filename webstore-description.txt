@@ -55,6 +55,7 @@ Shortcut	Action
 - Replace the Boomi masthead brand logo with the BoomiXcel logo (configurable)
 - Tab names simplified — account name removed (configurable)
 - Page-specific favicons with distinct colors per page — Build (blue), Deploy (green), Dashboard (coral), Runtime (coral atom), Reporting (purple), MdmSphere (teal), ApiSphere (deep blue), BoomiAI (magenta), Flow (orange) (configurable)
+- For easier viewing, functions in the Maps text now automatically expand to fill the available space, allowing you to see all relevant information at once.
 
 📬 Notifications & Reminders
 - Platform status check on every page
