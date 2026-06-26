@@ -85,6 +85,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 
     let alert_html = renderBoomiModal({
       overlayClass: "BoomiUpdateOverlay",
+      modern: true,
       body:
         "<h1>Settings Changed.</h1>" +
         "<p>The BoomiXcel extension options have been adjusted, please reload the page for the changes to apply.</p>",

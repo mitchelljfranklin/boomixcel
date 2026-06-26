@@ -9,6 +9,7 @@ document.addEventListener("click", function (event) {
     if (button.getAttribute("alt") === "off") {
       start_refresh();
       setButtonOnState();
+      fireRefresh();
     } else {
       stop_refresh(true);
     }

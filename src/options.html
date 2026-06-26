@@ -15,139 +15,214 @@
             </div>
             <h1>Boomi Xcel Options <span class="dirty-dot" id="dirty-indicator"></span></h1>
             <p>Adjust to suit your needs.</p>
-            <form> 
-                <details class="option-group" open>
-                    <summary>&#9660; Appearance</summary>
-                    <div class="mb-3">
-                        <label for="shape_icon_styling">Shape Icon Styling:</label>
-                        <select id="shape_icon_styling" name="shape_icon_styling" class="option form-select" aria-label="Shape Icon Styling" data-default="off">
-                            <option value="off">Off (Default)</option>
-                            <option value="legacy">Legacy Shapes</option>
-                            <option value="modern">Modern Shapes</option>
-                            <option value="minimal">Minimal Shapes</option>
-                            <option value="minimal-inverted">Minimal Shapes Inverted</option>
-                            <option value="refreshed-inverted">Refreshed Shapes Inverted</option>
-                        </select>
-                    </div>
-                    <div class="toggle-row">
-                        <label for="canvas_grid" class="toggle-label-row mb-0">Show Canvas Grid</label>
-                        <label class="toggle"><input type="checkbox" id="canvas_grid" name="canvas_grid" class="option toggle-input" data-default="on"><span class="slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <label for="brand_logo" class="toggle-label-row mb-0">Replace Boomi Brand Logo</label>
-                        <label class="toggle"><input type="checkbox" id="brand_logo" name="brand_logo" class="option toggle-input" data-default="off"><span class="slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <label for="schedule_icon" class="toggle-label-row mb-0">Old-Style Play/Pause Icons</label>
-                        <label class="toggle"><input type="checkbox" id="schedule_icon" name="schedule_icon" class="option toggle-input" data-default="off"><span class="slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <label for="reverse_modal" class="toggle-label-row mb-0">Reverse Modal Buttons (OK/Cancel)</label>
-                        <label class="toggle"><input type="checkbox" id="reverse_modal" name="reverse_modal" class="option toggle-input" data-default="off"><span class="slider"></span></label>
-                    </div>
-                    <div class="toggle-row">
-                        <label for="mastfoot_show" class="toggle-label-row mb-0">Show Boomi Footer</label>
-                        <label class="toggle"><input type="checkbox" id="mastfoot_show" name="mastfoot_show" class="option toggle-input" data-default="on"><span class="slider"></span></label>
-                    </div>
-                </details>
+            <form>
+                <div class="options-search-wrap">
+                    <input type="text" id="options-search" class="options-search" placeholder="Search settings..." aria-label="Search settings">
+                </div>
+                <div class="options-layout" id="options-layout">
+                    <nav class="options-nav" role="tablist" aria-label="Settings categories">
+                        <button type="button" class="options-nav-item active" data-pane="appearance" role="tab" aria-selected="true" aria-controls="pane-appearance">Appearance <span class="nav-changed-badge" data-badge-for="appearance"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="build" role="tab" aria-selected="false" aria-controls="pane-build">Build Canvas <span class="nav-changed-badge" data-badge-for="build"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="editing" role="tab" aria-selected="false" aria-controls="pane-editing">Editing <span class="nav-changed-badge" data-badge-for="editing"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="reporting" role="tab" aria-selected="false" aria-controls="pane-reporting">Process Reporting <span class="nav-changed-badge" data-badge-for="reporting"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="navigation" role="tab" aria-selected="false" aria-controls="pane-navigation">Navigation &amp; Shortcuts <span class="nav-changed-badge" data-badge-for="navigation"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="deployment" role="tab" aria-selected="false" aria-controls="pane-deployment">Deployment <span class="nav-changed-badge" data-badge-for="deployment"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="reminders" role="tab" aria-selected="false" aria-controls="pane-reminders">Reminders <span class="nav-changed-badge" data-badge-for="reminders"></span></button>
+                    </nav>
+                    <div class="options-panes">
+                        <section class="options-pane active" id="pane-appearance" data-pane="appearance" role="tabpanel" aria-label="Appearance">
+                            <h2 class="options-pane-title">Appearance</h2>
+                            <div class="option-item">
+                                <label for="shape_icon_styling">Shape Icon Styling:</label>
+                                <select id="shape_icon_styling" name="shape_icon_styling" class="option form-select" aria-label="Shape Icon Styling" data-default="off">
+                                    <option value="off">Off (Default)</option>
+                                    <option value="legacy">Legacy Shapes</option>
+                                    <option value="modern">Modern Shapes</option>
+                                    <option value="minimal">Minimal Shapes</option>
+                                    <option value="minimal-inverted">Minimal Shapes Inverted</option>
+                                    <option value="refreshed-inverted">Refreshed Shapes Inverted</option>
+                                </select>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="canvas_grid" class="toggle-label-row mb-0">Show Canvas Grid</label>
+                                    <label class="toggle"><input type="checkbox" id="canvas_grid" name="canvas_grid" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="brand_logo" class="toggle-label-row mb-0">Replace Boomi Brand Logo</label>
+                                    <label class="toggle"><input type="checkbox" id="brand_logo" name="brand_logo" class="option toggle-input" data-default="off"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="schedule_icon" class="toggle-label-row mb-0">Old-Style Play/Pause Icons</label>
+                                    <label class="toggle"><input type="checkbox" id="schedule_icon" name="schedule_icon" class="option toggle-input" data-default="off"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="reverse_modal" class="toggle-label-row mb-0">Reverse Modal Buttons (OK/Cancel)</label>
+                                    <label class="toggle"><input type="checkbox" id="reverse_modal" name="reverse_modal" class="option toggle-input" data-default="off"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="mastfoot_show" class="toggle-label-row mb-0">Show Boomi Footer</label>
+                                    <label class="toggle"><input type="checkbox" id="mastfoot_show" name="mastfoot_show" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="unique_titles_and_favicons" class="toggle-label-row mb-0">Unique Page Titles &amp; Favicons</label>
+                                    <label class="toggle"><input type="checkbox" id="unique_titles_and_favicons" name="unique_titles_and_favicons" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                        </section>
 
-                <details class="option-group" open>
-                    <summary>&#9660; Build Canvas</summary>
-                    <div class="mb-3">
-                        <label for="endpoint_flash">Non-Connected Endpoint Notification:</label>
-                        <select id="endpoint_flash" name="endpoint_flash" class="option form-select" data-default="on">
-                            <option value="on">Always On</option>
-                            <option value="off">Always Off</option>
-                            <option value="testing">Only when running tests</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="path_trace_highlight">Trace Path Highlight:</label>
-                        <select id="path_trace_highlight" name="path_trace_highlight" class="option form-select" data-default="pulse">
-                            <option value="pulse">On</option>
-                            <option value="off">Off</option>
-                        </select>
-                    </div>
-                                                <div class="mb-3">
-                                                    <label for="tablewrap_selector">Table Text Wrapping:</label>
-                        <select id="tablewrap_selector" name="tablewrap_selector" class="option form-select" data-default="never">
-                            <option value="never">Never Wrap (Default)</option>
-                            <option value="always">Always Wrap</option>
-                            <option value="toggle">Toggle on Header Hover</option>
-                        </select>
-                        <small class="helper">Allows the table text to wrap instead of being cut off.</small>
-                    </div>
-                </details>
+                        <section class="options-pane" id="pane-build" data-pane="build" role="tabpanel" aria-label="Build Canvas">
+                            <h2 class="options-pane-title">Build Canvas</h2>
+                            <div class="option-item">
+                                <label for="endpoint_flash">Non-Connected Endpoint Notification:</label>
+                                <select id="endpoint_flash" name="endpoint_flash" class="option form-select" data-default="on">
+                                    <option value="on">Always On</option>
+                                    <option value="off">Always Off</option>
+                                    <option value="testing">Only when running tests</option>
+                                </select>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="path_trace_highlight" class="toggle-label-row mb-0">Trace Path Highlight</label>
+                                    <label class="toggle"><input type="checkbox" id="path_trace_highlight" name="path_trace_highlight" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                        </section>
 
-                <details class="option-group" open>
-                    <summary>&#9660; Process Reporting</summary>
-                    <div class="mb-3">
-                        <label for="dashboard_default_range">Dashboard Default Time Range:</label>
-                        <select id="dashboard_default_range" name="dashboard_default_range" class="option form-select" data-default="7d">
-                            <option value="7d">7 Days</option>
-                            <option value="1m">1 Month</option>
-                            <option value="3m">3 Months</option>
-                            <option value="6m">6 Months</option>
-                            <option value="1y">1 Year</option>
-                            <option value="Max">Max</option>
-                        </select>
-                        <small class="helper">Auto-selects this time range when the Dashboard page loads.</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="refresh_interval">Refresh Interval (Seconds):</label>
-                        <input type="number" id="refresh_interval" name="refresh_interval" class="option form-control" value="15" min="1" max="3600" data-default="15">
-                        <small class="helper">Enabled once you click "Refresh Every XX" on the Process Reporting page.</small>
-                    </div>
-                </details>
+                        <section class="options-pane" id="pane-editing" data-pane="editing" role="tabpanel" aria-label="Editing">
+                            <h2 class="options-pane-title">Editing</h2>
+                            <div class="option-item">
+                                <label for="default_scripting_language">Default Scripting Language:</label>
+                                <select id="default_scripting_language" name="default_scripting_language" class="option form-select" data-default="off">
+                                    <option value="off">Off (Default)</option>
+                                    <option value="Groovy 1.5">Groovy 1.5</option>
+                                    <option value="Groovy 2.4">Groovy 2.4</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                </select>
+                                <small class="helper">Auto-selects this language when creating new Data Process, Custom Scripting, or Business Rules shapes.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="codemirror_theme">Code Editor Theme:</label>
+                                <select id="codemirror_theme" name="codemirror_theme" class="option form-select" data-default="auto">
+                                    <option value="auto">Auto (match Boomi light/dark)</option>
+                                    <option value="default">Default (light)</option>
+                                    <option value="eclipse">Eclipse (light)</option>
+                                    <option value="solarized light">Solarized Light</option>
+                                    <option value="solarized dark">Solarized Dark</option>
+                                    <option value="twilight">Twilight (dark)</option>
+                                    <option value="monokai">Monokai (dark)</option>
+                                    <option value="dracula">Dracula (dark)</option>
+                                    <option value="material">Material (dark)</option>
+                                </select>
+                                <small class="helper">Theme for the Message, Notify, Command, and SQL editor popouts. Auto follows Boomi's light/dark mode.</small>
+                            </div>
+                        </section>
 
-                <details class="option-group" open>
-                    <summary>&#9660; Navigation &amp; Shortcuts</summary>
-                    <div class="mb-3">
-                        <label for="full_screen_shortcut">Full Screen Shortcut (<a href="https://keycode.info/" target="_blank">keycode</a>):</label>
-                        <input type="number" id="full_screen_shortcut" name="full_screen_shortcut" class="option form-control mb-2" value="192" min="0" max="255" data-default="192">
-                        <label><input type="checkbox" id="full_screen_shortcut_alt" name="full_screen_shortcut_alt" value="ALT" class="option form-check-input" data-default="false"> Alt</label>
-                        <label><input type="checkbox" id="full_screen_shortcut_ctrl" name="full_screen_shortcut_ctrl" value="CTRL" class="option form-check-input" data-default="false"> Ctrl</label>
-                        <label><input type="checkbox" id="full_screen_shortcut_shift" name="full_screen_shortcut_shift" value="SHIFT" class="option form-check-input" data-default="false"> Shift</label>
-                        <small class="helper">Will not override system shortcuts — be careful with key/modifier combos.</small>
-                    </div>
-                    <div class="toggle-row">
-                        <label for="unique_titles_and_favicons" class="toggle-label-row mb-0">Unique Page Titles &amp; Favicons</label>
-                        <label class="toggle"><input type="checkbox" id="unique_titles_and_favicons" name="unique_titles_and_favicons" class="option toggle-input" data-default="on"><span class="slider"></span></label>
-                    </div>
-                    <div class="mb-3">
-                        <label for="apply_process_filters">Default Process Filters:</label>
-                        <select id="apply_process_filters" name="apply_process_filters" class="option form-select mb-2" aria-label="Apply Process Filters" data-default="off">
-                            <option value="on">On</option>
-                            <option value="off">Off</option>
-                        </select>
-                        <label><input type="checkbox" id="Filter_process" name="Filter_process" value="Process" class="option form-check-input" data-default="true"> Process</label>
-                        <label><input type="checkbox" id="Filter_processProp" name="Filter_processProp" value="ProcessProperties" class="option form-check-input" data-default="true"> Process Properties</label>
-                        <label><input type="checkbox" id="Filter_crossref" name="Filter_crossref" value="CrossReferenceTables" class="option form-check-input" data-default="true"> Cross Reference Tables</label>
-                        <label><input type="checkbox" id="Filter_api_service" name="Filter_api_service" value="APIServices" class="option form-check-input" data-default="true"> API Service</label>
-                    </div>
-                </details>
+                        <section class="options-pane" id="pane-reporting" data-pane="reporting" role="tabpanel" aria-label="Process Reporting">
+                            <h2 class="options-pane-title">Process Reporting</h2>
+                            <div class="option-item">
+                                <label for="dashboard_default_range">Dashboard Default Time Range:</label>
+                                <select id="dashboard_default_range" name="dashboard_default_range" class="option form-select" data-default="7d">
+                                    <option value="7d">7 Days</option>
+                                    <option value="1m">1 Month</option>
+                                    <option value="3m">3 Months</option>
+                                    <option value="6m">6 Months</option>
+                                    <option value="1y">1 Year</option>
+                                    <option value="Max">Max</option>
+                                </select>
+                                <small class="helper">Auto-selects this time range when the Dashboard page loads.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="refresh_interval">Refresh Interval (Seconds):</label>
+                                <input type="number" id="refresh_interval" name="refresh_interval" class="option form-control" value="15" min="1" max="3600" data-default="15">
+                                <small class="helper">Enabled once you click "Refresh Every XX" on the Process Reporting page.</small>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="log_highlight_warnings" class="toggle-label-row mb-0">Highlight WARNING Log Lines</label>
+                                    <label class="toggle"><input type="checkbox" id="log_highlight_warnings" name="log_highlight_warnings" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                                <small class="helper">Highlights WARNING-level rows in yellow in the Show Log dialog.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="log_default_min_status">Default Log Minimum Status:</label>
+                                <select id="log_default_min_status" name="log_default_min_status" class="option form-select" data-default="off">
+                                    <option value="off">Off (Default)</option>
+                                    <option value="finest">DEBUG</option>
+                                    <option value="info">INFO</option>
+                                    <option value="warning">WARNING</option>
+                                    <option value="severe">SEVERE</option>
+                                </select>
+                                <small class="helper">Auto-selects this minimum status in the Show Log dialog when it opens.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="tablewrap_selector">Table Text Wrapping:</label>
+                                <select id="tablewrap_selector" name="tablewrap_selector" class="option form-select" data-default="never">
+                                    <option value="never">Never Wrap (Default)</option>
+                                    <option value="always">Always Wrap</option>
+                                    <option value="toggle">Toggle on Header Hover</option>
+                                </select>
+                                <small class="helper">Allows the table text to wrap instead of being cut off.</small>
+                            </div>
+                        </section>
 
-                <details class="option-group" open>
-                    <summary>&#9660; Defaults</summary>
-                    <div class="mb-3">
-                        <label for="default_scripting_language">Default Scripting Language:</label>
-                        <select id="default_scripting_language" name="default_scripting_language" class="option form-select" data-default="off">
-                            <option value="off">Off (Default)</option>
-                            <option value="Groovy 1.5">Groovy 1.5</option>
-                            <option value="Groovy 2.4">Groovy 2.4</option>
-                            <option value="JavaScript">JavaScript</option>
-                        </select>
-                        <small class="helper">Auto-selects this language when creating new Data Process, Custom Scripting, or Business Rules shapes.</small>
-                    </div>
-                </details>
+                        <section class="options-pane" id="pane-navigation" data-pane="navigation" role="tabpanel" aria-label="Navigation &amp; Shortcuts">
+                            <h2 class="options-pane-title">Navigation &amp; Shortcuts</h2>
+                            <div class="option-item">
+                                <label for="full_screen_shortcut">Full Screen Shortcut (<a href="https://keycode.info/" target="_blank">keycode</a>):</label>
+                                <input type="number" id="full_screen_shortcut" name="full_screen_shortcut" class="option form-control mb-2" value="192" min="0" max="255" data-default="192">
+                                <label><input type="checkbox" id="full_screen_shortcut_alt" name="full_screen_shortcut_alt" value="ALT" class="option form-check-input" data-default="false"> Alt</label>
+                                <label><input type="checkbox" id="full_screen_shortcut_ctrl" name="full_screen_shortcut_ctrl" value="CTRL" class="option form-check-input" data-default="false"> Ctrl</label>
+                                <label><input type="checkbox" id="full_screen_shortcut_shift" name="full_screen_shortcut_shift" value="SHIFT" class="option form-check-input" data-default="false"> Shift</label>
+                                <small class="helper">Will not override system shortcuts — be careful with key/modifier combos.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="apply_process_filters">Default Process Filters:</label>
+                                <select id="apply_process_filters" name="apply_process_filters" class="option form-select mb-2" aria-label="Apply Process Filters" data-default="off">
+                                    <option value="on">On</option>
+                                    <option value="off">Off</option>
+                                </select>
+                                <label><input type="checkbox" id="Filter_process" name="Filter_process" value="Process" class="option form-check-input" data-default="true"> Process</label>
+                                <label><input type="checkbox" id="Filter_processProp" name="Filter_processProp" value="ProcessProperties" class="option form-check-input" data-default="true"> Process Properties</label>
+                                <label><input type="checkbox" id="Filter_crossref" name="Filter_crossref" value="CrossReferenceTables" class="option form-check-input" data-default="true"> Cross Reference Tables</label>
+                                <label><input type="checkbox" id="Filter_api_service" name="Filter_api_service" value="APIServices" class="option form-check-input" data-default="true"> API Service</label>
+                            </div>
+                        </section>
 
-                <details class="option-group" open>
-                    <summary>&#9660; Reminders</summary>
-                    <div class="toggle-row">
-                        <label for="reminder_schedule" class="toggle-label-row mb-0">Post-Deployment Schedule Reminder</label>
-                        <label class="toggle"><input type="checkbox" id="reminder_schedule" name="reminder_schedule" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                        <section class="options-pane" id="pane-deployment" data-pane="deployment" role="tabpanel" aria-label="Deployment">
+                            <h2 class="options-pane-title">Deployment</h2>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="deployment_notes_auto_apply" class="toggle-label-row mb-0">Deployment Notes Auto-Apply</label>
+                                    <label class="toggle"><input type="checkbox" id="deployment_notes_auto_apply" name="deployment_notes_auto_apply" class="option toggle-input" data-default="off"><span class="slider"></span></label>
+                                </div>
+                                <small class="helper">Copies the package notes from "Create Packaged Component" into the deployment notes field automatically.</small>
+                            </div>
+                        </section>
+
+                        <section class="options-pane" id="pane-reminders" data-pane="reminders" role="tabpanel" aria-label="Reminders">
+                            <h2 class="options-pane-title">Reminders</h2>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="reminder_schedule" class="toggle-label-row mb-0">Post-Deployment Schedule Reminder</label>
+                                    <label class="toggle"><input type="checkbox" id="reminder_schedule" name="reminder_schedule" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="options-no-results" id="options-no-results">No settings match your search.</div>
                     </div>
-                </details>
+                </div>
 
                 <div class="sticky-save">
                     <button id="save" type="button" class="btn flex-grow-1 btn-primary fw-bold">Save Options <span class="dirty-dot" id="save-dirty-dot"></span></button>

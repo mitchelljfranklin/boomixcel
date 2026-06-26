@@ -1,5 +1,6 @@
 var TOGGLE_LIST = [
   { key: "canvas_grid", label: "Show Canvas Grid", defaultVal: "on" },
+  { key: "path_trace_highlight", label: "Trace Path Highlight", defaultVal: "on" },
   { key: "brand_logo", label: "Replace Boomi Brand Logo", defaultVal: "off" },
   { key: "schedule_icon", label: "Old-Style Play/Pause Icons", defaultVal: "off" },
   { key: "reverse_modal", label: "Reverse Modal Buttons (OK/Cancel)", defaultVal: "off" },
@@ -7,6 +8,8 @@ var TOGGLE_LIST = [
   { key: "unique_titles_and_favicons", label: "Unique Page Titles & Favicons", defaultVal: "on" },
   { key: "apply_process_filters", label: "Default Process Filters", defaultVal: "off" },
   { key: "reminder_schedule", label: "Post-Deployment Schedule Reminder", defaultVal: "on" },
+  { key: "deployment_notes_auto_apply", label: "Deployment Notes Auto-Apply", defaultVal: "off" },
+  { key: "log_highlight_warnings", label: "Highlight WARNING Log Lines", defaultVal: "on" },
 ];
 
 function renderToggles() {

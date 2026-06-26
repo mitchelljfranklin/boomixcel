@@ -16,6 +16,7 @@ BoomiXcel enhances the Boomi Integration Platform (`platform.boomi.com`) with po
 - [Process Reporting](#process-reporting)
 - [Appearance](#appearance)
 - [Download & Document Tools](#download--document-tools)
+- [Deployment](#deployment)
 - [Notifications](#notifications)
 - [Footer & Branding](#footer--branding)
 
@@ -25,7 +26,7 @@ BoomiXcel enhances the Boomi Integration Platform (`platform.boomi.com`) with po
 
 1. Visit one of the browser stores:
    - [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko)
-   - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active)
+   - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomixcel)
 2. Click **Install**
 3. The extension auto-enables on `https://platform.boomi.com/*`
 
@@ -40,6 +41,7 @@ Click the BoomiXcel icon in your browser toolbar to open a compact settings popu
 | Toggle | Effect |
 |--------|--------|
 | Show Canvas Grid | Removes the dot grid from the build canvas |
+| Trace Path Highlight | Highlights connector lines when hovering shapes during tests |
 | Replace Boomi Brand Logo | Shows the BoomiXcel logo in the masthead |
 | Old-Style Play/Pause Icons | Restores legacy play/pause icons in deployed processes |
 | Reverse Modal Buttons (OK/Cancel) | Swaps Cancel/OK to OK/Cancel order |
@@ -47,6 +49,8 @@ Click the BoomiXcel icon in your browser toolbar to open a compact settings popu
 | Unique Page Titles & Favicons | Simplified tab names + page-specific favicons |
 | Default Process Filters | Auto-checks Process, Process Properties, Cross Reference, API Service filters |
 | Post-Deployment Schedule Reminder | Reminds you to schedule after deploying |
+| Deployment Notes Auto-Apply | Copies package notes into the deployment notes field |
+| Highlight WARNING Log Lines | Colors WARNING rows yellow in the Show Log dialog |
 
 Changes save immediately. Click **Reload Page** to apply them to the current Boomi tab, or **Full Settings** to open the complete options page.
 
@@ -56,15 +60,16 @@ Changes save immediately. Click **Reload Page** to apply them to the current Boo
 
 Right-click the extension icon → **Options**, click the `[options]` link in the Boomi footer bar, or use the **Full Settings** button in the popup.
 
-The options page groups settings into collapsible sections. Changes take effect after clicking **Save** and reloading the Boomi platform tab. A toast notification confirms each save.
+The options page organizes settings into categories shown in a left-hand sidebar — click a category to view its settings. A **search box** at the top filters settings across every category as you type, and each category shows a small badge counting how many of its settings have unsaved changes. Changes take effect after clicking **Save** and reloading the Boomi platform tab. A toast notification confirms each save.
 
-| Section | What you can configure |
+| Category | What you can configure |
 |---------|----------------------|
-| **Appearance** | Shape icons, canvas grid, brand logo, play/pause icons, modal buttons, footer |
-| **Build Canvas** | Endpoint notifications, trace path highlighting, table wrapping |
-| **Process Reporting** | Auto-refresh interval, dashboard default time range |
-| **Navigation & Shortcuts** | Full-screen shortcut key + modifiers, unique page titles/favicons, default filters |
-| **Defaults** | Default scripting language for new shapes |
+| **Appearance** | Shape icons, canvas grid, brand logo, play/pause icons, modal buttons, footer, unique page titles/favicons |
+| **Build Canvas** | Endpoint notifications, trace path highlighting |
+| **Editing** | Default scripting language for new shapes, code editor popout theme |
+| **Process Reporting** | Auto-refresh interval, dashboard default time range, WARNING log-line highlighting, default log minimum status, table text wrapping |
+| **Navigation & Shortcuts** | Full-screen shortcut key + modifiers, default process filters |
+| **Deployment** | Deployment notes auto-apply |
 | **Reminders** | Post-deployment schedule reminder |
 
 A **↺ Reset** button restores all defaults. A yellow dot appears when you have unsaved changes.
@@ -98,7 +103,7 @@ The old-style shape connector palette is restored, showing shapes at their origi
 Non-connected endpoints glow to help you spot unconnected shapes at a glance. Hover over a glowing endpoint to quick-add a **Stop** shape.
 
 ### Trace Path Highlighting
-When running tests, the connector lines highlight as you hover over shapes, making it easy to trace execution paths.
+When running tests, the connector lines highlight as you hover over shapes, making it easy to trace execution paths. Turn it on or off with the **Trace Path Highlight** toggle (on by default), available on the options page and in the quick-settings popup.
 
 ### Canvas Grid
 Remove the canvas dot grid for a cleaner workspace (configurable — pairs well with dark mode).
@@ -108,6 +113,13 @@ Quick access to Process Reporting from two entry points: a heartbeat SVG icon ne
 
 ### Extract Set Properties
 A list icon (📋) in the build toolbar scans every Set Properties shape on the canvas (visible or not), clicks each one, reads all property names and parameter values, and displays them in a modal table. The table has 4 columns: **Property Shape Name**, **Property Type**, **Property Name**, and **Parameters**. Property names that appear in multiple shapes are highlighted with a yellow background and amber left border for easy spotting. An **Export to Clipboard** button copies the data as tab-separated values for pasting into spreadsheets. The button is disabled and dimmed during extraction to prevent double-clicks, and a toast notification confirms the extraction is in progress.
+
+### Copy a Property Name or Value
+Inside a Set Properties step, a **Copy** icon appears next to the Add/Edit/Delete buttons in the **Properties to Set** list. Select a property, click **Copy**, and choose from the popup menu:
+- **Copy property name** — copies just the property name (e.g. `DDP_ONE`).
+- **Copy property value(s)** — copies the selected property's value(s). Static values are copied as their raw literal (e.g. `You found me`); other source types are copied as shown in the panel. Multiple values are separated by new lines.
+
+A toast confirms each copy. If no property is selected, a reminder toast appears.
 
 ---
 
@@ -120,7 +132,7 @@ When editing Message, Notify, or Command shapes, the standard text field is repl
 - **HTML** — syntax highlighting
 - **SQL** — syntax highlighting for Database Operation shapes
 
-The editor respects the Boomi dark/light theme.
+By default the editor matches Boomi's dark/light theme, but you can pick a specific theme from the Options page under **Editing → Code Editor Theme**: choose **Auto** (follow Boomi's light/dark mode), a light theme (**Default**, **Eclipse**, **Solarized Light**), or a dark theme (**Twilight**, **Solarized Dark**, **Monokai**, **Dracula**, **Material**). The chosen theme applies to the Message, Notify, Command, and SQL editor popouts.
 
 The popout has a **corner drag handle** at the bottom-right — drag it to resize the editor window (grows down and to the right). The size resets to the default each time you open it.
 
@@ -136,7 +148,7 @@ Boomi's own inline script editor dialog (the ACE-based editor that opens for Dat
 
 ### Default Scripting Language
 
-When creating new shapes with scripting (Data Process, Custom Scripting, Business Rules), BoomiXcel can auto-select your preferred scripting language instead of always defaulting to Groovy 1.5. Configure from the Options page under **Defaults**:
+When creating new shapes with scripting (Data Process, Custom Scripting, Business Rules), BoomiXcel can auto-select your preferred scripting language instead of always defaulting to Groovy 1.5. Configure from the Options page under **Editing**:
 
 - **Off** — default, no auto-selection
 - **Groovy 1.5**
@@ -183,7 +195,7 @@ The connection operation screen is resized to give you more room for the configu
 ## Process Reporting
 
 ### Auto-Refresh
-Click the **Refresh Every XX** button on the Process Reporting page to enable automatic refreshing at your configured interval (default: 15 seconds). The button shows a live countdown ("Refreshing in 10s") so you always know when the next refresh will fire. A subtle pulse animation confirms each refresh, and hovering over the button shows the last refresh timestamp. If you navigate away from Process Reporting while auto-refresh is running, it will automatically resume when you come back.
+Click the **Refresh Every XX** button on the Process Reporting page to enable automatic refreshing at your configured interval (default: 15 seconds). The page refreshes immediately when you click the button, then continues at your configured interval. The button shows a live countdown ("Refreshing in 10s") so you always know when the next refresh will fire. A subtle pulse animation confirms each refresh, and hovering over the button shows the last refresh timestamp. If you navigate away from Process Reporting while auto-refresh is running, it will automatically resume when you come back.
 
 ### Table Text Wrapping
 Process Reporting tables can wrap text instead of cutting it off. Three modes available:
@@ -202,6 +214,12 @@ The dashboard view auto-selects your chosen time range on page load. Configure f
 
 ### Pending Executions Clock
 When auto-refresh is enabled, a real-time elapsed time counter appears on the Process Reporting page for active processes. Active rows get a red left accent bar, the elapsed time displays as a gradient red badge, and the seconds digit bounces each time it updates so you can see it's live at a glance.
+
+### Highlight WARNING Log Lines
+In the **Show Log** dialog, rows with a Level of `WARNING` are highlighted in yellow so problem entries stand out. The highlight applies after the log finishes loading and re-applies as you page through results with Previous/Next. On by default; toggle it from the **Process Reporting** section of the options page or the quick-settings popup.
+
+### Default Log Minimum Status
+Set a default for the **Minimum Status to Show** dropdown in the Show Log dialog (DEBUG, INFO, WARNING, or SEVERE). When the dialog opens it auto-selects your chosen level so the log loads pre-filtered; you can still change the dropdown manually afterwards. Off by default — set it from the **Process Reporting** section of the options page.
 
 ---
 
@@ -249,6 +267,13 @@ In the Document Viewer dialog, a copy button appears in the header. Click to cop
 
 ### Copy Component XML
 When viewing a component's XML in the build page popup, a copy button appears in the header. Click to copy the clean XML to your clipboard — the button decodes HTML-encoded entities (`<br>` → newline, `&nbsp;` → space) so the pasted XML is ready to use.
+
+---
+
+## Deployment
+
+### Deployment Notes Auto-Apply
+When enabled (off by default), clicking **Create Packaged Component** captures whatever you typed in the package notes field and holds it temporarily. The next time a deployment notes field appears, it is filled in automatically with those notes, so you don't have to retype them. The temporary copy is cleared once it has been applied. Turn it on from the **Deployment** section of the options page or the quick-settings popup.
 
 ---
 

@@ -34,9 +34,9 @@
       <img src="https://img.shields.io/chrome-web-store/users/behhfojpggobllhaifocfcampokbfhko?color=4285F4&style=for-the-badge&label=%20" alt="Chrome Web Store users">
     </a>
     &nbsp;&nbsp;
-    <a href="https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active">
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/boomixcel">
       <img src="https://img.shields.io/badge/Firefox-Install-FF7139?style=for-the-badge&logo=firefox&logoColor=white" alt="Install from Firefox Add-ons">
-      <img src="https://img.shields.io/amo/users/boomi-platform-enhancer-active?color=FF7139&style=for-the-badge&label=%20" alt="Firefox Add-on users">
+      <img src="https://img.shields.io/amo/users/boomixcel?color=FF7139&style=for-the-badge&label=%20" alt="Firefox Add-on users">
     </a>
     <br />
     <br />
@@ -88,6 +88,7 @@
 - CodeMirror SQL editor for Database Operation shapes — "Edit SQL" popout on the query field plus a corner drag handle to resize the query textarea
 - Resize Boomi's native inline script editor dialog with a corner drag handle
 - Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
+- Choose the code editor popout theme — Auto (matches Boomi light/dark) or a specific light/dark theme (configurable)
 - Copy raw document content from the Document Viewer dialog
 - Copy clean XML from the Component XML popup (decodes HTML entities)
 - DB document table viewer — sortable, searchable, paginated table with "See table" toggle and maximize button
@@ -107,6 +108,8 @@
 - Table text wrapping — always / never / toggle on header hover (configurable)
 - Live elapsed-time counter with red accent row, gradient badge, and per-second bounce animation
 - Dashboard default time range — 7 days / 1 / 3 / 6 months / 1 year / max (configurable)
+- Highlight WARNING log lines in yellow in the Show Log dialog (configurable)
+- Default minimum log status for the Show Log dialog — DEBUG / INFO / WARNING / SEVERE (configurable)
 
 🎨 **Appearance**
 - Icon set selection for shapes — Legacy, Modern, Minimal, etc. (configurable)
@@ -114,6 +117,7 @@
 - Replace the Boomi masthead brand logo with the BoomiXcel logo (configurable)
 - Tab names simplified — account name removed (configurable)
 - Page-specific favicons with distinct colors per page — Build (blue), Deploy (green), Dashboard (coral), Runtime (coral atom), Reporting (purple), MdmSphere (teal), ApiSphere (deep blue), BoomiAI (magenta), Flow (orange) (configurable)
+- For easier viewing, functions in the Maps text now automatically expand to fill the available space, allowing you to see all relevant information at once.
 
 📬 **Notifications &amp; Reminders**
 - Platform status check on every page
@@ -127,8 +131,10 @@
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
 - Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export
+- Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to `<ProcessName>_<timestamp>.<ext>`
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
+- Auto-apply package notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field (configurable)
 
 ⚡ **Quick Settings Popup**
 - Click the toolbar icon for instant access to the most-used feature toggles — no need to open the full options page
@@ -147,9 +153,9 @@ Visit one of the browser stores:
 </a>
 <br>
 
-<a href="https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active">
+<a href="https://addons.mozilla.org/en-US/firefox/addon/boomixcel">
       <img src="https://img.shields.io/badge/Firefox-Install-FF7139?style=for-the-badge&logo=firefox&logoColor=white" alt="Install from Firefox Add-ons">
-      <img src="https://img.shields.io/amo/users/boomi-platform-enhancer-active?color=FF7139&style=for-the-badge&label=%20" alt="Firefox Add-on users">
+      <img src="https://img.shields.io/amo/users/boomixcel?color=FF7139&style=for-the-badge&label=%20" alt="Firefox Add-on users">
 </a>
 
 Click **Install** — the extension auto-enables on `https://platform.boomi.com/*`.
@@ -163,7 +169,7 @@ Click **Install** — the extension auto-enables on `https://platform.boomi.com/
 | Browser     | Minimum Version | Manifest | Store Listing                                                                                                          |
 | -------------| -----------------| ----------| ------------------------------------------------------------------------------------------------------------------------|
 | **Chrome**  | 88+             | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
-| **Firefox** | 109+            | V2       | [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomi-platform-enhancer-active)                       |
+| **Firefox** | 109+            | V2       | [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/boomixcel)                       |
 | **Edge**    | 88+             | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
 | **Brave**   | 1.45+           | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
 | **Opera**   | 74+             | V3       | [Chrome Web Store](https://chromewebstore.google.com/detail/boomixcel/behhfojpggobllhaifocfcampokbfhko) |
@@ -278,7 +284,7 @@ npm run release      # build + create a GitHub release (notes from updateNotific
 2. **Webstore description** — extracts the Features section from the README and regenerates `webstore-description.txt`, preserving section emojis and structure (strips `**bold**`/backticks, decodes HTML entities, and flattens the keyboard-shortcuts table to a tab-separated header row plus `- col1<tab>col2` rows).
 
 3. **Browser manifests** — reads version from `package.json`, injects it into `src/manifest.json`, then generates two additional manifests:
-   - **Firefox** — downgraded to Manifest V2, `web_accessible_resources` flattened to string array, `update_url` removed
+   - **Firefox** — downgraded to Manifest V2, `web_accessible_resources` flattened to string array, `update_url` removed, and `browser_specific_settings.gecko` injected (stable add-on `id` plus `data_collection_permissions: { required: ["none"] }`, required by AMO for new submissions from 2025-11-03 — BoomiXcel collects no user data)
    - **Edge** — same as Chrome V3 but `update_url` removed
 
 4. **Zip packages** — creates three archives in `build/`:
@@ -356,7 +362,7 @@ content/contentScript.js
 
 Three storage backends are used:
 - **`chrome.storage.sync`** — user preferences (feature toggles, refresh interval, shortcuts). Read directly by `listenerGlobal.js` and cached.
-- **`chrome.storage.local`** — transient UI state: `bph_custom_refresh_active` for refresh persistence, `bph_suppress_reload_dialog` for suppressing the reload prompt from popup changes
+- **`chrome.storage.local`** — transient UI state: `bph_custom_refresh_active` for refresh persistence, `bph_suppress_reload_dialog` for suppressing the reload prompt from popup changes, `bph_deployment_notes_temp` for holding captured package notes until the deployment notes field appears
 - **`localStorage`** — version-tracking key (`bph_update_notification_version`) for update changelog suppression. Legacy keys (`boomiplatenhanUpdateNot{version}`) auto-cleaned on first run
 
 ### Conventions
@@ -380,7 +386,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 ### Script reference
 
 <details>
-<summary>📂 <b>Click to expand — full script reference (43 files)</b></summary>
+<summary>📂 <b>Click to expand — full script reference (49 files)</b></summary>
 
 | Script | Context | Purpose |
 |---|---|---|
@@ -420,7 +426,11 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo |
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |
+| `content/deploymentNotes.js` | content | Captures package notes on Create Packaged Component, auto-fills the deployment notes field |
+| `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (re-applies on lazy-load and paging) |
+| `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" in the Show Log dialog when it opens |
 | `content/setPropertiesExtractor.js` | content | Extracts all Set Properties shape configurations from the canvas into a modal table with TSV export |
+| `content/copySetProperty.js` | content | Copy Property icon in the Set Properties step panel — copy a selected property's name or value(s) via a popup menu |
 | `content/svgAssets.js` | content | Shared SVG icon strings |
 | `content/modalHelper.js` | content | Boomi-style modal dialog helper |
 | `content/toastHelper.js` | content | Toast notification utility |

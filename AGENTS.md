@@ -33,7 +33,7 @@ The build also reads `updateNotification.md` and injects its changelog items as 
 
 ### Bundle scope behavior
 
-esbuild wraps the bundle in an IIFE (`(() => { ... })()`). Functions and `var` declarations are scoped to that IIFE — they are shared between all content scripts inside the bundle but are **not** on `window`. This is how `global.js` functions (`getUrlpath()`, `dashboardDays()`, `getUrlParameter()`, `getGWTPageName()`, `showInformationAlertDialog()`) are callable from `pageInit.js`, `headerActions.js`, and other content scripts.
+esbuild wraps the bundle in an IIFE (`(() => { ... })()`). Functions and `var` declarations are scoped to that IIFE — they are shared between all content scripts inside the bundle but are **not** on `window`. This is how `global.js` functions (`getUrlpath()`, `dashboardDays()`, `getUrlParameter()`, `getGWTPageName()`, `showInformationAlertDialog()`, `getCodeMirrorEditorTheme()`) are callable from `pageInit.js`, `headerActions.js`, and other content scripts.
 
 The `listenerGlobal.js` sets a `var BoomiPlatform = {}` in the bundle scope, reads config from `chrome.storage.sync.get()`, and all other scripts reference `BoomiPlatform.key` from this shared IIFE-scoped variable.
 
@@ -83,13 +83,13 @@ content/*.js (in bundle)
 ### Storage split
 
 - **`chrome.storage.sync`** — user preferences from the options page (feature toggles, refresh interval, shortcut keys, filter choices). Read directly by `listenerGlobal.js` and cached in bundle-scope `BoomiPlatform`.
-- **`chrome.storage.local`** — transient UI state: `bph_custom_refresh_active` for refresh persistence, `bph_suppress_reload_dialog` for suppressing the reload prompt from popup changes.
+- **`chrome.storage.local`** — transient UI state: `bph_custom_refresh_active` for refresh persistence, `bph_suppress_reload_dialog` for suppressing the reload prompt from popup changes, `bph_deployment_notes_temp` for holding captured package notes until the deployment notes field appears.
 - **`localStorage`** — version-tracking key (`bph_update_notification_version`) used by `content/updateNotification.js` to suppress the changelog popup after first view. Legacy keys (`boomiplatenhanUpdateNot{version}`) from the old approach are auto-cleaned on first run.
 
 ## Key libraries / third-party code
 
 - **jQuery 4.0** — actively used for DOM manipulation. Loaded via content_scripts at `document_start` for the isolated context.
-- **CodeMirror** — the custom code editor used in Message, Notify, and Database Operation shapes (JSON, XML, HTML, SQL modes). Loaded at `document_start` in the isolated context.
+- **CodeMirror** — the custom code editor used in Message, Notify, and Database Operation shapes (JSON, XML, HTML, SQL modes). Loaded at `document_start` in the isolated context. Editor popout theming is configurable via the `codemirror_theme` option (read through `getCodeMirrorEditorTheme()` in `global.js`); theme CSS files live in `library/css/cm/theme/` and are registered in `manifest.json`'s `content_scripts[].css` array. The `auto` default mirrors Boomi's light/dark mode (`default`/`twilight`).
 - **arrive.js** — mutation-observer library for DOM insertion detection (`document.arrive()`). Only available in the isolated context.
 - **rasterizeHTML.min.js** — loaded at `document_start` in the isolated context (used by `imageCapture.js` for process flow → PNG capture)
 
@@ -108,7 +108,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | Script | Context | What it does |
 |---|---|---|
 | `content/contentScript.js` | content | Entry point. Detects page load via title change, injects `fullscreen.js`, injects masthead options gear icon, sets up platform status check, update notification dialog |
-| `content/global.js` | content | Utility functions: URL parsing, `dashboardDays()` (configurable dashboard time-range auto-selector), alert dialog helper |
+| `content/global.js` | content | Utility functions: URL parsing, `dashboardDays()` (configurable dashboard time-range auto-selector), alert dialog helper, `getCodeMirrorEditorTheme()` (resolves the configured editor popout theme) |
 | `content/pageInit.js` | content | Page-load detection, triggers navigation change and update notification checks |
 | `content/favicon.js` | content | Page-specific favicons with distinct colors per page, unique page titles, navigation state listeners |
 | `content/keyboardShortcuts.js` | content | Ctrl+Alt+S (save) |
@@ -143,7 +143,11 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo with a custom image (reads BoomiPlatform config) |
 | `content/boomiGpt.js` | content | Revision History checkbox selection for Boomi GPT compare prompts. Check 2 revisions → builds a "compare {id} version X and Y" prompt, updates the GPT link, and auto-submits on the BoomiAI page. |
 | `content/viewInReporting.js` | content | Adds "View in Process Reporting" menu item to deployed process context menus and a quick-link icon on the build page. Opens Process Reporting in a new tab and auto-applies a process name filter via polling state machine. |
+| `content/deploymentNotes.js` | content | Captures the package notes textarea (`formrow-package-notes-for-all`) when "Create Packaged Component" is clicked, stores it in `chrome.storage.local`, and fills it into the deployment notes textarea (`formrow-deployment-notes`) when it appears, then clears the temp store. Reads `deployment_notes_auto_apply` from BoomiPlatform config. |
+| `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (`#popup_on_popup_content_LogDialogContents`). A 1s poller re-applies the `bph-log-warning` class, detecting the Level column from the header and matching the Level cell exactly, so it survives lazy-load and Previous/Next paging. Reads `log_highlight_warnings` from BoomiPlatform config. |
+| `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" filter (`.filterContainer select.gwt-ListBox`) in the Show Log dialog when it opens. A 1s poller applies the configured value once per dialog instance (guarded by the `bph-log-status-applied` class) and dispatches a `change` event so GWT reloads the log, then leaves the dropdown for manual changes. Reads `log_default_min_status` from BoomiPlatform config. |
 | `content/setPropertiesExtractor.js` | content | Build toolbar button that extracts all Set Properties shape configurations (property names and parameter values) from the canvas into a modal table with TSV export |
+| `content/copySetProperty.js` | content | Adds a Copy Property icon to the Set Properties step panel's property action row. Select a property, click Copy, and choose to copy the property name (e.g. `DDP_ONE`) or its value(s) from a small popup menu. Static values are copied as the raw literal; other source types fall back to the displayed descriptor. |
 | `content/svgAssets.js` | content | Shared SVG icon strings used across multiple content scripts |
 | `content/modalHelper.js` | content | Shared Boomi-style modal dialog renderer and cleanup utilities |
 | `content/toastHelper.js` | content | Shared toast notification utility used across content scripts and the options page |
@@ -154,7 +158,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 
 ## Versioning
 
-BoomiXcel uses a four-part version in `package.json` — `MAJOR.MINOR.SUBMINOR.BUILD` (currently `2.1.0.0`). The build injects this into all generated manifests.
+BoomiXcel uses a four-part version in `package.json` — `MAJOR.MINOR.SUBMINOR.BUILD` (currently `2.2.0.0`). The build injects this into all generated manifests.
 
 - **MAJOR** — significant changes: new product direction, rebrands, or breaking architecture/tech-stack shifts. (e.g. `1.x.x.x` → `2.x.x.x` for the "BoomiXcel" rebrand and the esbuild bundling overhaul.)
 - **MINOR** — new features or enhancements within the current major (e.g. adding a new content-script feature).
@@ -171,7 +175,7 @@ Bump the appropriate segment in `package.json` before running `npm run build` / 
 2. Reads `src/manifest.json` as the **base manifest** (Chrome V3)
 3. Generates browser-specific manifests from it:
    - **Chrome** — copied as-is (V3, includes `update_url`)
-   - **Firefox** — downgraded to V2, `web_accessible_resources` flattened to string array, `update_url` removed
+   - **Firefox** — downgraded to V2, `web_accessible_resources` flattened to string array, `update_url` removed, and `browser_specific_settings.gecko` injected (a stable add-on `id` plus `data_collection_permissions: { required: ["none"] }`, which AMO requires for new submissions from 2025-11-03 — BoomiXcel collects no user data)
    - **Edge** — same as Chrome but without `update_url`
 4. Packages each into `build/boomi-xcel-{version}-{Browser}.zip`
 
@@ -183,8 +187,8 @@ The **version** is read from `package.json` and injected into all manifests. To 
 
 ## Deprecated / archived code
 
-`.Old Scripts but want to keep/` contains scripts no longer in active rotation, including:
-- `copyComponentid.js`, `customprocessButtons.js`, `home.js`, `initPage.js`, `jsonView.js`, `sqlView.js` — older versions of features now integrated elsewhere
+`.oldScriptsKeep/` contains scripts no longer in active rotation, including:
+- `copyComponentid.js`, `customprocessButtons.js`, `dbsqlEditor.js`, `home.js`, `initPage.js`, `jsonView.js`, `sqlView.js` — older versions of features now integrated elsewhere
 
 Do not modify or re-integrate without understanding why they were removed.
 
@@ -278,6 +282,8 @@ Every form control on `options.html` **must** have both:
 - `class="option"` — this is how `options.js` discovers controls to serialize/restore via `document.querySelectorAll(".option")`
 - a `name` attribute — becomes the `chrome.storage.sync` key
 
+The options page uses a **two-pane layout**: a left sidebar (`.options-nav` of `.options-nav-item` buttons, one per category) and a right content area of `<section class="options-pane" data-pane="…">` panels (only the active one is shown). Each setting is wrapped in an `.option-item` (label + control + its `<small class="helper">`). When adding a control, place it inside an `.option-item` within the appropriate `.options-pane`, and add a matching `<button class="options-nav-item" data-pane="…">` only if you are creating a new category. All controls **must stay in the DOM** — tabs and the search filter only show/hide elements, so `querySelectorAll(".option")` still finds everything for serialize/restore and the per-category "changed" badge counts.
+
 If you add a new option toggle on the options page, you must also add the corresponding key read in `listenerGlobal.js` for it to take effect on the Boomi platform pages.
 
 If the new option is a simple on/off toggle, add it to `TOGGLE_LIST` in `src/popup/popup.js` so it appears in the quick-settings popup.
@@ -292,8 +298,9 @@ The options page loads `boomi.css` in its `<head>`.
 
 When adding new option controls, prefer the existing patterns:
 
+- **Wrapper** — wrap each setting (label + control + helper) in an `.option-item` inside the relevant `.options-pane`. This standardizes spacing and lets the search filter show/hide whole settings.
 - **Toggle switches** — use `<div class="toggle-row"><label class="toggle-label-row">...<label class="toggle"><input type="checkbox" class="option toggle-input" data-default="on"><span class="slider"></span></label>`. The `options.js` serializes `.toggle-input` checkboxes as `"on"`/`"off"` strings.
-- **Selects / inputs** — use standard `.mb-3` blocks with `.form-select` or `.form-control` and a `data-default` attribute for reset support.
+- **Selects / inputs** — use a `.form-select` or `.form-control` with a `data-default` attribute for reset support.
 - **Helper text** — use `<small class="helper">` for option descriptions.
 
 ## Rebuild scope

@@ -1,4 +1,4 @@
-Boomi Xcel v2.1.1.0
+Boomi Xcel v2.2.0.0
 The Boomi Integration Platform Extension
 
 A browser extension that enhances the Boomi Integration Platform web UI at platform.boomi.com with powerful productivity tools, visual improvements, and workflow optimizations.
@@ -26,6 +26,7 @@ Shortcut	Action
 - CodeMirror SQL editor for Database Operation shapes — "Edit SQL" popout on the query field plus a corner drag handle to resize the query textarea
 - Resize Boomi's native inline script editor dialog with a corner drag handle
 - Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
+- Choose the code editor popout theme — Auto (matches Boomi light/dark) or a specific light/dark theme (configurable)
 - Copy raw document content from the Document Viewer dialog
 - Copy clean XML from the Component XML popup (decodes HTML entities)
 - DB document table viewer — sortable, searchable, paginated table with "See table" toggle and maximize button
@@ -45,6 +46,8 @@ Shortcut	Action
 - Table text wrapping — always / never / toggle on header hover (configurable)
 - Live elapsed-time counter with red accent row, gradient badge, and per-second bounce animation
 - Dashboard default time range — 7 days / 1 / 3 / 6 months / 1 year / max (configurable)
+- Highlight WARNING log lines in yellow in the Show Log dialog (configurable)
+- Default minimum log status for the Show Log dialog — DEBUG / INFO / WARNING / SEVERE (configurable)
 
 🎨 Appearance
 - Icon set selection for shapes — Legacy, Modern, Minimal, etc. (configurable)
@@ -65,8 +68,10 @@ Shortcut	Action
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
 - Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export
+- Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to <ProcessName>_<timestamp>.<ext>
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
+- Auto-apply package notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field (configurable)
 
 ⚡ Quick Settings Popup
 - Click the toolbar icon for instant access to the most-used feature toggles — no need to open the full options page

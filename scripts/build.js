@@ -43,6 +43,7 @@ const CONTENT_ORDER = [
   "shapes.js",
   "endpointGlow.js",
   "setPropertiesExtractor.js",
+  "copySetProperty.js",
   "tableWrap.js",
   "imageCapture.js",
   "connectionOperations.js",
@@ -52,6 +53,9 @@ const CONTENT_ORDER = [
   "brandLogo.js",
   "boomiGpt.js",
   "viewInReporting.js",
+  "deploymentNotes.js",
+  "logHighlight.js",
+  "logDefaultStatus.js",
 ];
 
 function getConcatenatedSource() {
@@ -257,6 +261,18 @@ function generateFirefoxManifest(base) {
   if (manifest.web_accessible_resources?.[0]?.resources) {
     manifest.web_accessible_resources = manifest.web_accessible_resources[0].resources;
   }
+
+  // Firefox-only: AMO requires data_collection_permissions for new submissions
+  // from 2025-11-03. BoomiXcel collects/transmits no user data, so declare "none".
+  // A stable email-style id locks in a permanent add-on ID on first AMO submission.
+  manifest.browser_specific_settings = {
+    gecko: {
+      id: "boomixcel@mitchelljfranklin.github.io",
+      data_collection_permissions: {
+        required: ["none"],
+      },
+    },
+  };
   return manifest;
 }
 
