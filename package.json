@@ -10,7 +10,7 @@
     "releaseall": "node scripts/build.js --releaseall"
   },
   "devDependencies": {
-    "archiver": "^7.0.0",
+    "archiver": "^8.0.0",
     "esbuild": "^0.28.1"
   }
 }
