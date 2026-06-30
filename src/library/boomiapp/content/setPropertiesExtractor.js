@@ -10,13 +10,13 @@ var init_set_properties_extractor = (process) => {
   let buttonHtml = [
     '<a class="gwt-Anchor svg-anchor others_floats bph-extract-setproperties" data-locator="extract-set-properties" title="Extract Set Properties">',
     '<svg width="40" height="40" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px">',
-    '<circle cx="20" cy="20" r="19.5" fill="white" stroke="#CCCCCC"/>',
+    '<circle cx="20" cy="20" r="19.5" fill="transparent" stroke="currentColor"/>',
     '<g transform="translate(11, 11)">',
-    '<path d="M4 3C4 2.44772 4.44772 2 5 2H13C13.5523 2 14 2.44772 14 3V5H4V3Z" fill="#666"/>',
-    '<rect x="2" y="4" width="14" height="12" rx="1" fill="none" stroke="#666" stroke-width="1.2"/>',
-    '<line x1="5" y1="7" x2="13" y2="7" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>',
-    '<line x1="5" y1="10" x2="13" y2="10" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>',
-    '<line x1="5" y1="13" x2="10" y2="13" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>',
+    '<path d="M4 3C4 2.44772 4.44772 2 5 2H13C13.5523 2 14 2.44772 14 3V5H4V3Z" fill="currentColor"/>',
+    '<rect x="2" y="4" width="14" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.2"/>',
+    '<line x1="5" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>',
+    '<line x1="5" y1="10" x2="13" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>',
+    '<line x1="5" y1="13" x2="10" y2="13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>',
     '</g></svg></a>',
   ].join("");
 
@@ -184,7 +184,9 @@ function showSetPropertiesModal(results) {
     let params = row.parameters.length > 0
       ? row.parameters.map(function (p) { return escapeHtml(p); }).join(', ')
       : '(none)';
-    let duplicateClass = row.propertyName && nameCounts[row.propertyName] > 1 ? ' bpe-setprops-duplicate' : '';
+    let duplicateClass = (BoomiPlatform.setprops_highlight_duplicates !== "off" && row.propertyName && nameCounts[row.propertyName] > 1)
+      ? ' bpe-setprops-duplicate'
+      : '';
     return '<tr><td>' + escapeHtml(row.displayName) + '</td><td>'
       + escapeHtml(row.propertyType) + '</td><td class="' + duplicateClass + '">'
       + escapeHtml(row.propertyName) + '</td><td>' + params + '</td></tr>';
@@ -197,7 +199,6 @@ function showSetPropertiesModal(results) {
     '<tbody>' + rowsHtml + '</tbody>',
     '</table>',
     '<div class="bpe-setprops-footer">',
-    '<button class="gwt-Button bpe-setprops-export" id="bpe-setprops-export-btn">Export to Clipboard</button>',
     '<span class="bpe-setprops-count">' + results.length + ' propert' + (results.length === 1 ? 'y' : 'ies') + ' extracted</span>',
     '</div>',
     '</div>',
@@ -215,6 +216,7 @@ function showSetPropertiesModal(results) {
     body: bodyHtml,
     buttons: [
       { className: "gwt-Button qm-button--primary-action action_button", text: "Close", attrs: ' data-locator="link-cancel" onclick="javascript:document.querySelector(\'.BoomiPlatformOverlay\').remove();"' },
+      { className: "gwt-Button bpe-setprops-export", id: "bpe-setprops-export-btn", text: "Export to Clipboard" },
     ],
   });
 
