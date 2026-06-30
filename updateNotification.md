@@ -1,2 +1,6 @@
-- The vertical spacing on the Right Side Map Profile has been updated to match the Left Side profile, following the recent Boomi UI update.
-- Bug Fix: The "See Table" option was not consistently visible on the Database Document View. The viewer now waits longer for the document detail to finish loading before deciding whether to show the option, so it reliably appears even on slow-loading documents.
+- Bug Fix: Set Properties Extractor modal — the sticky table header no longer lets scrolling body text bleed through or appear above it.
+- Bug Fix: Set Properties Extractor modal — duplicate property highlights and row hover are now readable in dark mode.
+- Improvement: Set Properties Extractor modal — the Export to Clipboard button is now in the modal's button bar alongside Close, staying visible without scrolling.
+- Bug Fix: Log WARNING row highlighting now works correctly in dark mode — yellow background with black text is no longer overridden by Boomi's dark-theme table styles.
+- Bug Fix: Extract Set Properties toolbar button now shows full blue hover highlight when moused over, consistent with other toolbar icons.
+- New Feature: Toggle to control duplicate property name highlighting in the Set Properties extraction table — turn it on/off from the Build Canvas section of the options page or the quick-settings popup.
