@@ -140,11 +140,8 @@ async function handleExecuteProcess(accountId, processName, envName) {
 
   if (!execResp.ok) {
     const errorText = await execResp.text().catch(() => '');
-    console.error('[BoomiXcel] executeProcess failed:', execResp.status, errorText);
     return { success: false, error: `Execute failed (HTTP ${execResp.status}): ${errorText}` };
   }
 
-  const respText = await execResp.text();
-  console.log('[BoomiXcel] executeProcess response:', respText);
   return { success: true };
 }
