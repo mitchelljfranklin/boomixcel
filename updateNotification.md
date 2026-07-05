@@ -1,6 +1,3 @@
-- Bug Fix: Set Properties Extractor modal — the sticky table header no longer lets scrolling body text bleed through or appear above it.
-- Bug Fix: Set Properties Extractor modal — duplicate property highlights and row hover are now readable in dark mode.
-- Improvement: Set Properties Extractor modal — the Export to Clipboard button is now in the modal's button bar alongside Close, staying visible without scrolling.
-- Bug Fix: Log WARNING row highlighting now works correctly in dark mode — yellow background with black text is no longer overridden by Boomi's dark-theme table styles.
-- Bug Fix: Extract Set Properties toolbar button now shows full blue hover highlight when moused over, consistent with other toolbar icons.
-- New Feature: Toggle to control duplicate property name highlighting in the Set Properties extraction table — turn it on/off from the Build Canvas section of the options page or the quick-settings popup.
+- Maintenance: Removed 6 unused library files and cleaned up stale build artifacts, reducing the extension package size by ~55 KB.
+- Bug Fix: Document Viewer DB table — table headers, row hover, search input, and pagination buttons are now readable in dark mode.
+- Bug Fix: Document Viewer DB table — horizontal scrollbar now stays visible when the maximized table is wider than the dialog.

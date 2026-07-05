@@ -130,7 +130,7 @@
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
-- Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export
+- Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export (duplicate property names highlighted — configurable toggle)
 - Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to `<ProcessName>_<timestamp>.<ext>`
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
@@ -440,8 +440,6 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `options.js` | options | Options page save/restore |
 | `popup/popup.js` | popup | Quick-settings popup with feature toggles |
 | `background.js` | background | Service worker: download rename + options-page-open message |
-
-> `.oldScriptsKeep/` contains archived scripts (`copyComponentid.js`, `customprocessButtons.js`, `home.js`, `initPage.js`, `jsonView.js`, `sqlView.js`, `dbsqlEditor.js`) — previous versions of features no longer in rotation. They are not loaded by any manifest. Do not modify or re-integrate them without understanding why they were removed.
 
 </details>
 

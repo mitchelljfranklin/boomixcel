@@ -186,13 +186,6 @@ The **version** is read from `package.json` and injected into all manifests. To 
 3. Run `npm run build`
 4. Upload the zips from `build/` to the respective stores
 
-## Deprecated / archived code
-
-`.oldScriptsKeep/` contains scripts no longer in active rotation, including:
-- `copyComponentid.js`, `customprocessButtons.js`, `dbsqlEditor.js`, `home.js`, `initPage.js`, `jsonView.js`, `sqlView.js` — older versions of features now integrated elsewhere
-
-Do not modify or re-integrate without understanding why they were removed.
-
 ## Refactoring rules — preserve existing logic
 
 When splitting, renaming, or moving code between files:
