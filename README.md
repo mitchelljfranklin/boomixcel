@@ -82,11 +82,12 @@
 - Restored old-style shape connector palette
 - Non-connected endpoints glow for visibility; hover an endpoint to quick-add a Stop shape (configurable)
 - Trace path highlighting during test execution (configurable)
+- Chooser input tooltips — hover over truncated chooser values to see the full text
 
 ✏️ **Editing**
-- CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes) — the popout has a corner drag handle to resize it
+- CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes) — the popout has a corner drag handle to resize it, and auto-recenters on release
 - CodeMirror SQL editor for Database Operation shapes — "Edit SQL" popout on the query field plus a corner drag handle to resize the query textarea
-- Resize Boomi's native inline script editor dialog with a corner drag handle
+- Resize Boomi's native inline script editor dialog with a corner drag handle — auto-recenters on release
 - Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
 - Choose the code editor popout theme — Auto (matches Boomi light/dark) or a specific light/dark theme (configurable)
 - Copy raw document content from the Document Viewer dialog
@@ -130,11 +131,13 @@
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
-- Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export
+- Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export (duplicate property names highlighted — configurable toggle)
 - Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to `<ProcessName>_<timestamp>.<ext>`
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
 - Auto-apply package notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field (configurable)
+- Auto-apply package notes from Packaged Components screen — clicking Deploy from the context menu copies the component's notes
+- Run Process From Deployment — after deployment, click "Run Deployment Now" to submit the process via the Boomi Platform API and open Process Reporting with auto-refresh + filter applied (requires Boomi API token, configurable)
 
 ⚡ **Quick Settings Popup**
 - Click the toolbar icon for instant access to the most-used feature toggles — no need to open the full options page
@@ -411,6 +414,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/headerActions.js` | content | Copy component ID/URL, update overlay close, settings-changed reload, View in Process Reporting link icon |
 | `content/updateNotification.js` | content | Per-version changelog popup |
 | `content/iconSets.js` | content | Icon set data for shape styling |
+| `content/chooserTooltip.js` | content | Adds full-text tooltip on hover for truncated chooser inputs |
 | `content/listenerGlobal.js` | content | Reads config from storage, caches it, runs the DOM poller |
 | `content/canvas.js` | content | Canvas grid toggle |
 | `content/customRefresh.js` | content | Custom auto-refresh with live countdown, pulse animation, last-refreshed tooltip, and persisted state across navigation |
@@ -428,6 +432,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |
 | `content/deploymentNotes.js` | content | Captures package notes on Create Packaged Component, auto-fills the deployment notes field |
+| `content/runProcessFromDeployment.js` | content | After deployment, offers to navigate to Process Reporting and auto-execute the process |
 | `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (re-applies on lazy-load and paging) |
 | `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" in the Show Log dialog when it opens |
 | `content/setPropertiesExtractor.js` | content | Extracts all Set Properties shape configurations from the canvas into a modal table with TSV export |
@@ -440,8 +445,6 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `options.js` | options | Options page save/restore |
 | `popup/popup.js` | popup | Quick-settings popup with feature toggles |
 | `background.js` | background | Service worker: download rename + options-page-open message |
-
-> `.oldScriptsKeep/` contains archived scripts (`copyComponentid.js`, `customprocessButtons.js`, `home.js`, `initPage.js`, `jsonView.js`, `sqlView.js`, `dbsqlEditor.js`) — previous versions of features no longer in rotation. They are not loaded by any manifest. Do not modify or re-integrate them without understanding why they were removed.
 
 </details>
 

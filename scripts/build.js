@@ -34,6 +34,7 @@ const CONTENT_ORDER = [
   "documentViewer.js",
   "scheduleIcons.js",
   "iconSets.js",
+  "chooserTooltip.js",
   "modalButtons.js",
   "listenerGlobal.js",
   "defaultScriptingLanguage.js",
@@ -54,6 +55,7 @@ const CONTENT_ORDER = [
   "boomiGpt.js",
   "viewInReporting.js",
   "deploymentNotes.js",
+  "runProcessFromDeployment.js",
   "logHighlight.js",
   "logDefaultStatus.js",
 ];

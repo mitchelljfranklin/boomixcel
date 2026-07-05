@@ -50,6 +50,8 @@ document.arrive(
         resizeHandle.releasePointerCapture(pointerEvent.pointerId);
       }
       document.body.classList.remove("bph-resizing");
+      popup.style.left = ((window.innerWidth - flexPanel.offsetWidth) / 2) + "px";
+      popup.style.top = ((window.innerHeight - flexPanel.offsetHeight) / 2) + "px";
       window.dispatchEvent(new Event("resize"));
     }
 

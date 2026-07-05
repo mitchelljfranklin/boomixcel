@@ -1,6 +1,7 @@
-- Bug Fix: Set Properties Extractor modal — the sticky table header no longer lets scrolling body text bleed through or appear above it.
-- Bug Fix: Set Properties Extractor modal — duplicate property highlights and row hover are now readable in dark mode.
-- Improvement: Set Properties Extractor modal — the Export to Clipboard button is now in the modal's button bar alongside Close, staying visible without scrolling.
-- Bug Fix: Log WARNING row highlighting now works correctly in dark mode — yellow background with black text is no longer overridden by Boomi's dark-theme table styles.
-- Bug Fix: Extract Set Properties toolbar button now shows full blue hover highlight when moused over, consistent with other toolbar icons.
-- New Feature: Toggle to control duplicate property name highlighting in the Set Properties extraction table — turn it on/off from the Build Canvas section of the options page or the quick-settings popup.
+- Maintenance: Removed 6 unused library files and cleaned up stale build artifacts, reducing the extension package size by ~55 KB.
+- Bug Fix: Document Viewer DB table — table headers, row hover, search input, and pagination buttons are now readable in dark mode.
+- Bug Fix: Document Viewer DB table — horizontal scrollbar now stays visible when the maximized table is wider than the dialog.
+- Improvement: Deployment Notes Auto-Apply now also captures notes from the Packaged Components screen — when deploying an already-packaged component, clicking "Deploy" from the context menu copies the component's notes into the deployment notes field automatically.
+- New Feature: Run Process From Deployment toggle — after a successful deployment, click "Run Deployment Now" to submit the deployed process for execution via the Boomi Platform API and open Process Reporting with auto-refresh and process name filter applied. Requires a Boomi API token and email to be configured in the options page.
+- Improvement: Resizable editor dialogs (CodeMirror popout and ACE script editor) now auto-recenter on screen after resizing finishes.
+- Improvement: Chooser panel inputs now show a full-text tooltip on hover when the displayed text is truncated.

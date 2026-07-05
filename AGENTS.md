@@ -128,6 +128,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/downloadRename.js` | content | Intercepts document downloads, detects file type from content, sends context to background for auto-rename. Binary detection prevents misidentification of ZIP files as CSV/TXT. |
 | `content/documentViewer.js` | content | DB document table viewer — "See table" toggle switch renders a sortable, searchable, paginated table from DBSTART| format. Maximize/restore button for the dialog. Shares raw content with copy/download scripts. |
 | `content/iconSets.js` | content | Icon set data objects referenced by `listenerGlobal` |
+| `content/chooserTooltip.js` | content | Adds full-text tooltip on hover for truncated chooser panel inputs |
 | `content/listenerGlobal.js` | content | Reads config from `chrome.storage.sync`, caches in bundle scope, orchestrates feature listeners via MutationObserver + poller. Also handles shape icon styling injection. |
 | `content/canvas.js` | content | Canvas grid toggle (reads `BoomiPlatform.canvas_grid`) |
 | `content/customRefresh.js` | content | Custom process-reporting refresh interval — injects "Refresh Every XXs" button with live countdown, pulse animation, last-refreshed tooltip, and persisted state across navigation |
@@ -144,7 +145,8 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo with a custom image (reads BoomiPlatform config) |
 | `content/boomiGpt.js` | content | Revision History checkbox selection for Boomi GPT compare prompts. Check 2 revisions → builds a "compare {id} version X and Y" prompt, updates the GPT link, and auto-submits on the BoomiAI page. |
 | `content/viewInReporting.js` | content | Adds "View in Process Reporting" menu item to deployed process context menus and a quick-link icon on the build page. Opens Process Reporting in a new tab and auto-applies a process name filter via polling state machine. |
-| `content/deploymentNotes.js` | content | Captures the package notes textarea (`formrow-package-notes-for-all`) when "Create Packaged Component" is clicked, stores it in `chrome.storage.local`, and fills it into the deployment notes textarea (`formrow-deployment-notes`) when it appears, then clears the temp store. Reads `deployment_notes_auto_apply` from BoomiPlatform config. |
+| `content/deploymentNotes.js` | content | Captures the package notes textarea (`formrow-package-notes-for-all`) when "Create Packaged Component" is clicked, stores it in `chrome.storage.local`, and fills it into the deployment notes textarea (`formrow-deployment-notes`) when it appears, then clears the temp store. Also captures notes from the Packaged Components screen when clicking Deploy. Reads `deployment_notes_auto_apply` from BoomiPlatform config. |
+| `content/runProcessFromDeployment.js` | content | After a successful deployment, injects a "Run Deployment Now" button. Submits the deployed process for execution via the Boomi Platform API, then opens Process Reporting with auto-refresh and a process name filter applied. Reads `run_process_from_deployment` from BoomiPlatform config and `boomi_api_token`/`boomi_api_email` from chrome.storage.sync. |
 | `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (`#popup_on_popup_content_LogDialogContents`). A 1s poller re-applies the `bph-log-warning` class, detecting the Level column from the header and matching the Level cell exactly, so it survives lazy-load and Previous/Next paging. Reads `log_highlight_warnings` from BoomiPlatform config. |
 | `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" filter (`.filterContainer select.gwt-ListBox`) in the Show Log dialog when it opens. A 1s poller applies the configured value once per dialog instance (guarded by the `bph-log-status-applied` class) and dispatches a `change` event so GWT reloads the log, then leaves the dropdown for manual changes. Reads `log_default_min_status` from BoomiPlatform config. |
 | `content/setPropertiesExtractor.js` | content | Build toolbar button that extracts all Set Properties shape configurations (property names and parameter values) from the canvas into a modal table with TSV export |
@@ -185,13 +187,6 @@ The **version** is read from `package.json` and injected into all manifests. To 
 2. Edit `updateNotification.md` with the latest changes
 3. Run `npm run build`
 4. Upload the zips from `build/` to the respective stores
-
-## Deprecated / archived code
-
-`.oldScriptsKeep/` contains scripts no longer in active rotation, including:
-- `copyComponentid.js`, `customprocessButtons.js`, `dbsqlEditor.js`, `home.js`, `initPage.js`, `jsonView.js`, `sqlView.js` — older versions of features now integrated elsewhere
-
-Do not modify or re-integrate without understanding why they were removed.
 
 ## Refactoring rules — preserve existing logic
 

@@ -51,6 +51,8 @@ Click the BoomiXcel icon in your browser toolbar to open a compact settings popu
 | Post-Deployment Schedule Reminder | Reminds you to schedule after deploying |
 | Deployment Notes Auto-Apply | Copies package notes into the deployment notes field |
 | Highlight WARNING Log Lines | Colors WARNING rows yellow in the Show Log dialog |
+| Highlight Duplicate Property Names | Highlights property names appearing in multiple shapes in the Set Properties extraction table |
+| Run Process From Deployment | After deployment, adds a button to auto-execute the process in Process Reporting |
 
 Changes save immediately. Click **Reload Page** to apply them to the current Boomi tab, or **Full Settings** to open the complete options page.
 
@@ -65,11 +67,11 @@ The options page organizes settings into categories shown in a left-hand sidebar
 | Category | What you can configure |
 |---------|----------------------|
 | **Appearance** | Shape icons, canvas grid, brand logo, play/pause icons, modal buttons, footer, unique page titles/favicons |
-| **Build Canvas** | Endpoint notifications, trace path highlighting |
+| **Build Canvas** | Endpoint notifications, trace path highlighting, highlight duplicate property names |
 | **Editing** | Default scripting language for new shapes, code editor popout theme |
 | **Process Reporting** | Auto-refresh interval, dashboard default time range, WARNING log-line highlighting, default log minimum status, table text wrapping |
 | **Navigation & Shortcuts** | Full-screen shortcut key + modifiers, default process filters |
-| **Deployment** | Deployment notes auto-apply |
+| **Deployment** | Deployment notes auto-apply, run process from deployment, Boomi API token and email |
 | **Reminders** | Post-deployment schedule reminder |
 
 A **↺ Reset** button restores all defaults. A yellow dot appears when you have unsaved changes.
@@ -112,7 +114,7 @@ Remove the canvas dot grid for a cleaner workspace (configurable — pairs well 
 Quick access to Process Reporting from two entry points: a heartbeat SVG icon next to the Description link on the build page, and a menu item with a separator line in the chevron context menu on deployed process lists (Atom/Runtime). Both open Process Reporting in a new tab and auto-apply a process name filter (Add Filter → Process → type name → select checkbox → Apply). A confirming toast shows "Filtered for: {name}" when the filter is applied.
 
 ### Extract Set Properties
-A list icon (📋) in the build toolbar scans every Set Properties shape on the canvas (visible or not), clicks each one, reads all property names and parameter values, and displays them in a modal table. The table has 4 columns: **Property Shape Name**, **Property Type**, **Property Name**, and **Parameters**. Property names that appear in multiple shapes are highlighted with a yellow background and amber left border for easy spotting. An **Export to Clipboard** button copies the data as tab-separated values for pasting into spreadsheets. The button is disabled and dimmed during extraction to prevent double-clicks, and a toast notification confirms the extraction is in progress.
+A list icon (📋) in the build toolbar scans every Set Properties shape on the canvas (visible or not), clicks each one, reads all property names and parameter values, and displays them in a modal table. The table has 4 columns: **Property Shape Name**, **Property Type**, **Property Name**, and **Parameters**. Property names that appear in multiple shapes are highlighted with a yellow background and amber left border for easy spotting (configurable via the **Highlight Duplicate Property Names** toggle — on by default, available in the Build Canvas section of the options page and the quick-settings popup). An **Export to Clipboard** button sits in the modal's button bar alongside Close, always visible without scrolling. A toast notification confirms the extraction is in progress.
 
 ### Copy a Property Name or Value
 Inside a Set Properties step, a **Copy** icon appears next to the Add/Edit/Delete buttons in the **Properties to Set** list. Select a property, click **Copy**, and choose from the popup menu:
@@ -120,6 +122,9 @@ Inside a Set Properties step, a **Copy** icon appears next to the Add/Edit/Delet
 - **Copy property value(s)** — copies the selected property's value(s). Static values are copied as their raw literal (e.g. `You found me`); other source types are copied as shown in the panel. Multiple values are separated by new lines.
 
 A toast confirms each copy. If no property is selected, a reminder toast appears.
+
+### Chooser Input Tooltips
+When you mouse over any chooser panel input (fields where you click "Choose..." to select a value), a tooltip shows the full selected text if it's too long to fit in the field. No more guessing what you selected when the name gets cut off.
 
 ---
 
@@ -134,7 +139,7 @@ When editing Message, Notify, or Command shapes, the standard text field is repl
 
 By default the editor matches Boomi's dark/light theme, but you can pick a specific theme from the Options page under **Editing → Code Editor Theme**: choose **Auto** (follow Boomi's light/dark mode), a light theme (**Default**, **Eclipse**, **Solarized Light**), or a dark theme (**Twilight**, **Solarized Dark**, **Monokai**, **Dracula**, **Material**). The chosen theme applies to the Message, Notify, Command, and SQL editor popouts.
 
-The popout has a **corner drag handle** at the bottom-right — drag it to resize the editor window (grows down and to the right). The size resets to the default each time you open it.
+The popout has a **corner drag handle** at the bottom-right — drag it to resize the editor window (grows down and to the right). When you release the drag, the window auto-recenters on screen. The size resets to the default each time you open it.
 
 ### Database Operation SQL Query
 
@@ -144,7 +149,7 @@ The query textarea also gets a **corner drag handle** (bottom-right). Drag it to
 
 ### Resizable Native Script Editor
 
-Boomi's own inline script editor dialog (the ACE-based editor that opens for Data Process, Custom Scripting, Business Rules, and similar shapes) gets a **corner drag handle** at its bottom-right. Drag it to make the whole dialog larger or smaller; the editor inside reflows to fit. The size resets to Boomi's default each time the dialog opens.
+Boomi's own inline script editor dialog (the ACE-based editor that opens for Data Process, Custom Scripting, Business Rules, and similar shapes) gets a **corner drag handle** at its bottom-right. Drag it to make the whole dialog larger or smaller — the dialog auto-recenters on screen when you release the drag. The editor inside reflows to fit. The size resets to Boomi's default each time the dialog opens.
 
 ### Default Scripting Language
 
@@ -273,7 +278,12 @@ When viewing a component's XML in the build page popup, a copy button appears in
 ## Deployment
 
 ### Deployment Notes Auto-Apply
-When enabled (off by default), clicking **Create Packaged Component** captures whatever you typed in the package notes field and holds it temporarily. The next time a deployment notes field appears, it is filled in automatically with those notes, so you don't have to retype them. The temporary copy is cleared once it has been applied. Turn it on from the **Deployment** section of the options page or the quick-settings popup.
+When enabled (off by default), clicking **Create Packaged Component** captures whatever you typed in the package notes field and holds it temporarily. The next time a deployment notes field appears, it is filled in automatically with those notes, so you don't have to retype them. Also works from the **Packaged Components** screen: clicking **Deploy** from a component's context menu copies that component's existing notes into the deployment notes field. The temporary copy is cleared once it has been applied. Turn it on from the **Deployment** section of the options page or the quick-settings popup.
+
+### Run Process From Deployment
+When enabled (off by default), after a successful deployment a **Run Deployment Now** button appears on the success dialog. Clicking it (after a confirmation prompt) uses the Boomi Platform API to submit the process for execution on the matching runtime, then opens Process Reporting in a new tab to show the results.
+
+**Requires a Boomi API token and email.** Generate a token from **Settings → API Tokens** in Boomi. Enter your Boomi account email and the generated token into the Deployment section of the BoomiXcel options page. The credentials are stored in `chrome.storage.sync` and shared across your signed-in browsers.
 
 ---
 

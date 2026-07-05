@@ -215,6 +215,23 @@
                                 </div>
                                 <small class="helper">Copies the package notes from "Create Packaged Component" into the deployment notes field automatically.</small>
                             </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="run_process_from_deployment" class="toggle-label-row mb-0">Run Process From Deployment</label>
+                                    <label class="toggle"><input type="checkbox" id="run_process_from_deployment" name="run_process_from_deployment" class="option toggle-input" data-default="off"><span class="slider"></span></label>
+                                </div>
+                                <small class="helper">After a successful deployment, adds a button to immediately navigate to Process Reporting and execute the deployed process on the matching runtime.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="boomi_api_email">Boomi API Email:</label>
+                                <input type="email" id="boomi_api_email" name="boomi_api_email" class="option form-control" data-default="" placeholder="you@company.com" autocomplete="off">
+                                <small class="helper">The email address associated with your Boomi account.</small>
+                            </div>
+                            <div class="option-item">
+                                <label for="boomi_api_token">Boomi API Token:</label>
+                                <input type="password" id="boomi_api_token" name="boomi_api_token" class="option form-control" data-default="" placeholder="Enter your Boomi API token" autocomplete="off">
+                                <small class="helper">Required for Run Process From Deployment. Username format: BOOMI_TOKEN.you@company.com. Generate a token from Boomi Settings &rarr; API Tokens.</small>
+                            </div>
                         </section>
 
                         <section class="options-pane" id="pane-reminders" data-pane="reminders" role="tabpanel" aria-label="Reminders">
