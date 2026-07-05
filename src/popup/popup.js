@@ -11,6 +11,7 @@ var TOGGLE_LIST = [
   { key: "deployment_notes_auto_apply", label: "Deployment Notes Auto-Apply", defaultVal: "off" },
   { key: "log_highlight_warnings", label: "Highlight WARNING Log Lines",  defaultVal: "on" },
   { key: "setprops_highlight_duplicates", label: "Highlight Duplicate Property Names", defaultVal: "on" },
+  { key: "run_process_from_deployment", label: "Run Process From Deployment", defaultVal: "off" },
 ];
 
 function renderToggles() {

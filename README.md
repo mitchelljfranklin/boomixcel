@@ -135,6 +135,8 @@
 - Automatically rename downloaded documents to `<ProcessName>_<timestamp>.<ext>`
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
 - Auto-apply package notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field (configurable)
+- Auto-apply package notes from Packaged Components screen — clicking Deploy from the context menu copies the component's notes
+- Run Process From Deployment — after deployment, click "Run Deployment Now" to submit the process via the Boomi Platform API and open Process Reporting with auto-refresh + filter applied (requires Boomi API token, configurable)
 
 ⚡ **Quick Settings Popup**
 - Click the toolbar icon for instant access to the most-used feature toggles — no need to open the full options page
@@ -428,6 +430,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |
 | `content/deploymentNotes.js` | content | Captures package notes on Create Packaged Component, auto-fills the deployment notes field |
+| `content/runProcessFromDeployment.js` | content | After deployment, offers to navigate to Process Reporting and auto-execute the process |
 | `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (re-applies on lazy-load and paging) |
 | `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" in the Show Log dialog when it opens |
 | `content/setPropertiesExtractor.js` | content | Extracts all Set Properties shape configurations from the canvas into a modal table with TSV export |

@@ -273,7 +273,12 @@ When viewing a component's XML in the build page popup, a copy button appears in
 ## Deployment
 
 ### Deployment Notes Auto-Apply
-When enabled (off by default), clicking **Create Packaged Component** captures whatever you typed in the package notes field and holds it temporarily. The next time a deployment notes field appears, it is filled in automatically with those notes, so you don't have to retype them. The temporary copy is cleared once it has been applied. Turn it on from the **Deployment** section of the options page or the quick-settings popup.
+When enabled (off by default), clicking **Create Packaged Component** captures whatever you typed in the package notes field and holds it temporarily. The next time a deployment notes field appears, it is filled in automatically with those notes, so you don't have to retype them. Also works from the **Packaged Components** screen: clicking **Deploy** from a component's context menu copies that component's existing notes into the deployment notes field. The temporary copy is cleared once it has been applied. Turn it on from the **Deployment** section of the options page or the quick-settings popup.
+
+### Run Process From Deployment
+When enabled (off by default), after a successful deployment a **Run Deployment Now** button appears on the success dialog. Clicking it (after a confirmation prompt) uses the Boomi Platform API to submit the process for execution on the matching runtime, then opens Process Reporting in a new tab to show the results.
+
+**Requires a Boomi API token and email.** Generate a token from **Settings → API Tokens** in Boomi. Enter your Boomi account email and the generated token into the Deployment section of the BoomiXcel options page. The credentials are stored in `chrome.storage.sync` and shared across your signed-in browsers.
 
 ---
 

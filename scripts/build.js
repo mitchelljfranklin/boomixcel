@@ -54,6 +54,7 @@ const CONTENT_ORDER = [
   "boomiGpt.js",
   "viewInReporting.js",
   "deploymentNotes.js",
+  "runProcessFromDeployment.js",
   "logHighlight.js",
   "logDefaultStatus.js",
 ];
