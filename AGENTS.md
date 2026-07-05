@@ -128,6 +128,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/downloadRename.js` | content | Intercepts document downloads, detects file type from content, sends context to background for auto-rename. Binary detection prevents misidentification of ZIP files as CSV/TXT. |
 | `content/documentViewer.js` | content | DB document table viewer — "See table" toggle switch renders a sortable, searchable, paginated table from DBSTART| format. Maximize/restore button for the dialog. Shares raw content with copy/download scripts. |
 | `content/iconSets.js` | content | Icon set data objects referenced by `listenerGlobal` |
+| `content/chooserTooltip.js` | content | Adds full-text tooltip on hover for truncated chooser panel inputs |
 | `content/listenerGlobal.js` | content | Reads config from `chrome.storage.sync`, caches in bundle scope, orchestrates feature listeners via MutationObserver + poller. Also handles shape icon styling injection. |
 | `content/canvas.js` | content | Canvas grid toggle (reads `BoomiPlatform.canvas_grid`) |
 | `content/customRefresh.js` | content | Custom process-reporting refresh interval — injects "Refresh Every XXs" button with live countdown, pulse animation, last-refreshed tooltip, and persisted state across navigation |

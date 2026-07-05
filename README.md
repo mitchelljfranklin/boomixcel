@@ -413,6 +413,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/headerActions.js` | content | Copy component ID/URL, update overlay close, settings-changed reload, View in Process Reporting link icon |
 | `content/updateNotification.js` | content | Per-version changelog popup |
 | `content/iconSets.js` | content | Icon set data for shape styling |
+| `content/chooserTooltip.js` | content | Adds full-text tooltip on hover for truncated chooser inputs |
 | `content/listenerGlobal.js` | content | Reads config from storage, caches it, runs the DOM poller |
 | `content/canvas.js` | content | Canvas grid toggle |
 | `content/customRefresh.js` | content | Custom auto-refresh with live countdown, pulse animation, last-refreshed tooltip, and persisted state across navigation |
