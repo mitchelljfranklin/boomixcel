@@ -82,11 +82,12 @@
 - Restored old-style shape connector palette
 - Non-connected endpoints glow for visibility; hover an endpoint to quick-add a Stop shape (configurable)
 - Trace path highlighting during test execution (configurable)
+- Chooser input tooltips — hover over truncated chooser values to see the full text
 
 ✏️ **Editing**
-- CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes) — the popout has a corner drag handle to resize it
+- CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes) — the popout has a corner drag handle to resize it, and auto-recenters on release
 - CodeMirror SQL editor for Database Operation shapes — "Edit SQL" popout on the query field plus a corner drag handle to resize the query textarea
-- Resize Boomi's native inline script editor dialog with a corner drag handle
+- Resize Boomi's native inline script editor dialog with a corner drag handle — auto-recenters on release
 - Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
 - Choose the code editor popout theme — Auto (matches Boomi light/dark) or a specific light/dark theme (configurable)
 - Copy raw document content from the Document Viewer dialog
