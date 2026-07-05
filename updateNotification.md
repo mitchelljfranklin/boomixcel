@@ -1,3 +1,4 @@
 - Maintenance: Removed 6 unused library files and cleaned up stale build artifacts, reducing the extension package size by ~55 KB.
 - Bug Fix: Document Viewer DB table — table headers, row hover, search input, and pagination buttons are now readable in dark mode.
 - Bug Fix: Document Viewer DB table — horizontal scrollbar now stays visible when the maximized table is wider than the dialog.
+- Improvement: Deployment Notes Auto-Apply now also captures notes from the Packaged Components screen — when deploying an already-packaged component, clicking "Deploy" from the context menu copies the component's notes into the deployment notes field automatically.

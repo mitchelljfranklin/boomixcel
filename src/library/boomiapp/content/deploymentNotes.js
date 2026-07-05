@@ -37,6 +37,45 @@ document.addEventListener(
   true,
 );
 
+document.addEventListener("mousedown", function (event) {
+  var deployLink = event.target.closest('[data-locator="link-deploy"]');
+  if (!deployLink) return;
+  if (BoomiPlatform.deployment_notes_auto_apply !== "on") return;
+  if (!bphExtensionContextValid()) return;
+
+  var packagedPanel = document.querySelector(".packaged_component_panel");
+  if (!packagedPanel) return;
+
+  var highlightedRow = packagedPanel.querySelector("tr.GPGODNGDAJ");
+  if (!highlightedRow) return;
+
+  var notesColumnIndex = -1;
+  var headerTable = packagedPanel.querySelector(".boomi_standard_table table");
+  if (headerTable) {
+    var headerCells = headerTable.querySelectorAll("th");
+    for (var i = 0; i < headerCells.length; i++) {
+      var headerDiv = headerCells[i].querySelector('div[__gwt_header]');
+      if (headerDiv && headerDiv.textContent.trim().toUpperCase() === "NOTES") {
+        notesColumnIndex = i;
+        break;
+      }
+    }
+  }
+  if (notesColumnIndex === -1) return;
+
+  var cells = highlightedRow.querySelectorAll("td");
+  if (notesColumnIndex >= cells.length) return;
+
+  var notesCell = cells[notesColumnIndex];
+  var notesDiv = notesCell.querySelector('div[__gwt_cell]');
+  var notes = notesDiv ? notesDiv.textContent.trim() : notesCell.textContent.trim();
+  if (!notes) return;
+
+  var storedNotes = {};
+  storedNotes[DEPLOYMENT_NOTES_TEMP_KEY] = notes;
+  chrome.storage.local.set(storedNotes);
+}, true);
+
 setInterval(function () {
   if (BoomiPlatform.deployment_notes_auto_apply !== "on") return;
   if (deploymentNotesApplyInFlight) return;
