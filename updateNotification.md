@@ -3,3 +3,4 @@
 - Bug Fix: Document Viewer DB table — horizontal scrollbar now stays visible when the maximized table is wider than the dialog.
 - Improvement: Deployment Notes Auto-Apply now also captures notes from the Packaged Components screen — when deploying an already-packaged component, clicking "Deploy" from the context menu copies the component's notes into the deployment notes field automatically.
 - New Feature: Run Process From Deployment toggle — after a successful deployment, click "Run Deployment Now" to submit the deployed process for execution via the Boomi Platform API and open Process Reporting with auto-refresh and process name filter applied. Requires a Boomi API token and email to be configured in the options page.
+- Improvement: Resizable editor dialogs (CodeMirror popout and ACE script editor) now auto-recenter on screen after resizing finishes.

@@ -208,6 +208,11 @@ function enableEditorPopupResize(codeMirrorEditor) {
       resizeHandle.releasePointerCapture(pointerEvent.pointerId);
     }
     document.body.classList.remove("bph-resizing");
+    var centerPanel = flexPanel.closest(".center_panel");
+    if (centerPanel) {
+      centerPanel.style.left = ((window.innerWidth - flexPanel.offsetWidth) / 2) + "px";
+      centerPanel.style.top = ((window.innerHeight - flexPanel.offsetHeight) / 2) + "px";
+    }
     codeMirrorEditor.refresh();
   }
 
