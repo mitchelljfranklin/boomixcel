@@ -58,6 +58,7 @@ const CONTENT_ORDER = [
   "runProcessFromDeployment.js",
   "logHighlight.js",
   "logDefaultStatus.js",
+  "scrollDirtyFix.js",
 ];
 
 function getConcatenatedSource() {

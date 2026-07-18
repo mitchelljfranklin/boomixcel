@@ -308,6 +308,36 @@ When adding new option controls, prefer the existing patterns:
 
 To see content-script console output, inspect the page — content scripts log to the main page console in Chrome. To see page-context console output, same approach. Errors from the bundle will show with the source file name in the stack trace (esbuild injects `// src/library/boomiapp/content/...` comments).
 
+## Developer tools
+
+### SELECTORS.md — auto-generated selector reference
+
+`SELECTORS.md` is an auto-generated catalog of every CSS selector, class name, `data-locator` value, and `data-testid` attribute referenced across all content scripts and `boomi.css`, grouped by Boomi page/dialog area. It tells you what DOM elements each feature touches, what classes BoomiXcel adds, and what Boomi native selectors are already hooked.
+
+**Regenerate:** `node scripts/gen-selectors.js`
+
+The generator parses every `.js` file in `src/library/boomiapp/content/` and `boomi.css`, extracting selectors from:
+- `document.querySelector/querySelectorAll`
+- `document.arrive()`
+- `document.getElementById`
+- jQuery `$()` and `.find()`
+- `classList.add/remove/toggle/contains`
+- `data-locator` and `data-testid` attribute references in template strings
+
+The output is grouped by area (Build Canvas, Process Reporting, Show Log Dialog, etc.) with separate tables for Boomi native selectors and BoomiXcel-added `bph-*`/`bpe-*` classes.
+
+### DOM Snapshots — capturing unknown pages
+
+When building a feature for a Boomi page or dialog that BoomiXcel hasn't touched yet, use the DOM capture snippet to get a structural outline:
+
+1. Run `node scripts/capture-dom.js` — it prints a console-ready snippet and creates `DOM snapshots/README.md`
+2. Copy the snippet, open the browser console (F12) on the target Boomi page/dialog, paste and press Enter
+3. The DOM outline is copied to your clipboard — paste into a new `.html` file in `DOM snapshots/` (e.g. `DOM snapshots/show-log-dialog.html`)
+
+The outline strips all text content, keeps structural elements with their `class`, `id`, `data-locator`, `data-testid`, `__gwt_cell`, `__gwt_row`, and `role` attributes, and walks into shadow DOM. BoomiXcel-injected elements (`bph-*`/`bpe-*` classes and IDs) are excluded.
+
+The AI assistant can then read the snapshot to understand the DOM structure before writing any code.
+
 ## Before committing — mandatory doc verification
 
 After `npm run build` succeeds and **before any git commit**:
