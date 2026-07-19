@@ -192,6 +192,14 @@ Normally when you click **Lock & Edit** on a component tab, Boomi hides the Clos
 ### Copy Component ID/URL
 A copy button appears on the build canvas header, letting you quickly copy a component's ID or URL to your clipboard.
 
+### Copy Component Defaults
+When copying a component, BoomiXcel can auto-populate the component name and set default checkbox states. Configurable from the Options page:
+
+- **New Component Name Auto-Apply** — auto-fills the "Enter Name Here" field with the original component's name
+- **Auto-Apply Suffix** — optional text appended to the auto-populated name (e.g., ` - Copy`)
+- **Copy Password Across All Accounts On by Default** — checks the Copy Password checkbox
+- **Copy Component Dependents On by Default** — checks the Copy Component Dependents checkbox
+
 ### Adjust Connection Operation Screen
 The connection operation screen is resized to give you more room for the configuration panel.
 

@@ -425,6 +425,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/modalButtons.js` | content | Reverse modal OK/Cancel order |
 | `content/imageCapture.js` | content | Process flow → PNG capture |
 | `content/connectionOperations.js` | content | Connection operation screen sizing |
+| `content/copyComponentDefaults.js` | content | Copy Component dialog defaults — auto-populate name with optional suffix, set Copy Password and Copy Component Dependents checkbox defaults |
 | `content/versionNotification.js` | content | Close button on revision notification |
 | `content/sqlEditor.js` | content | CodeMirror SQL editor — "Edit SQL" popout for Command (`formrow-sql`) and Database Operation query (`formrow-sql-query`) fields + corner drag-resize handle on the query textarea |
 | `content/nativeEditorResize.js` | content | Adds a corner drag-resize handle to Boomi's native inline script editor dialog (ACE-based) |

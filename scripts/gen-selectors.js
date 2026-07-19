@@ -31,7 +31,7 @@ var FILE_AREA_MAP = {
   nativeEditorResize:       "Build Canvas",
   canvas:                   "Build Canvas",
   connectionOperations:     "Build Canvas",
-  scrollDirtyFix:           "Build Canvas",
+  copyComponentDefaults:    "Build Canvas",
 
   // Process Reporting — execution monitoring
   customRefresh:            "Process Reporting",

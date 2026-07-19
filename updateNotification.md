@@ -5,3 +5,4 @@
 - New Feature: Run Process From Deployment toggle — after a successful deployment, click "Run Deployment Now" to submit the deployed process for execution via the Boomi Platform API and open Process Reporting with auto-refresh and process name filter applied. Requires a Boomi API token and email to be configured in the options page.
 - Improvement: Resizable editor dialogs (CodeMirror popout and ACE script editor) now auto-recenter on screen after resizing finishes.
 - Improvement: Chooser panel inputs now show a full-text tooltip on hover when the displayed text is truncated.
+- New Feature: Copy Component Defaults — when copying a component, auto-populate the name field with the original component's name plus an optional suffix, and optionally set the Copy Password and Copy Component Dependents checkboxes to their preferred default states. Configurable in the Options page under Build Enhancements.

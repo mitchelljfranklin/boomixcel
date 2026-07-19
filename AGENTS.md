@@ -139,6 +139,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/modalButtons.js` | content | Reverse modal OK/Cancel button order |
 | `content/imageCapture.js` | content | Capture process flow to PNG |
 | `content/connectionOperations.js` | content | Adjust connection operation screen sizing |
+| `content/copyComponentDefaults.js` | content | Copy Component dialog defaults — auto-populate name with optional suffix, set Copy Password and Copy Component Dependents checkbox defaults |
 | `content/versionNotification.js` | content | Close button on sticky revision notification |
 | `content/sqlEditor.js` | content | CodeMirror SQL editor for Database Operation shapes |
 | `content/nativeEditorResize.js` | content | Adds a bottom-right corner drag-resize handle to Boomi's native inline script editor dialog (`#popup_on_popup_content_InlineScriptEditorPanel`, ACE-based). Pointer-capture drag sets the `.flex_panel` size with inline `!important` and dispatches a window resize event so ACE re-measures. |
