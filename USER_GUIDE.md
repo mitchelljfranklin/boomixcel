@@ -52,6 +52,9 @@ Click the BoomiXcel icon in your browser toolbar to open a compact settings popu
 | Deployment Notes Auto-Apply | Copies package notes into the deployment notes field |
 | Highlight WARNING Log Lines | Colors WARNING rows yellow in the Show Log dialog |
 | Highlight Duplicate Property Names | Highlights property names appearing in multiple shapes in the Set Properties extraction table |
+| Default Copy Dependents | Checks the Copy Component Dependents checkbox by default when copying a component |
+| Auto-Apply Component Name | Auto-fills the component name field when copying a component |
+| Package Notes Auto-Apply | Copies Latest Notes into the Package Notes field when creating a packaged component |
 | Run Process From Deployment | After deployment, adds a button to auto-execute the process in Process Reporting |
 
 Changes save immediately. Click **Reload Page** to apply them to the current Boomi tab, or **Full Settings** to open the complete options page.
@@ -151,6 +154,14 @@ The query textarea also gets a **corner drag handle** (bottom-right). Drag it to
 
 Boomi's own inline script editor dialog (the ACE-based editor that opens for Data Process, Custom Scripting, Business Rules, and similar shapes) gets a **corner drag handle** at its bottom-right. Drag it to make the whole dialog larger or smaller — the dialog auto-recenters on screen when you release the drag. The editor inside reflows to fit. The size resets to Boomi's default each time the dialog opens.
 
+### Resizable Included Components Dialog
+
+The Included Components dialog (shown when creating a package or viewing an existing package's components) gets a **corner drag handle** at its bottom-right. Drag to resize the dialog — it auto-recenters on screen when you release the drag. The size persists across wizard steps (Back/Next navigation). The size resets to Boomi's default when the dialog is fully closed and reopened.
+
+### Package Notes Auto-Apply
+
+When creating a packaged component with the **Package Notes Auto-Apply** option enabled, the Package Notes field is automatically populated with the Latest Notes from the first component in the Included Components table. If the Latest Notes value is empty or "None", no text is applied.
+
 ### Default Scripting Language
 
 When creating new shapes with scripting (Data Process, Custom Scripting, Business Rules), BoomiXcel can auto-select your preferred scripting language instead of always defaulting to Groovy 1.5. Configure from the Options page under **Editing**:
@@ -191,6 +202,14 @@ Normally when you click **Lock & Edit** on a component tab, Boomi hides the Clos
 
 ### Copy Component ID/URL
 A copy button appears on the build canvas header, letting you quickly copy a component's ID or URL to your clipboard.
+
+### Copy Component Defaults
+When copying a component, BoomiXcel can auto-populate the component name and set default checkbox states. Configurable from the Options page:
+
+- **New Component Name Auto-Apply** — auto-fills the "Enter Name Here" field with the original component's name
+- **Auto-Apply Suffix** — optional text appended to the auto-populated name (e.g., ` - Copy`)
+- **Copy Password Across All Accounts On by Default** — checks the Copy Password checkbox
+- **Copy Component Dependents On by Default** — checks the Copy Component Dependents checkbox
 
 ### Adjust Connection Operation Screen
 The connection operation screen is resized to give you more room for the configuration panel.

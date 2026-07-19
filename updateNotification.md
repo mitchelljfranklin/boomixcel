@@ -1,7 +1,3 @@
-- Maintenance: Removed 6 unused library files and cleaned up stale build artifacts, reducing the extension package size by ~55 KB.
-- Bug Fix: Document Viewer DB table — table headers, row hover, search input, and pagination buttons are now readable in dark mode.
-- Bug Fix: Document Viewer DB table — horizontal scrollbar now stays visible when the maximized table is wider than the dialog.
-- Improvement: Deployment Notes Auto-Apply now also captures notes from the Packaged Components screen — when deploying an already-packaged component, clicking "Deploy" from the context menu copies the component's notes into the deployment notes field automatically.
-- New Feature: Run Process From Deployment toggle — after a successful deployment, click "Run Deployment Now" to submit the deployed process for execution via the Boomi Platform API and open Process Reporting with auto-refresh and process name filter applied. Requires a Boomi API token and email to be configured in the options page.
-- Improvement: Resizable editor dialogs (CodeMirror popout and ACE script editor) now auto-recenter on screen after resizing finishes.
-- Improvement: Chooser panel inputs now show a full-text tooltip on hover when the displayed text is truncated.
+- New Feature: Copy Component Defaults — when copying a component, auto-populate the name field with the original component's name plus an optional suffix, and optionally set the Copy Password and Copy Component Dependents checkboxes to their preferred default states. Configurable in the Options page under Build Enhancements.
+- New Feature: Resizable Included Components Dialog — the Included Components dialog now has a corner drag-resize handle. Drag it to make the dialog larger or smaller; it auto-recenters on screen when you release the drag. Size persists across wizard steps (Back/Next).
+- New Feature: Package Notes Auto-Apply — when creating a packaged component, the Package Notes field is automatically populated with the Latest Notes from the first component in the Included Components table. Configurable in the Options page under Build Enhancements.

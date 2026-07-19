@@ -51,6 +51,7 @@ const CONTENT_ORDER = [
   "versionNotification.js",
   "sqlEditor.js",
   "nativeEditorResize.js",
+  "packagedComponentsResize.js",
   "brandLogo.js",
   "boomiGpt.js",
   "viewInReporting.js",
@@ -58,6 +59,8 @@ const CONTENT_ORDER = [
   "runProcessFromDeployment.js",
   "logHighlight.js",
   "logDefaultStatus.js",
+  "copyComponentDefaults.js",
+  "packageNotesAutoApply.js",
 ];
 
 function getConcatenatedSource() {

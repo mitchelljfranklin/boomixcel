@@ -108,7 +108,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 
 | Script | Context | What it does |
 |---|---|---|
-| `content/contentScript.js` | content | Entry point. Detects page load via title change, injects `fullscreen.js`, injects masthead options gear icon, sets up platform status check, update notification dialog |
+| `content/contentScript.js` | content | Entry point. Detects page load via title change, injects `fullscreen.js`, injects masthead options gear icon, sets up platform status check, update notification dialog, and config forwarding for page-context scripts |
 | `content/global.js` | content | Utility functions: URL parsing, `dashboardDays()` (configurable dashboard time-range auto-selector), alert dialog helper, `getCodeMirrorEditorTheme()` (resolves the configured editor popout theme) |
 | `content/pageInit.js` | content | Page-load detection, triggers navigation change and update notification checks |
 | `content/favicon.js` | content | Page-specific favicons with distinct colors per page, unique page titles, navigation state listeners |
@@ -139,9 +139,12 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/modalButtons.js` | content | Reverse modal OK/Cancel button order |
 | `content/imageCapture.js` | content | Capture process flow to PNG |
 | `content/connectionOperations.js` | content | Adjust connection operation screen sizing |
+| `content/copyComponentDefaults.js` | content | Copy Component dialog defaults — auto-populate name with optional suffix, set Copy Password and Copy Component Dependents checkbox defaults |
 | `content/versionNotification.js` | content | Close button on sticky revision notification |
 | `content/sqlEditor.js` | content | CodeMirror SQL editor for Database Operation shapes |
 | `content/nativeEditorResize.js` | content | Adds a bottom-right corner drag-resize handle to Boomi's native inline script editor dialog (`#popup_on_popup_content_InlineScriptEditorPanel`, ACE-based). Pointer-capture drag sets the `.flex_panel` size with inline `!important` and dispatches a window resize event so ACE re-measures. |
+| `content/packagedComponentsResize.js` | content | Adds a bottom-right corner drag-resize handle to the Included Components dialog (`.flex_panel.packaged_components_wizard`). Same pointer-capture pattern as `nativeEditorResize.js` with recenter on end-resize. |
+| `content/packageNotesAutoApply.js` | content | Auto-copies the Latest Notes from the first row of the Included Components table into the Package Notes field when creating a packaged component. Reads `package_notes_auto_apply` from BoomiPlatform config. |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo with a custom image (reads BoomiPlatform config) |
 | `content/boomiGpt.js` | content | Revision History checkbox selection for Boomi GPT compare prompts. Check 2 revisions → builds a "compare {id} version X and Y" prompt, updates the GPT link, and auto-submits on the BoomiAI page. |
 | `content/viewInReporting.js` | content | Adds "View in Process Reporting" menu item to deployed process context menus and a quick-link icon on the build page. Opens Process Reporting in a new tab and auto-applies a process name filter via polling state machine. |
@@ -307,6 +310,36 @@ When adding new option controls, prefer the existing patterns:
 - Changes to `src/manifest.json` → must run `npm run build` (generates browser-specific manifests)
 
 To see content-script console output, inspect the page — content scripts log to the main page console in Chrome. To see page-context console output, same approach. Errors from the bundle will show with the source file name in the stack trace (esbuild injects `// src/library/boomiapp/content/...` comments).
+
+## Developer tools
+
+### SELECTORS.md — auto-generated selector reference
+
+`SELECTORS.md` is an auto-generated catalog of every CSS selector, class name, `data-locator` value, and `data-testid` attribute referenced across all content scripts and `boomi.css`, grouped by Boomi page/dialog area. It tells you what DOM elements each feature touches, what classes BoomiXcel adds, and what Boomi native selectors are already hooked.
+
+**Regenerate:** `node scripts/gen-selectors.js`
+
+The generator parses every `.js` file in `src/library/boomiapp/content/` and `boomi.css`, extracting selectors from:
+- `document.querySelector/querySelectorAll`
+- `document.arrive()`
+- `document.getElementById`
+- jQuery `$()` and `.find()`
+- `classList.add/remove/toggle/contains`
+- `data-locator` and `data-testid` attribute references in template strings
+
+The output is grouped by area (Build Canvas, Process Reporting, Show Log Dialog, etc.) with separate tables for Boomi native selectors and BoomiXcel-added `bph-*`/`bpe-*` classes.
+
+### DOM Snapshots — capturing unknown pages
+
+When building a feature for a Boomi page or dialog that BoomiXcel hasn't touched yet, use the DOM capture snippet to get a structural outline:
+
+1. Run `node scripts/capture-dom.js` — it prints a console-ready snippet and creates `DOM snapshots/README.md`
+2. Copy the snippet, open the browser console (F12) on the target Boomi page/dialog, paste and press Enter
+3. The DOM outline is copied to your clipboard — paste into a new `.html` file in `DOM snapshots/` (e.g. `DOM snapshots/show-log-dialog.html`)
+
+The outline strips all text content, keeps structural elements with their `class`, `id`, `data-locator`, `data-testid`, `__gwt_cell`, `__gwt_row`, and `role` attributes, and walks into shadow DOM. BoomiXcel-injected elements (`bph-*`/`bpe-*` classes and IDs) are excluded.
+
+The AI assistant can then read the snapshot to understand the DOM structure before writing any code.
 
 ## Before committing — mandatory doc verification
 
