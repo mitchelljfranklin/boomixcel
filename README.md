@@ -88,11 +88,13 @@
 - CodeMirror editor for Message, Notify, and Command shapes (JSON, XML, HTML, SQL modes) — the popout has a corner drag handle to resize it, and auto-recenters on release
 - CodeMirror SQL editor for Database Operation shapes — "Edit SQL" popout on the query field plus a corner drag handle to resize the query textarea
 - Resize Boomi's native inline script editor dialog with a corner drag handle — auto-recenters on release
+- Resize the Included Components dialog with a corner drag handle — size persists across wizard steps, auto-recenters on release
 - Auto-select default scripting language for new Data Process, Custom Scripting, and Business Rules shapes (configurable)
 - Choose the code editor popout theme — Auto (matches Boomi light/dark) or a specific light/dark theme (configurable)
 - Copy raw document content from the Document Viewer dialog
 - Copy clean XML from the Component XML popup (decodes HTML entities)
 - DB document table viewer — sortable, searchable, paginated table with "See table" toggle and maximize button
+- Copy Component dialog defaults — auto-populate copy name with optional suffix, set Copy Password and Copy Component Dependents checkbox defaults (configurable)
 
 🧭 **Navigation & Layout**
 - Collapse-all-folders button in Process Reporting and Deployed Process screens
@@ -135,8 +137,9 @@
 - Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to `<ProcessName>_<timestamp>.<ext>`
 - Auto-check default build filters — Process, Process Property, Cross Reference Table, API Service (configurable)
-- Auto-apply package notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field (configurable)
-- Auto-apply package notes from Packaged Components screen — clicking Deploy from the context menu copies the component's notes
+- Auto-apply deployment notes — captures the notes from "Create Packaged Component" and fills them into the deployment notes field (configurable)
+- Auto-apply deployment notes from Packaged Components screen — clicking Deploy from the context menu copies the component's notes
+- Package Notes Auto-Apply — copies the Latest Notes from the first component row into the Package Notes field when creating a packaged component (configurable)
 - Run Process From Deployment — after deployment, click "Run Deployment Now" to submit the process via the Boomi Platform API and open Process Reporting with auto-refresh + filter applied (requires Boomi API token, configurable)
 
 ⚡ **Quick Settings Popup**
@@ -390,7 +393,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 ### Script reference
 
 <details>
-<summary>📂 <b>Click to expand — full script reference (49 files)</b></summary>
+<summary>📂 <b>Click to expand — full script reference (54 files)</b></summary>
 
 | Script | Context | Purpose |
 |---|---|---|

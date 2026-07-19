@@ -52,6 +52,9 @@ Click the BoomiXcel icon in your browser toolbar to open a compact settings popu
 | Deployment Notes Auto-Apply | Copies package notes into the deployment notes field |
 | Highlight WARNING Log Lines | Colors WARNING rows yellow in the Show Log dialog |
 | Highlight Duplicate Property Names | Highlights property names appearing in multiple shapes in the Set Properties extraction table |
+| Default Copy Dependents | Checks the Copy Component Dependents checkbox by default when copying a component |
+| Auto-Apply Component Name | Auto-fills the component name field when copying a component |
+| Package Notes Auto-Apply | Copies Latest Notes into the Package Notes field when creating a packaged component |
 | Run Process From Deployment | After deployment, adds a button to auto-execute the process in Process Reporting |
 
 Changes save immediately. Click **Reload Page** to apply them to the current Boomi tab, or **Full Settings** to open the complete options page.

@@ -108,7 +108,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 
 | Script | Context | What it does |
 |---|---|---|
-| `content/contentScript.js` | content | Entry point. Detects page load via title change, injects `fullscreen.js`, injects masthead options gear icon, sets up platform status check, update notification dialog |
+| `content/contentScript.js` | content | Entry point. Detects page load via title change, injects `fullscreen.js`, injects masthead options gear icon, sets up platform status check, update notification dialog, and config forwarding for page-context scripts |
 | `content/global.js` | content | Utility functions: URL parsing, `dashboardDays()` (configurable dashboard time-range auto-selector), alert dialog helper, `getCodeMirrorEditorTheme()` (resolves the configured editor popout theme) |
 | `content/pageInit.js` | content | Page-load detection, triggers navigation change and update notification checks |
 | `content/favicon.js` | content | Page-specific favicons with distinct colors per page, unique page titles, navigation state listeners |
