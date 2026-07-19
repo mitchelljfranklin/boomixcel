@@ -151,6 +151,10 @@ The query textarea also gets a **corner drag handle** (bottom-right). Drag it to
 
 Boomi's own inline script editor dialog (the ACE-based editor that opens for Data Process, Custom Scripting, Business Rules, and similar shapes) gets a **corner drag handle** at its bottom-right. Drag it to make the whole dialog larger or smaller — the dialog auto-recenters on screen when you release the drag. The editor inside reflows to fit. The size resets to Boomi's default each time the dialog opens.
 
+### Resizable Included Components Dialog
+
+The Included Components dialog (shown when creating a package or viewing an existing package's components) gets a **corner drag handle** at its bottom-right. Drag to resize the dialog — it auto-recenters on screen when you release the drag. The component tree inside expands to fill the new size. The size resets to Boomi's default each time the dialog opens.
+
 ### Default Scripting Language
 
 When creating new shapes with scripting (Data Process, Custom Scripting, Business Rules), BoomiXcel can auto-select your preferred scripting language instead of always defaulting to Groovy 1.5. Configure from the Options page under **Editing**:

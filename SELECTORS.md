@@ -100,15 +100,10 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `boomiConnect` | `connectionOperations.js` |
 | `connectorText` | `connectionOperations.js` |
 | `connectorVal` | `connectionOperations.js` |
-| `gwt-CheckBox-disabled` | `copyComponentDefaults.js` |
 | `formrow-enter-name-here` | `copyComponentDefaults.js` |
 | `formrow-component-to-copy` | `copyComponentDefaults.js` |
-| `formrow-copy-passwords-across-all-accounts` | `copyComponentDefaults.js` |
 | `formrow-copy-passwords-across-all-accounts-input` | `copyComponentDefaults.js` |
-| `formrow-copy-passwords-across-all-accounts-label` | `copyComponentDefaults.js` |
-| `formrow-copy-component-dependents` | `copyComponentDefaults.js` |
 | `formrow-copy-component-dependents-input` | `copyComponentDefaults.js` |
-| `formrow-copy-component-dependents-label` | `copyComponentDefaults.js` |
 | `.bph-copy-property` | `copySetProperty.js` |
 | `title` | `copySetProperty.js` |
 | `tr.selected .gwt-DataListItem:not(.parameter_value_list_item)` | `copySetProperty.js` |
@@ -149,6 +144,8 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `.flex_panel` | `nativeEditorResize.js` |
 | `.modal_top` | `nativeEditorResize.js` |
 | `#popup_on_popup_content_InlineScriptEditorPanel` | `nativeEditorResize.js` |
+| `.bpe-editor-resize-handle` | `packagedComponentsResize.js` |
+| `.flex_panel.packaged_components_wizard` | `packagedComponentsResize.js` |
 | `.step_pellete` | `setPropertiesExtractor.js` |
 | `.bph-extract-setproperties` | `setPropertiesExtractor.js` |
 | `.gwt-DataList > tbody .gwt-DataListItem` | `setPropertiesExtractor.js` |
@@ -243,6 +240,9 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bpe-editor-modal` | `nativeEditorResize.js` |
 | `bph-resizing` | `nativeEditorResize.js` |
 | `bpe-editor-resize-handle` | `nativeEditorResize.js` |
+| `bpe-editor-modal` | `packagedComponentsResize.js` |
+| `bph-resizing` | `packagedComponentsResize.js` |
+| `bpe-editor-resize-handle` | `packagedComponentsResize.js` |
 | `bpe-setprops-export-btn` | `setPropertiesExtractor.js` |
 | `bph-extracting` | `setPropertiesExtractor.js` |
 | `bph-sql-query-done` | `sqlEditor.js` |

@@ -29,6 +29,7 @@ var FILE_AREA_MAP = {
   messageEditor:            "Build Canvas",
   sqlEditor:                "Build Canvas",
   nativeEditorResize:       "Build Canvas",
+  packagedComponentsResize: "Build Canvas",
   canvas:                   "Build Canvas",
   connectionOperations:     "Build Canvas",
   copyComponentDefaults:    "Build Canvas",

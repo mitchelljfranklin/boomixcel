@@ -1,1 +1,2 @@
 - New Feature: Copy Component Defaults — when copying a component, auto-populate the name field with the original component's name plus an optional suffix, and optionally set the Copy Password and Copy Component Dependents checkboxes to their preferred default states. Configurable in the Options page under Build Enhancements.
+- New Feature: Resizable Included Components Dialog — the Included Components dialog now has a corner drag-resize handle. Drag it to make the dialog larger or smaller; it auto-recenters on screen when you release the drag.

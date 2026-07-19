@@ -1,6 +1,6 @@
 <!-- DOM snapshot of: Boomi_BenMiller - Build - Boomi Enterprise Platform -->
 <!-- URL: https://platform.boomi.com/AtomSphere.html#build;accountId=boomi_benmiller-01226Z;branchName=main;components=2c429a56-e30e-4f83-8f6d-65f9f07f65b9;componentIdOnFocus=2c429a56-e30e-4f83-8f6d-65f9f07f65b9 -->
-<!-- Captured: 2026-07-19T01:32:45.123Z -->
+<!-- Captured: 2026-07-19T02:08:49.771Z -->
 <!-- DIAGNOSTICS -->
 <!-- document.title : "Boomi_BenMiller - Build - Boomi Enterprise Platform" -->
 <!-- document.title dirty? (starts with *): false -->
@@ -14,218 +14,259 @@
 div.popupContent
   div.modal.modal_top
     div.modal_contents
-      div.margin_popup_contents
-        div.form_header
-          div.form_title
-            div.form_title_top
-              img.no_display.form_header_image
+      div#create_package.flex_panel.packaged_components_wizard
+        div
+          div.form_header.add_details_header
+            div.form_title.no_required
+              div.form_title_top
+                img.no_display.form_header_image
 
-              h1.form_title_label.no_display.with_help
+                h1.form_title_label.no_display
 
-              h2.form_title_label.with_help
+                h2.form_title_label
 
-              h3.form_title_label.no_display.with_help
+                h3.form_title_label.no_display
 
-              h4.form_title_label.no_display.with_help
+                h4.form_title_label.no_display
 
-              h5.form_title_label.no_display.with_help
+                h5.form_title_label.no_display
 
-              h6.form_title_label.no_display.with_help
+                h6.form_title_label.no_display
 
-              a.gwt-Anchor.svg-anchor.help_icon[data-locator="link"]
+                a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
 
-              button.internal_badge.internal_badge_disabled [style="display: none"]
+                button.internal_badge.internal_badge_disabled [style="display: none"]
 
-            dl.property_list.no_display
+              dl.property_list.no_display
 
-            p.form_summary.no_display
+              p.form_summary
 
-        div.form_row
-          div.form_label
-            label
-              span.form_label_required
+        div.flex_panel.included_components_panel
+          div [style="height: 200px"]
+            div [style="top: -20ex; width: 10em; height: 10ex"]
 
-            ex-link.exo_component.form_label_link [style="display: none"]
-              a.link.link--size-small[role="link"]
-                span.leading-icon
-                  ex-icon
-                    span.ex-icon.default
+            div [style="left: -100%; top: 0%; width: 100%; height: 100%; display: none"]
+              div.loading_icon [style="display: none"]
+                i.font_icon.icon-spinner.before-animate-spin.spinner
 
-                slot.slot
+            div [style="left: 0%; top: 0%; width: 100%; height: 100%"]
+              div.table_column_style [style="width: 100%; height: 100%"]
+                div.GPGODNGDPJ.boomi_standard_table [style="width: 100%; height: 100%"]
+                  div [style="left: 0px; top: 0px; width: 100%"]
+                    div [style="width: 100%; height: 100%"]
+                      div [style="width: 1460px; height: 136px"]
 
-            span.form_label_required_text
+                    div [style="width: 100%; height: 100%"]
+                      div [style="width: 200%; height: 200%"]
 
-          div.form_static_value[data-locator="formrow-component-to-copy"]
+                    div
+                      table [style="width: 100%"]
+                        colgroup
+                          col [style="width: 25%"]
 
-        div.form_row
-          div.form_label
-            label
-              span.form_label_required
+                          col [style="width: 20%"]
 
-            ex-link.exo_component.form_label_link [style="display: none"]
-              a.link.link--size-small[role="link"]
-                span.leading-icon
-                  ex-icon
-                    span.ex-icon.default
+                          col [style="width: 20%"]
 
-                slot.slot
+                          col [style="width: 35%"]
 
-            span.form_label_required_text
+                          col [style="width: 20%"]
 
-          div.validation_panel
-            div.container
-              input.gwt-TextBox.validatable[data-locator="formrow-enter-name-here"]
+                          col [style="width: 14px"]
 
-            div.container_label.no_display
+                        thead
+                          tr
+                            th.GPGODNGDPI.GPGODNGDNI
+                              div /* "Component Name" */
 
-            a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
+                            th.GPGODNGDPI.GPGODNGDMJ[role="button"]
+                              div
+                                a.help_icon
 
-            label.error_message
+                            th.GPGODNGDPI.GPGODNGDMJ[role="button"]
+                              div /* "Branch" */
 
-        div.form_row.required
-          div.form_label
-            label
-              span.form_label_required
+                            th.GPGODNGDPI.GPGODNGDMJ[role="button"]
+                              div /* "Latest Notes" */
 
-            ex-link.exo_component.form_label_link [style="display: none"]
-              a.link.link--size-small[role="link"]
-                span.leading-icon
-                  ex-icon
-                    span.ex-icon.default
+                            th.GPGODNGDPI
+                              div /* "Action" */
 
-                slot.slot
+                            th.GPGODNGDPI.GPGODNGDHJ
 
-            span.form_label_required_text
+                  div [style="left: 0px; width: 100%; display: none"]
+                    div [style="width: 100%; height: 100%"]
+                      div [style="width: 100px; height: 100px"]
 
-          div.validation_panel
-            div.container
-              div.chooser_panel
-                div.chooser_input
-                  input.gwt-TextBox.gwt-TextBox-readonly.validatable[data-locator="formrow-copy-to-account"]
+                    div [style="width: 100%; height: 100%"]
+                      div [style="width: 200%; height: 200%"]
 
-                  i.font_icon.icon-search.action_icon[data-locator="icon-search"]
+                  div [style="left: 0px; top: 36px; width: 100%; height: 199px"]
+                    div.GPGODNGDET [style="height: 100%"]
+                      div [style="top: -20ex; width: 10em; height: 10ex"]
 
-                  img.clear_chooser_button.no_display
+                      div
+                        div
+                          div.GPGODNGDPL [style="display: block"]
+                            div [style="width: 100%; height: 100%"]
+                              div [style="width: 1460px; height: 138px"]
 
-                  a.clear_chooser_button.no_display[data-locator="link"]
+                            div [style="width: 100%; height: 100%"]
+                              div [style="width: 200%; height: 200%"]
 
-                  img.edit_chooser_button.no_display
+                            table [style="width: 100%"]
+                              colgroup
+                                col [style="width: 25%"]
 
-                  a.edit_chooser_button.no_display[data-locator="link"]
+                                col [style="width: 20%"]
 
-                  img.clear_chooser_button.clear_chooser_img.cancel_waiting
+                                col [style="width: 20%"]
 
-                  a.clear_chooser_button.cancel_waiting[data-locator="link"]
+                                col [style="width: 35%"]
 
-            div.container_label.no_display
+                                col [style="width: 20%"]
 
-            a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
+                                col [style="width: 14px"]
 
-            label.error_message
+                              tbody
+                                tr.GPGODNGDJI
+                                  td.GPGODNGDII.GPGODNGDKI.GPGODNGDLI
+                                    div[__gwt_cell="cell-gwt-uid-3228"]
+                                      div[data-locator="cell-xcel-extension-dev"] /* "Xcel Extension Dev" */
 
-        div.form_row.checkbox_row
-          div.form_label
-            label
-              span.form_label_required
+                                  td.GPGODNGDII.GPGODNGDKI
+                                    div[__gwt_cell="cell-gwt-uid-3229"]
+                                      div[data-locator="cell-2-1"] /* "2.1" */
 
-            ex-link.exo_component.form_label_link [style="display: none"]
-              a.link.link--size-small[role="link"]
-                span.leading-icon
-                  ex-icon
-                    span.ex-icon.default
+                                  td.GPGODNGDII.GPGODNGDKI
+                                    div[__gwt_cell="cell-gwt-uid-3230"]
+                                      div[data-locator="cell-main"] /* "main" */
 
-                slot.slot
+                                  td.GPGODNGDII.GPGODNGDKI
+                                    div[__gwt_cell="cell-gwt-uid-3231"]
+                                      div[data-locator="cell-none"] /* "None" */
 
-            span.form_label_required_text
+                                  td.GPGODNGDII.GPGODNGDKI
+                                    div[__gwt_cell="cell-gwt-uid-3232"]
+                                      a[data-locator="cell-view-included-components"] /* "View Included Components" */
 
-          div.validation_panel
-            div.container
-              span.gwt-CheckBox.gwt-CheckBox-disabled[data-locator="formrow-copy-passwords-across-all-accounts"]
-                input[data-locator="formrow-copy-passwords-across-all-accounts-input"]
+                                  td.GPGODNGDII.GPGODNGDKI.GPGODNGDFJ
+                                    div[__gwt_cell="cell-gwt-uid-3233"]
 
-                label[data-locator="formrow-copy-passwords-across-all-accounts-label"]
+                      div [style="width: 0px; height: 0px"]
+                        div.GPGODNGDFT
 
-            div.container_label.no_display
+                      div [style="display: none"]
+                        div.GPGODNGDMW.GPGODNGDPL [style="height: 19px"]
+                          div.GPGODNGDLW.GPGODNGDGT
+                            div.GPGODNGDKW
 
-            a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
+                      div [style="top: 0px; width: 19px; display: none"]
+                        div.GPGODNGDOW.GPGODNGDPL [style="width: 19px"]
+                          div.GPGODNGDNW.GPGODNGDIT
+                            div [style="height: 38px"]
 
-            label.error_message
+          div.new_input_panel.large_form_values
+            div.form_row
+              div.form_label
+                label
+                  span.form_label_required
 
-        div.form_row.checkbox_row
-          div.form_label
-            label
-              span.form_label_required
+                ex-link.exo_component.form_label_link [style="display: none"]
+                  a.link.link--size-small[role="link"]
+                    span.leading-icon
+                      ex-icon
+                        span.ex-icon.default
 
-            ex-link.exo_component.form_label_link [style="display: none"]
-              a.link.link--size-small[role="link"]
-                span.leading-icon
-                  ex-icon
-                    span.ex-icon.default
+                    slot.slot
 
-                slot.slot
+                span.form_label_required_text
 
-            span.form_label_required_text
+              div.validation_panel
+                div.container
+                  input.gwt-TextBox.validatable[data-locator="formrow-version-for-all"]
 
-          div.validation_panel
-            div.container
-              span.gwt-CheckBox[data-locator="formrow-copy-component-dependents"]
-                input[data-locator="formrow-copy-component-dependents-input"]
+                div.container_label.no_display
 
-                label[data-locator="formrow-copy-component-dependents-label"]
+                a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
 
-            div.container_label.no_display
+                label.error_message
 
-            a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
+                label.info_message
 
-            label.error_message
+            div.form_row.text_area_row
+              div.form_label
+                label
+                  span.form_label_required
 
-        div.form_row.required
-          div.form_label
-            label
-              span.form_label_required
+                ex-link.exo_component.form_label_link [style="display: none"]
+                  a.link.link--size-small[role="link"]
+                    span.leading-icon
+                      ex-icon
+                        span.ex-icon.default
 
-            ex-link.exo_component.form_label_link [style="display: none"]
-              a.link.link--size-small[role="link"]
-                span.leading-icon
-                  ex-icon
-                    span.ex-icon.default
+                    slot.slot
 
-                slot.slot
+                span.form_label_required_text
 
-            span.form_label_required_text
+              div.validation_panel
+                div.container
+                  textarea.gwt-TextArea.validatable[data-locator="formrow-package-notes-for-all"] [style="height: 80px"]
 
-          div.validation_panel
-            div.container
-              div.chooser_panel
-                div.chooser_input
-                  input.gwt-TextBox.gwt-TextBox-readonly.validatable[data-locator="formrow-destination-folder"]
+                div.container_label.no_display
 
-                  i.font_icon.icon-search.action_icon[data-locator="icon-search"]
+                a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
 
-                  img.clear_chooser_button
+                label.error_message
 
-                  a.clear_chooser_button[data-locator="link"]
+                label.remaining_characters_message
 
-                  img.edit_chooser_button.no_display
+            div.form_row
+              div.form_label
+                label
+                  span.form_label_required
 
-                  a.edit_chooser_button.no_display[data-locator="link"]
+                ex-link.exo_component.form_label_link [style="display: none"]
+                  a.link.link--size-small[role="link"]
+                    span.leading-icon
+                      ex-icon
+                        span.ex-icon.default
 
-                  img.clear_chooser_button.clear_chooser_img.cancel_waiting.no_display
+                    slot.slot
 
-                  a.clear_chooser_button.cancel_waiting.no_display[data-locator="link"]
+                span.form_label_required_text
 
-            div.container_label.no_display
+                a.gwt-Anchor.svg-anchor.help_icon[data-locator="link"]
 
-            a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
+              div.validation_panel
+                div.container
+                  div.radio_buttons.validatable
+                    span.gwt-RadioButton[data-locator="formrow-sharing-not-allowed"]
+                      input[data-locator="formrow-sharing-not-allowed-input"]
 
-            label.error_message
+                      label[data-locator="formrow-sharing-not-allowed-label"] /* "Not Allowed" */
 
-    div.button_set
+                    span.gwt-RadioButton[data-locator="formrow-sharing-allowed"]
+                      input[data-locator="formrow-sharing-allowed-input"]
+
+                      label[data-locator="formrow-sharing-allowed-label"] /* "Allowed" */
+
+                div.container_label.no_display
+
+                a.gwt-Anchor.svg-anchor.help_icon.no_display[data-locator="link"]
+
+                label.error_message
+
+                label.info_message
+
+    div.wizard_buttons
+      button.cancel_button[data-locator="button-cancel"] /* "Cancel" */
+
+      button.back_button[data-locator="button-back-select-components"] /* "Back: Select Components" */
+
+      button.next_button.qm-button--primary-action[data-locator="button-next"] [style="display: none"] /* "Next" */
+
+      button.finish_button.qm-button--primary-action[data-locator="button-create-packaged-component-1"] /* "Create Packaged Component (1)" */
+
       div.button_spinner_panel.no_display
         i.font_icon.icon-spinner.before-animate-spin.spinner
-
-      button.gwt-Button.qm-button--primary-action[data-locator="button-ok"] /* "OK" */
-
-      button.gwt-Button.qm-button--primary-action[data-locator="button-save"] [style="display: none"] /* "Save" */
-
-      button.gwt-Button[data-locator="button-cancel"] /* "Cancel" */

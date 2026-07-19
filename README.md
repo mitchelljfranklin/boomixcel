@@ -429,6 +429,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/versionNotification.js` | content | Close button on revision notification |
 | `content/sqlEditor.js` | content | CodeMirror SQL editor — "Edit SQL" popout for Command (`formrow-sql`) and Database Operation query (`formrow-sql-query`) fields + corner drag-resize handle on the query textarea |
 | `content/nativeEditorResize.js` | content | Adds a corner drag-resize handle to Boomi's native inline script editor dialog (ACE-based) |
+| `content/packagedComponentsResize.js` | content | Adds a corner drag-resize handle to the Included Components dialog with auto-recenter on finish |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo |
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |
