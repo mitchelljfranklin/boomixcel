@@ -146,6 +146,10 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `#popup_on_popup_content_InlineScriptEditorPanel` | `nativeEditorResize.js` |
 | `.bpe-editor-resize-handle` | `packagedComponentsResize.js` |
 | `.flex_panel.packaged_components_wizard` | `packagedComponentsResize.js` |
+| `.boomi_standard_table tbody tr` | `packageNotesAutoApply.js` |
+| `.boomi_standard_table thead th` | `packageNotesAutoApply.js` |
+| `td` | `packageNotesAutoApply.js` |
+| `formrow-package-notes-for-all` | `packageNotesAutoApply.js` |
 | `.step_pellete` | `setPropertiesExtractor.js` |
 | `.bph-extract-setproperties` | `setPropertiesExtractor.js` |
 | `.gwt-DataList > tbody .gwt-DataListItem` | `setPropertiesExtractor.js` |

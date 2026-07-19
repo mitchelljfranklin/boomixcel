@@ -153,7 +153,11 @@ Boomi's own inline script editor dialog (the ACE-based editor that opens for Dat
 
 ### Resizable Included Components Dialog
 
-The Included Components dialog (shown when creating a package or viewing an existing package's components) gets a **corner drag handle** at its bottom-right. Drag to resize the dialog — it auto-recenters on screen when you release the drag. The component tree inside expands to fill the new size. The size resets to Boomi's default each time the dialog opens.
+The Included Components dialog (shown when creating a package or viewing an existing package's components) gets a **corner drag handle** at its bottom-right. Drag to resize the dialog — it auto-recenters on screen when you release the drag. The size persists across wizard steps (Back/Next navigation). The size resets to Boomi's default when the dialog is fully closed and reopened.
+
+### Package Notes Auto-Apply
+
+When creating a packaged component with the **Package Notes Auto-Apply** option enabled, the Package Notes field is automatically populated with the Latest Notes from the first component in the Included Components table. If the Latest Notes value is empty or "None", no text is applied.
 
 ### Default Scripting Language
 

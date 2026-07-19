@@ -13,6 +13,7 @@ var TOGGLE_LIST = [
   { key: "setprops_highlight_duplicates", label: "Highlight Duplicate Property Names", defaultVal: "on" },
   { key: "copy_component_name_auto_apply", label: "Auto-Apply Component Name", defaultVal: "off" },
   { key: "copy_component_dependents_default", label: "Default Copy Dependents", defaultVal: "on" },
+  { key: "package_notes_auto_apply", label: "Package Notes Auto-Apply", defaultVal: "off" },
   { key: "run_process_from_deployment", label: "Run Process From Deployment", defaultVal: "off" },
 ];
 

@@ -60,6 +60,7 @@ const CONTENT_ORDER = [
   "logHighlight.js",
   "logDefaultStatus.js",
   "copyComponentDefaults.js",
+  "packageNotesAutoApply.js",
 ];
 
 function getConcatenatedSource() {
