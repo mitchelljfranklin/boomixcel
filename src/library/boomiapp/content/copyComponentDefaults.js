@@ -50,8 +50,6 @@ var applyCopyComponentDefaults = function () {
         depInput.checked =
           BoomiPlatform.copy_component_dependents_default !== "off";
       }
-
-      document.unbindArrive("[data-locator='formrow-enter-name-here']");
     },
   );
 };
