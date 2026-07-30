@@ -150,6 +150,10 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `.boomi_standard_table thead th` | `packageNotesAutoApply.js` |
 | `td` | `packageNotesAutoApply.js` |
 | `formrow-package-notes-for-all` | `packageNotesAutoApply.js` |
+| `.bph-runtime-footer` | `runtimePanel.js` |
+| `.bph-runtime-panel` | `runtimePanel.js` |
+| `.bph-runtime-panel-body` | `runtimePanel.js` |
+| `footer_links` | `runtimePanel.js` |
 | `.step_pellete` | `setPropertiesExtractor.js` |
 | `.bph-extract-setproperties` | `setPropertiesExtractor.js` |
 | `.gwt-DataList > tbody .gwt-DataListItem` | `setPropertiesExtractor.js` |
@@ -247,6 +251,18 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bpe-editor-modal` | `packagedComponentsResize.js` |
 | `bph-resizing` | `packagedComponentsResize.js` |
 | `bpe-editor-resize-handle` | `packagedComponentsResize.js` |
+| `bph-runtime-panel-open` | `runtimePanel.js` |
+| `bph-runtime-footer` | `runtimePanel.js` |
+| `bph-runtime-footer-dot bph-runtime-footer-` | `runtimePanel.js` |
+| `bph-runtime-panel` | `runtimePanel.js` |
+| `bph-runtime-panel-toggle` | `runtimePanel.js` |
+| `bph-runtime-panel-body` | `runtimePanel.js` |
+| `bph-runtime-panel-heading` | `runtimePanel.js` |
+| `bph-runtime-panel-item` | `runtimePanel.js` |
+| `bph-runtime-panel-status bph-runtime-status-` | `runtimePanel.js` |
+| `bph-runtime-panel-info` | `runtimePanel.js` |
+| `bph-runtime-panel-name` | `runtimePanel.js` |
+| `bph-runtime-panel-meta` | `runtimePanel.js` |
 | `bpe-setprops-export-btn` | `setPropertiesExtractor.js` |
 | `bph-extracting` | `setPropertiesExtractor.js` |
 | `bph-sql-query-done` | `sqlEditor.js` |
@@ -620,6 +636,13 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `.shape_palette_widget, .gwt-Shape` | `listenerGlobal.js` |
 | `${selector}:not(.bph-load-done)` | `listenerGlobal.js` |
 | `body.bph-resizing` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-toggle` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-toggle:hover` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-body` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-heading` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-item` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-name` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-meta` | `boomi.css` |
 
 ### BoomiXcel-added classes (`bph-*` / `bpe-*`)
 
@@ -659,5 +682,19 @@ Regenerate with: `node scripts/gen-selectors.js`
 | Class | Source |
 |---|---|
 | `bph-copy-tooltip` | `boomi.css` |
+| `bph-runtime-footer` | `boomi.css` |
+| `bph-runtime-footer-dot` | `boomi.css` |
+| `bph-runtime-footer-dot:hover` | `boomi.css` |
+| `bph-runtime-panel` | `boomi.css` |
+| `bph-runtime-panel-toggle` | `boomi.css` |
+| `bph-runtime-panel-toggle:hover` | `boomi.css` |
+| `bph-runtime-panel-body` | `boomi.css` |
+| `bph-runtime-panel-heading` | `boomi.css` |
+| `bph-runtime-panel-item` | `boomi.css` |
+| `bph-runtime-panel-item:last-child` | `boomi.css` |
+| `bph-runtime-panel-status` | `boomi.css` |
+| `bph-runtime-panel-info` | `boomi.css` |
+| `bph-runtime-panel-name` | `boomi.css` |
+| `bph-runtime-panel-meta` | `boomi.css` |
 
 ---

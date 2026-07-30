@@ -21,6 +21,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       .catch(err => sendResponse({ success: false, error: err.message }));
     return true;
   }
+  if (msg.type === 'GET_RUNTIME_STATUS') {
+    handleGetRuntimeStatus(msg.accountId)
+      .then(sendResponse)
+      .catch(err => sendResponse({ success: false, error: err.message }));
+    return true;
+  }
 });
 
 // ── Rename on download ────────────────────────────────────────────────────────
@@ -144,4 +150,61 @@ async function handleExecuteProcess(accountId, processName, envName) {
   }
 
   return { success: true };
+}
+
+// ── Runtime Status API ─────────────────────────────────────────────────────────
+
+var runtimeStatusCache = null;
+var runtimeStatusCacheTime = 0;
+
+async function handleGetRuntimeStatus(accountId) {
+  var now = Date.now();
+  // Return cached result if fresh (< 30 seconds)
+  if (runtimeStatusCache && (now - runtimeStatusCacheTime) < 30000) {
+    return { success: true, runtimes: runtimeStatusCache, cached: true };
+  }
+
+  var { boomi_api_token, boomi_api_email } = await chrome.storage.sync.get(['boomi_api_token', 'boomi_api_email']);
+  if (!boomi_api_token || !boomi_api_email) {
+    return { success: false, error: 'Boomi API token or email not configured.' };
+  }
+
+  var authHeader = 'Basic ' + btoa('BOOMI_TOKEN.' + boomi_api_email + ':' + boomi_api_token);
+  var apiBase = 'https://api.boomi.com/api/rest/v1/' + accountId;
+
+  try {
+    var resp = await fetch(apiBase + '/Atom/query', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': authHeader,
+      },
+      body: '{}',
+    });
+
+    if (!resp.ok) {
+      return { success: false, error: 'Atom query failed (HTTP ' + resp.status + ')' };
+    }
+
+    var data = await resp.json();
+    var runtimes = (data.result || []).map(function (atom) {
+      return {
+        id: atom.id,
+        name: atom.name,
+        status: atom.status || 'UNKNOWN',
+        statusDetail: atom.statusDetail || '',
+        type: atom.type || 'ATOM',
+        hostName: atom.hostName || '',
+        currentVersion: atom.currentVersion || '',
+      };
+    });
+
+    runtimeStatusCache = runtimes;
+    runtimeStatusCacheTime = now;
+
+    return { success: true, runtimes: runtimes, cached: false };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
 }

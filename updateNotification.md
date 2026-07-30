@@ -1,1 +1,1 @@
-- Bug Fix: Copy Component Defaults now applies on every Copy Component dialog opening instead of only the first time after page load.
+- New Feature: Runtime Status Panel — colored status dots in the Boomi footer and a slide-out panel on the build canvas show your runtimes' status, version, and type at a glance without leaving the build page. Configurable in the Options page under Build Enhancements.

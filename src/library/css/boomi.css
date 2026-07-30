@@ -1335,3 +1335,156 @@ html.qm-u-theme-dark .bpe-setprops-table tbody tr:hover {
 .gwt-TreeRightAlign .gwt-FastTreeItem-leaf {
     padding: 4px !important;
 }
+
+/* ── Runtime Panel ──────────────────────────────────────────────────── */
+
+.bph-runtime-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.bph-runtime-footer-dot {
+    font-size: 12px;
+    cursor: default;
+    opacity: 0.8;
+    transition: opacity 0.15s ease;
+}
+
+.bph-runtime-footer-dot:hover {
+    opacity: 1;
+}
+
+.bph-runtime-footer-online { color: #2e7d32; }
+.bph-runtime-footer-offline { color: #c62828; }
+.bph-runtime-footer-warning { color: #e65100; }
+.bph-runtime-footer-unknown { color: #9aa0a6; }
+
+.bph-runtime-panel {
+    position: fixed;
+    top: 120px;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row-reverse;
+    max-height: calc(100vh - 160px);
+}
+
+.bph-runtime-panel-toggle {
+    width: 20px;
+    background: #f0f0f0;
+    border: 1px solid #dadce0;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #5f6368;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.bph-runtime-panel-toggle:hover {
+    background: #e0e0e0;
+}
+
+.bph-runtime-panel-body {
+    width: 260px;
+    background: #fff;
+    border: 1px solid #dadce0;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    padding: 12px;
+    font-size: 12px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+}
+
+.bph-runtime-panel-heading {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dadce0;
+    color: #202124;
+}
+
+.bph-runtime-panel-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.bph-runtime-panel-item:last-child {
+    border-bottom: none;
+}
+
+.bph-runtime-panel-status {
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.bph-runtime-status-online { color: #2e7d32; }
+.bph-runtime-status-offline { color: #c62828; }
+.bph-runtime-status-warning { color: #e65100; }
+.bph-runtime-status-unknown { color: #9aa0a6; }
+
+.bph-runtime-panel-info {
+    min-width: 0;
+}
+
+.bph-runtime-panel-name {
+    font-weight: 600;
+    color: #202124;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bph-runtime-panel-meta {
+    font-size: 11px;
+    color: #5f6368;
+    margin-top: 2px;
+}
+
+/* Dark mode */
+html.qm-u-theme-dark .bph-runtime-panel-toggle {
+    background: #303030;
+    border-color: #424242;
+    color: #9aa0a6;
+}
+
+html.qm-u-theme-dark .bph-runtime-panel-toggle:hover {
+    background: #3a3a3a;
+}
+
+html.qm-u-theme-dark .bph-runtime-panel-body {
+    background: #262626;
+    border-color: #424242;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.4);
+}
+
+html.qm-u-theme-dark .bph-runtime-panel-heading {
+    color: #e8eaed;
+    border-color: #424242;
+}
+
+html.qm-u-theme-dark .bph-runtime-panel-item {
+    border-color: #333;
+}
+
+html.qm-u-theme-dark .bph-runtime-panel-name {
+    color: #e8eaed;
+}
+
+html.qm-u-theme-dark .bph-runtime-panel-meta {
+    color: #9aa0a6;
+}

@@ -14,6 +14,7 @@ var TOGGLE_LIST = [
   { key: "copy_component_name_auto_apply", label: "Auto-Apply Component Name", defaultVal: "off" },
   { key: "copy_component_dependents_default", label: "Default Copy Dependents", defaultVal: "on" },
   { key: "package_notes_auto_apply", label: "Package Notes Auto-Apply", defaultVal: "off" },
+  { key: "runtime_status_panel", label: "Runtime Status Panel", defaultVal: "on" },
   { key: "run_process_from_deployment", label: "Run Process From Deployment", defaultVal: "off" },
 ];
 
