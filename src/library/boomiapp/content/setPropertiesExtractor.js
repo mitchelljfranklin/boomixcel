@@ -199,7 +199,7 @@ function parseSetPropertiesFromXml(xml) {
           }
 
           if (valueText) {
-            paramValues.push(valueText);
+            paramValues.push(valueType + ": " + valueText);
           } else if (valueType) {
             paramValues.push(valueType);
           }
@@ -210,6 +210,7 @@ function parseSetPropertiesFromXml(xml) {
         displayName: userLabel,
         propertyType: propertyType,
         propertyName: propertyName,
+        propertyId: propertyId,
         parameters: paramValues,
       });
     }
@@ -308,33 +309,47 @@ function escapeHtml(text) {
 
 function showSetPropertiesModal(results) {
   // Count occurrences of each property name across results
-  let nameCounts = {};
+  var nameCounts = {};
   results.forEach(function (row) {
     if (row.propertyName) {
       nameCounts[row.propertyName] = (nameCounts[row.propertyName] || 0) + 1;
     }
   });
 
-  let rowsHtml = results.map(function (row) {
-    let params = row.parameters.length > 0
+  // Count unique shapes
+  var shapeNames = {};
+  results.forEach(function (row) {
+    if (row.displayName) shapeNames[row.displayName] = true;
+  });
+  var shapeCount = Object.keys(shapeNames).length;
+
+  var hasPropertyIds = results.some(function (row) { return !!row.propertyId; });
+
+  var rowsHtml = results.map(function (row) {
+    var params = row.parameters.length > 0
       ? row.parameters.map(function (p) { return escapeHtml(p); }).join(', ')
       : '(none)';
-    let duplicateClass = (BoomiPlatform.setprops_highlight_duplicates !== "off" && row.propertyName && nameCounts[row.propertyName] > 1)
+    var duplicateClass = (BoomiPlatform.setprops_highlight_duplicates !== "off" && row.propertyName && nameCounts[row.propertyName] > 1)
       ? ' bpe-setprops-duplicate'
+      : '';
+    var propertyIdCell = hasPropertyIds
+      ? '<td><code>' + escapeHtml(row.propertyId || '—') + '</code></td>'
       : '';
     return '<tr><td>' + escapeHtml(row.displayName) + '</td><td>'
       + escapeHtml(row.propertyType) + '</td><td class="' + duplicateClass + '">'
-      + escapeHtml(row.propertyName) + '</td><td>' + params + '</td></tr>';
+      + escapeHtml(row.propertyName) + '</td>' + propertyIdCell + '<td>' + params + '</td></tr>';
   }).join('');
 
-  let bodyHtml = [
+  var propertyIdHeader = hasPropertyIds ? '<th>Property ID</th>' : '';
+
+  var bodyHtml = [
     '<div class="bpe-setprops-container">',
     '<table class="bpe-setprops-table">',
-    '<thead><tr><th>Property Shape Name</th><th>Property Type</th><th>Property Name</th><th>Parameters</th></tr></thead>',
+    '<thead><tr><th>Property Shape Name</th><th>Property Type</th><th>Property Name</th>' + propertyIdHeader + '<th>Parameters</th></tr></thead>',
     '<tbody>' + rowsHtml + '</tbody>',
     '</table>',
     '<div class="bpe-setprops-footer">',
-    '<span class="bpe-setprops-count">' + results.length + ' propert' + (results.length === 1 ? 'y' : 'ies') + ' extracted</span>',
+    '<span class="bpe-setprops-count">' + shapeCount + ' shape' + (shapeCount === 1 ? '' : 's') + ' found, ' + results.length + ' propert' + (results.length === 1 ? 'y' : 'ies') + ' extracted</span>',
     '</div>',
     '</div>',
   ].join('');
@@ -360,10 +375,14 @@ function showSetPropertiesModal(results) {
   document.body.insertAdjacentHTML("beforeend", modalHtml);
 
   document.getElementById("bpe-setprops-export-btn").addEventListener("click", () => {
-    let tsv = 'Property Shape Name\tProperty Type\tProperty Name\tParameters\n';
+    var tsvHeader = hasPropertyIds
+      ? 'Property Shape Name\tProperty Type\tProperty Name\tProperty ID\tParameters\n'
+      : 'Property Shape Name\tProperty Type\tProperty Name\tParameters\n';
+    var tsv = tsvHeader;
     results.forEach(row => {
-      let params = row.parameters.length > 0 ? row.parameters.join(', ') : '';
-      tsv += row.displayName + '\t' + row.propertyType + '\t' + row.propertyName + '\t' + params + '\n';
+      var params = row.parameters.length > 0 ? row.parameters.join(', ') : '';
+      var propertyIdCol = hasPropertyIds ? (row.propertyId || '') + '\t' : '';
+      tsv += row.displayName + '\t' + row.propertyType + '\t' + row.propertyName + '\t' + propertyIdCol + params + '\n';
     });
     navigator.clipboard.writeText(tsv).then(() => {
       showToast("Set Properties data copied to clipboard as TSV.", 2500, "success");
