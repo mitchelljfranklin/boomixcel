@@ -1866,6 +1866,24 @@ html.qm-u-theme-dark .bph-decision-value {
     color: #8ab4f8;
 }
 
+.bpe-analysis-content-cell {
+    max-width: 400px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.bpe-analysis-code-cell {
+    max-width: 500px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+.bpe-analysis-inventory-table {
+    max-width: 300px;
+}
+
 .bph-api-warning {
     font-size: 12px;
     margin-left: 6px;

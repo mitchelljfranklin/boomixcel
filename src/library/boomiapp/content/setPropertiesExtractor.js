@@ -5,8 +5,8 @@
 let extracting = false;
 
 var init_set_properties_extractor = (process) => {
-  let nav = process.closest(".component_editor_panel").querySelector(".step_pellete");
-  if (!nav || nav.querySelector(".bph-extract-setproperties")) return;
+  var toolbar = process.closest(".component_editor_panel").querySelector(".step_pellete");
+  if (!toolbar || toolbar.querySelector(".bph-extract-setproperties")) return;
 
   let buttonHtml = [
     '<a class="gwt-Anchor svg-anchor others_floats bph-extract-setproperties" data-locator="extract-set-properties" title="Process Analysis">',
@@ -21,15 +21,15 @@ var init_set_properties_extractor = (process) => {
     '</g></svg></a>',
   ].join("");
 
-  nav.insertAdjacentHTML("beforeend", buttonHtml);
+  toolbar.insertAdjacentHTML("beforeend", buttonHtml);
 
-  nav.querySelector(".bph-extract-setproperties").addEventListener("click", async () => {
+  toolbar.querySelector(".bph-extract-setproperties").addEventListener("click", async () => {
     if (extracting) {
       showToast("Extraction already in progress...", 2000, "warning");
       return;
     }
     extracting = true;
-    var button = nav.querySelector(".bph-extract-setproperties");
+    var button = toolbar.querySelector(".bph-extract-setproperties");
     button.classList.add("bph-extracting");
 
     try {
@@ -162,11 +162,11 @@ function extractDocumentProperties(shape, displayName, shapeX, shapeY, results) 
   var documentProperties = shape.querySelectorAll("documentproperty");
   for (var j = 0; j < documentProperties.length; j++) {
     var documentProperty = documentProperties[j];
-    var nameAttr = documentProperty.getAttribute("name") || "";
+    var nameAttribute = documentProperty.getAttribute("name") || "";
     var propertyId = documentProperty.getAttribute("propertyId") || "";
-    var parts = nameAttr.split(" - ");
-    var propertyType = parts.length > 1 ? parts[0] : nameAttr;
-    var propertyName = parts.length > 1 ? parts[1] : nameAttr;
+    var parts = nameAttribute.split(" - ");
+    var propertyType = parts.length > 1 ? parts[0] : nameAttribute;
+    var propertyName = parts.length > 1 ? parts[1] : nameAttribute;
     var paramValues = extractParameterValues(documentProperty);
     results.push({
       displayName: displayName,
@@ -184,11 +184,11 @@ function extractNotify(shape, displayName, shapeX, shapeY, results) {
   var notify = shape.querySelector("notify");
   var title = notify ? (notify.getAttribute("title") || "") : "";
   var message = "";
-  var messageEl = shape.querySelector("notifyMessage");
-  if (messageEl) message = messageEl.textContent.trim();
+  var messageElement = shape.querySelector("notifyMessage");
+  if (messageElement) message = messageElement.textContent.trim();
   var level = "";
-  var levelEl = shape.querySelector("notifyMessageLevel");
-  if (levelEl) level = levelEl.textContent.trim();
+  var levelElement = shape.querySelector("notifyMessageLevel");
+  if (levelElement) level = levelElement.textContent.trim();
   results.push({
     displayName: displayName,
     shapeX: shapeX,
@@ -200,21 +200,21 @@ function extractNotify(shape, displayName, shapeX, shapeY, results) {
 }
 
 function extractMessage(shape, displayName, shapeX, shapeY, results) {
-  var msgTxt = "";
-  var msgEl = shape.querySelector("msgTxt");
-  if (msgEl) msgTxt = msgEl.textContent.trim();
+  var messageText = "";
+  var messageElement = shape.querySelector("msgTxt");
+  if (messageElement) messageText = messageElement.textContent.trim();
   results.push({
     displayName: displayName,
     shapeX: shapeX,
     shapeY: shapeY,
-    messageText: msgTxt,
+    messageText: messageText,
   });
 }
 
 function extractSqlQuery(shape, displayName, shapeX, shapeY, results) {
-  var sqlEl = shape.querySelector("sqltoexecute");
-  if (!sqlEl) return;
-  var query = sqlEl.textContent.trim();
+  var sqlElement = shape.querySelector("sqltoexecute");
+  if (!sqlElement) return;
+  var query = sqlElement.textContent.trim();
   results.push({
     displayName: displayName,
     shapeX: shapeX,
@@ -232,12 +232,12 @@ function extractDecision(shape, displayName, shapeX, shapeY, results) {
     var valueType = decisionValues[k].getAttribute("valueType") || "";
     var valueText = "";
     var processParam = decisionValues[k].querySelector("processparameter");
-    var profileEl = decisionValues[k].querySelector("profileelement");
+    var profileElement = decisionValues[k].querySelector("profileelement");
     if (processParam) {
       valueText = processParam.getAttribute("processproperty") || "";
       valueType = "process";
-    } else if (profileEl) {
-      valueText = profileEl.getAttribute("elementName") || profileEl.getAttribute("elementId") || "";
+    } else if (profileElement) {
+      valueText = profileElement.getAttribute("elementName") || profileElement.getAttribute("elementId") || "";
       valueType = "profile";
     } else {
       valueText = valueType;
@@ -254,8 +254,8 @@ function extractDecision(shape, displayName, shapeX, shapeY, results) {
 }
 
 function extractMap(shape, displayName, shapeX, shapeY, results) {
-  var mapEl = shape.querySelector("map");
-  var mapId = mapEl ? (mapEl.getAttribute("mapId") || "") : "";
+  var mapElement = shape.querySelector("map");
+  var mapId = mapElement ? (mapElement.getAttribute("mapId") || "") : "";
   results.push({
     displayName: displayName,
     shapeX: shapeX,
@@ -272,8 +272,8 @@ function extractScripting(shape, displayName, shapeX, shapeY, results) {
     var dataprocessscript = steps[m].querySelector("dataprocessscript");
     if (!dataprocessscript) continue;
     var language = dataprocessscript.getAttribute("language") || "";
-    var scriptEl = dataprocessscript.querySelector("script");
-    var code = scriptEl ? scriptEl.textContent.trim() : "";
+    var scriptElement = dataprocessscript.querySelector("script");
+    var code = scriptElement ? scriptElement.textContent.trim() : "";
     results.push({
       displayName: displayName,
       shapeX: shapeX,
@@ -332,7 +332,7 @@ function waitForSelector(selector, textMatch, timeoutMs) {
       var elements = document.querySelectorAll(selector);
       var found = null;
       if (textMatch !== undefined) {
-        found = [...elements].find(el => el.textContent.trim() === textMatch);
+        found = [...elements].find(element => element.textContent.trim() === textMatch);
       } else if (elements.length > 0) {
         found = elements[0];
       }
@@ -354,8 +354,8 @@ async function extractAllSetProperties() {
   var images = document.querySelectorAll('img.gwt-Image[title="Set Properties"]');
   var seen = new Set();
   var wrappers = [];
-  images.forEach(img => {
-    var wrapper = img.closest('.dragdrop-draggable');
+  images.forEach(image => {
+    var wrapper = image.closest('.dragdrop-draggable');
     if (wrapper && !seen.has(wrapper)) { seen.add(wrapper); wrappers.push(wrapper); }
   });
   if (wrappers.length === 0) return [];
@@ -369,7 +369,7 @@ async function extractAllSetProperties() {
     var displayNameInput = document.querySelector('input[data-locator="formrow-display-name"]');
     var displayName = displayNameInput ? displayNameInput.value.trim() : '';
     var propertyItems = document.querySelectorAll('.gwt-DataList > tbody .gwt-DataListItem');
-    var propertyTexts = [...propertyItems].map(el => el.textContent.trim());
+    var propertyTexts = [...propertyItems].map(element => element.textContent.trim());
     if (propertyTexts.length === 0) continue;
     var allRows = document.querySelectorAll('.gwt-DataList > tbody tr');
     for (var i = 0; i < propertyTexts.length; i++) {
@@ -387,7 +387,7 @@ async function extractAllSetProperties() {
       if (paramsFound) {
         await new Promise(resolve => setTimeout(resolve, 100));
         var paramElements = document.querySelectorAll('.parameter_value_list_item .parameter_value');
-        paramValues = [...paramElements].map(el => el.textContent.trim());
+        paramValues = [...paramElements].map(element => element.textContent.trim());
       }
       results.push({ displayName: displayName, propertyType: propertyType, propertyName: propertyName, parameters: paramValues });
     }
@@ -555,29 +555,29 @@ function showProcessAnalysisModal(data) {
 function getTabExportTsv(tabId, data) {
   switch (tabId) {
     case "setprops":
-      var hasIds = data.setProperties.some(function (r) { return !!r.propertyId; });
+      var hasIds = data.setProperties.some(function (property) { return !!property.propertyId; });
       var header = hasIds ? "Shape Name\tX\tY\tProperty Type\tProperty Name\tProperty ID\tParameters\n" : "Shape Name\tX\tY\tProperty Type\tProperty Name\tParameters\n";
-      var rows = data.setProperties.map(function (r) {
-        var params = r.parameters.length > 0 ? r.parameters.join("; ") : "";
-        var idCol = hasIds ? (r.propertyId || "") + "\t" : "";
-        return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.propertyType + "\t" + r.propertyName + "\t" + idCol + params;
+      var rows = data.setProperties.map(function (property) {
+        var params = property.parameters.length > 0 ? property.parameters.join("; ") : "";
+        var idCol = hasIds ? (property.propertyId || "") + "\t" : "";
+        return property.displayName + "\t" + property.shapeX + "\t" + property.shapeY + "\t" + property.propertyType + "\t" + property.propertyName + "\t" + idCol + params;
       }).join("\n");
       return header + rows;
     case "notifications":
-      return "Shape Name\tX\tY\tTitle\tMessage\tLevel\n" + data.notifications.map(function (r) { return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.title + "\t" + r.message + "\t" + r.level; }).join("\n");
+      return "Shape Name\tX\tY\tTitle\tMessage\tLevel\n" + data.notifications.map(function (notification) { return notification.displayName + "\t" + notification.shapeX + "\t" + notification.shapeY + "\t" + notification.title + "\t" + notification.message + "\t" + notification.level; }).join("\n");
     case "messages":
-      return "Shape Name\tX\tY\tMessage\n" + data.messages.map(function (r) { return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.messageText; }).join("\n");
+      return "Shape Name\tX\tY\tMessage\n" + data.messages.map(function (message) { return message.displayName + "\t" + message.shapeX + "\t" + message.shapeY + "\t" + message.messageText; }).join("\n");
     case "sql":
-      return "Shape Name\tX\tY\tQuery\n" + data.sqlQueries.map(function (r) { return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.query; }).join("\n");
+      return "Shape Name\tX\tY\tQuery\n" + data.sqlQueries.map(function (sqlQuery) { return sqlQuery.displayName + "\t" + sqlQuery.shapeX + "\t" + sqlQuery.shapeY + "\t" + sqlQuery.query; }).join("\n");
     case "decisions":
-      return "Shape Name\tX\tY\tComparison\tValues\n" + data.decisions.map(function (r) {
-        var vals = r.values.map(function (v) { return v.type + ": " + v.value; }).join("; ");
-        return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.comparison + "\t" + vals;
+      return "Shape Name\tX\tY\tComparison\tValues\n" + data.decisions.map(function (decision) {
+        var vals = decision.values.map(function (decisionValue) { return decisionValue.type + ": " + decisionValue.value; }).join("; ");
+        return decision.displayName + "\t" + decision.shapeX + "\t" + decision.shapeY + "\t" + decision.comparison + "\t" + vals;
       }).join("\n");
     case "maps":
-      return "Shape Name\tX\tY\tMap ID\n" + data.maps.map(function (r) { return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.mapId; }).join("\n");
+      return "Shape Name\tX\tY\tMap ID\n" + data.maps.map(function (mapEntry) { return mapEntry.displayName + "\t" + mapEntry.shapeX + "\t" + mapEntry.shapeY + "\t" + mapEntry.mapId; }).join("\n");
     case "scripts":
-      return "Shape Name\tX\tY\tLanguage\tCode\n" + data.scripts.map(function (r) { return r.displayName + "\t" + r.shapeX + "\t" + r.shapeY + "\t" + r.language + "\t" + r.code; }).join("\n");
+      return "Shape Name\tX\tY\tLanguage\tCode\n" + data.scripts.map(function (scriptEntry) { return scriptEntry.displayName + "\t" + scriptEntry.shapeX + "\t" + scriptEntry.shapeY + "\t" + scriptEntry.language + "\t" + scriptEntry.code; }).join("\n");
     case "inventory":
       return "Shape Type\tCount\n" + Object.keys(data.inventory).map(function (type) { return type + "\t" + data.inventory[type]; }).join("\n");
     default: return "";
@@ -592,8 +592,8 @@ function shapeTooltip(row) {
 
 function renderSetPropertiesTab(data) {
   var nameCounts = {};
-  data.setProperties.forEach(function (r) { if (r.propertyName) nameCounts[r.propertyName] = (nameCounts[r.propertyName] || 0) + 1; });
-  var hasPropertyIds = data.setProperties.some(function (r) { return !!r.propertyId; });
+  data.setProperties.forEach(function (property) { if (property.propertyName) nameCounts[property.propertyName] = (nameCounts[property.propertyName] || 0) + 1; });
+  var hasPropertyIds = data.setProperties.some(function (property) { return !!property.propertyId; });
   var rows = data.setProperties.map(function (row) {
     var params = row.parameters.length > 0 ? row.parameters.map(function (p) { return escapeHtml(p); }).join(', ') : '(none)';
     var duplicateClass = (BoomiPlatform.setprops_highlight_duplicates !== "off" && row.propertyName && nameCounts[row.propertyName] > 1) ? ' bpe-setprops-duplicate' : '';
@@ -606,21 +606,21 @@ function renderSetPropertiesTab(data) {
 
 function renderNotificationsTab(data) {
   var rows = data.notifications.map(function (row) {
-    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td>' + escapeHtml(row.title) + '</td><td>' + escapeHtml(row.level) + '</td><td style="max-width:400px;white-space:pre-wrap;word-break:break-word">' + escapeHtml(row.message) + '</td></tr>';
+    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td>' + escapeHtml(row.title) + '</td><td>' + escapeHtml(row.level) + '</td><td class="bpe-analysis-content-cell">' + escapeHtml(row.message) + '</td></tr>';
   }).join('');
   return '<table class="bpe-setprops-table"><thead><tr><th>Shape</th><th>Title</th><th>Level</th><th>Message</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
 
 function renderMessagesTab(data) {
   var rows = data.messages.map(function (row) {
-    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td style="max-width:500px;white-space:pre-wrap;word-break:break-word;font-family:monospace;font-size:11px">' + escapeHtml(row.messageText) + '</td></tr>';
+    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td class="bpe-analysis-code-cell">' + escapeHtml(row.messageText) + '</td></tr>';
   }).join('');
   return '<table class="bpe-setprops-table"><thead><tr><th>Shape</th><th>Message</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
 
 function renderSqlTab(data) {
   var rows = data.sqlQueries.map(function (row) {
-    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td style="max-width:500px;white-space:pre-wrap;word-break:break-word;font-family:monospace;font-size:11px">' + escapeHtml(row.query) + '</td></tr>';
+    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td class="bpe-analysis-code-cell">' + escapeHtml(row.query) + '</td></tr>';
   }).join('');
   return '<table class="bpe-setprops-table"><thead><tr><th>Shape</th><th>SQL Query</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
@@ -642,7 +642,7 @@ function renderMapsTab(data) {
 
 function renderScriptsTab(data) {
   var rows = data.scripts.map(function (row) {
-    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td>' + escapeHtml(row.language) + '</td><td style="max-width:400px;white-space:pre-wrap;word-break:break-word;font-family:monospace;font-size:11px">' + escapeHtml(row.code) + '</td></tr>';
+    return '<tr' + shapeTooltip(row) + '><td>' + escapeHtml(row.displayName) + '</td><td>' + escapeHtml(row.language) + '</td><td class="bpe-analysis-code-cell">' + escapeHtml(row.code) + '</td></tr>';
   }).join('');
   return '<table class="bpe-setprops-table"><thead><tr><th>Shape</th><th>Language</th><th>Code</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
@@ -652,5 +652,5 @@ function renderInventoryTab(data) {
   var rows = types.map(function (type) {
     return '<tr><td>' + type + '</td><td>' + data.inventory[type] + '</td></tr>';
   }).join('');
-  return '<table class="bpe-setprops-table" style="max-width:300px"><thead><tr><th>Shape Type</th><th>Count</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  return '<table class="bpe-setprops-table bpe-analysis-inventory-table"><thead><tr><th>Shape Type</th><th>Count</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
