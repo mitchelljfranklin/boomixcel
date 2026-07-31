@@ -116,8 +116,21 @@ Remove the canvas dot grid for a cleaner workspace (configurable — pairs well 
 ### View in Process Reporting
 Quick access to Process Reporting from two entry points: a heartbeat SVG icon next to the Description link on the build page, and a menu item with a separator line in the chevron context menu on deployed process lists (Atom/Runtime). Both open Process Reporting in a new tab and auto-apply a process name filter (Add Filter → Process → type name → select checkbox → Apply). A confirming toast shows "Filtered for: {name}" when the filter is applied.
 
-### Extract Set Properties
-A list icon (📋) in the build toolbar scans every Set Properties shape on the canvas (visible or not), clicks each one, reads all property names and parameter values, and displays them in a modal table. The table has 4 columns: **Property Shape Name**, **Property Type**, **Property Name**, and **Parameters**. Property names that appear in multiple shapes are highlighted with a yellow background and amber left border for easy spotting (configurable via the **Highlight Duplicate Property Names** toggle — on by default, available in the Build Canvas section of the options page and the quick-settings popup). An **Export to Clipboard** button sits in the modal's button bar alongside Close, always visible without scrolling. A toast notification confirms the extraction is in progress.
+### Process Analysis
+A list icon (📋) in the build toolbar scans your process and presents a multi-tab analysis modal. When your Boomi API token is configured, the extension fetches the component XML in a single API call and parses all shape types. Tabs that have data include:
+
+- **Set Properties** — property name, type, property ID, and parameter values with type prefixes (e.g., "static: You found me"). Property names appearing in multiple shapes are highlighted (configurable toggle).
+- **Notifications** — shape name, title, severity level (INFO/WARNING/ERROR), and message body.
+- **Messages** — shape name and message content.
+- **SQL Queries** — shape name and the SQL text from Program Command shapes.
+- **Decisions** — shape name, comparison type, and decision values with type badges.
+- **Maps** — shape name and the referenced Map component ID.
+- **Scripts** — shape name, language, and the Custom Scripting code.
+- **Inventory** — a count of every shape type in the process.
+
+Each tab has an **Export Current Tab** button, and an **Export All** button copies every tab's data as multi-section TSV. Shape coordinates are available as tooltips on shape names.
+
+When the API token is not configured, only Set Properties are extracted via a DOM-clicking approach (the original behavior).
 
 ### Copy a Property Name or Value
 Inside a Set Properties step, a **Copy** icon appears next to the Add/Edit/Delete buttons in the **Properties to Set** list. Select a property, click **Copy**, and choose from the popup menu:

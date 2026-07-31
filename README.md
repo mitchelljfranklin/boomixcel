@@ -445,7 +445,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/runProcessFromDeployment.js` | content | After deployment, offers to navigate to Process Reporting and auto-execute the process |
 | `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (re-applies on lazy-load and paging) |
 | `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" in the Show Log dialog when it opens |
-| `content/setPropertiesExtractor.js` | content | Extracts all Set Properties shape configurations from the canvas into a modal table with TSV export |
+| `content/setPropertiesExtractor.js` | content | Process Analysis button — extracts Set Properties, Notify, Messages, SQL, Decisions, Maps, Scripts + inventory via API or DOM |
 | `content/copySetProperty.js` | content | Copy Property icon in the Set Properties step panel — copy a selected property's name or value(s) via a popup menu |
 | `content/svgAssets.js` | content | Shared SVG icon strings |
 | `content/modalHelper.js` | content | Boomi-style modal dialog helper |

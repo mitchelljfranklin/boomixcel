@@ -1788,6 +1788,84 @@ html.qm-u-theme-dark .bph-references-section summary {
     max-width: 700px;
 }
 
+/* ── Process Analysis Modal ─────────────────────────────────────── */
+
+.bpe-analysis-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #dadce0;
+    margin-bottom: 12px;
+    overflow-x: auto;
+}
+
+.bpe-analysis-tab-btn {
+    padding: 8px 14px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #5f6368;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.bpe-analysis-tab-btn:hover {
+    color: #1a73e8;
+}
+
+.bpe-analysis-tab-active {
+    color: #1a73e8;
+    border-bottom-color: #1a73e8;
+    font-weight: 600;
+}
+
+.bpe-analysis-tab-pane {
+    display: none;
+}
+
+.bpe-analysis-tab-pane-active {
+    display: block;
+}
+
+.bpe-analysis-content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.bph-decision-value {
+    display: inline-block;
+    font-size: 11px;
+    background: #e8f0fe;
+    color: #1967d2;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin: 1px 0;
+}
+
+html.qm-u-theme-dark .bpe-analysis-tabs {
+    border-bottom-color: #424242;
+}
+
+html.qm-u-theme-dark .bpe-analysis-tab-btn {
+    color: #9aa0a6;
+}
+
+html.qm-u-theme-dark .bpe-analysis-tab-btn:hover {
+    color: #8ab4f8;
+}
+
+html.qm-u-theme-dark .bpe-analysis-tab-active {
+    color: #8ab4f8;
+    border-bottom-color: #8ab4f8;
+}
+
+html.qm-u-theme-dark .bph-decision-value {
+    background: #1a3a5c;
+    color: #8ab4f8;
+}
+
 .bph-api-warning {
     font-size: 12px;
     margin-left: 6px;
