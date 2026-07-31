@@ -129,6 +129,9 @@ A toast confirms each copy. If no property is selected, a reminder toast appears
 ### Chooser Input Tooltips
 When you mouse over any chooser panel input (fields where you click "Choose..." to select a value), a tooltip shows the full selected text if it's too long to fit in the field. No more guessing what you selected when the name gets cut off.
 
+### Runtime Status Panel
+A server-rack icon added to the masthead icon row (next to the BoomiXcel gear icon) opens a slide-out panel on the right side of the build canvas showing all your runtimes at a glance. Each runtime displays its **status** (online/offline/warning), **type** (Atom/Cloud/Molecule), **version**, and **hostname**. Click any runtime to expand detailed information including Runtime ID (click to copy), status detail, instance ID, cloud cluster, cloud owner, and install date. Click anywhere outside the panel to close it. Polls every 60 seconds. Configurable via the **Runtime Status Panel** toggle (on by default) in the Options page under Build Enhancements.
+
 ---
 
 ## Editing Tools

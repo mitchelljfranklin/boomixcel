@@ -83,6 +83,11 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bph-masthead-options-link` | `boomi.css` |
 | `bph-masthead-options-link:hover` | `boomi.css` |
 | `bph-masthead-options-link svg` | `boomi.css` |
+| `bph-masthead-runtime-item` | `boomi.css` |
+| `bph-masthead-runtime-link` | `boomi.css` |
+| `bph-masthead-runtime-link:hover` | `boomi.css` |
+| `bph-masthead-runtime-link svg` | `boomi.css` |
+| `bph-masthead-runtime-link.bph-active` | `boomi.css` |
 | `bph-status-dot` | `boomi.css` |
 | `bph-close-notification` | `boomi.css` |
 | `bph-close-notification:hover` | `boomi.css` |
@@ -150,10 +155,13 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `.boomi_standard_table thead th` | `packageNotesAutoApply.js` |
 | `td` | `packageNotesAutoApply.js` |
 | `formrow-package-notes-for-all` | `packageNotesAutoApply.js` |
-| `.bph-runtime-footer` | `runtimePanel.js` |
 | `.bph-runtime-panel` | `runtimePanel.js` |
 | `.bph-runtime-panel-body` | `runtimePanel.js` |
-| `footer_links` | `runtimePanel.js` |
+| `.bph-runtime-panel-item` | `runtimePanel.js` |
+| `.bph-masthead-runtime-item` | `runtimePanel.js` |
+| `li` | `runtimePanel.js` |
+| `.bph-masthead-runtime-link` | `runtimePanel.js` |
+| `product-switcher-button` | `runtimePanel.js` |
 | `.step_pellete` | `setPropertiesExtractor.js` |
 | `.bph-extract-setproperties` | `setPropertiesExtractor.js` |
 | `.gwt-DataList > tbody .gwt-DataListItem` | `setPropertiesExtractor.js` |
@@ -251,11 +259,11 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bpe-editor-modal` | `packagedComponentsResize.js` |
 | `bph-resizing` | `packagedComponentsResize.js` |
 | `bpe-editor-resize-handle` | `packagedComponentsResize.js` |
+| `bph-runtime-copied` | `runtimePanel.js` |
+| `bph-runtime-panel-detail-id` | `runtimePanel.js` |
+| `bph-runtime-panel-expanded` | `runtimePanel.js` |
 | `bph-runtime-panel-open` | `runtimePanel.js` |
-| `bph-runtime-footer` | `runtimePanel.js` |
-| `bph-runtime-footer-dot bph-runtime-footer-` | `runtimePanel.js` |
 | `bph-runtime-panel` | `runtimePanel.js` |
-| `bph-runtime-panel-toggle` | `runtimePanel.js` |
 | `bph-runtime-panel-body` | `runtimePanel.js` |
 | `bph-runtime-panel-heading` | `runtimePanel.js` |
 | `bph-runtime-panel-item` | `runtimePanel.js` |
@@ -263,6 +271,14 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bph-runtime-panel-info` | `runtimePanel.js` |
 | `bph-runtime-panel-name` | `runtimePanel.js` |
 | `bph-runtime-panel-meta` | `runtimePanel.js` |
+| `bph-runtime-panel-expand-icon` | `runtimePanel.js` |
+| `bph-runtime-panel-detail` | `runtimePanel.js` |
+| `bph-runtime-panel-detail-row` | `runtimePanel.js` |
+| `bph-runtime-panel-detail-label` | `runtimePanel.js` |
+| `bph-runtime-panel-detail-value` | `runtimePanel.js` |
+| `bph-runtime-panel-detail-value bph-runtime-panel-detail-id` | `runtimePanel.js` |
+| `bph-masthead-runtime-item` | `runtimePanel.js` |
+| `bph-masthead-runtime-link` | `runtimePanel.js` |
 | `bpe-setprops-export-btn` | `setPropertiesExtractor.js` |
 | `bph-extracting` | `setPropertiesExtractor.js` |
 | `bph-sql-query-done` | `sqlEditor.js` |
@@ -636,8 +652,15 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `.shape_palette_widget, .gwt-Shape` | `listenerGlobal.js` |
 | `${selector}:not(.bph-load-done)` | `listenerGlobal.js` |
 | `body.bph-resizing` | `boomi.css` |
-| `html.qm-u-theme-dark .bph-runtime-panel-toggle` | `boomi.css` |
-| `html.qm-u-theme-dark .bph-runtime-panel-toggle:hover` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-item:hover` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-expand-icon` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-expanded .bph-runtime-panel-expand-icon` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-detail` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-detail-label` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-detail-value` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-detail-id` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-detail-id:hover` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-runtime-panel-detail-id.bph-runtime-copied` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-body` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-heading` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-item` | `boomi.css` |
@@ -682,12 +705,7 @@ Regenerate with: `node scripts/gen-selectors.js`
 | Class | Source |
 |---|---|
 | `bph-copy-tooltip` | `boomi.css` |
-| `bph-runtime-footer` | `boomi.css` |
-| `bph-runtime-footer-dot` | `boomi.css` |
-| `bph-runtime-footer-dot:hover` | `boomi.css` |
 | `bph-runtime-panel` | `boomi.css` |
-| `bph-runtime-panel-toggle` | `boomi.css` |
-| `bph-runtime-panel-toggle:hover` | `boomi.css` |
 | `bph-runtime-panel-body` | `boomi.css` |
 | `bph-runtime-panel-heading` | `boomi.css` |
 | `bph-runtime-panel-item` | `boomi.css` |
@@ -696,5 +714,16 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bph-runtime-panel-info` | `boomi.css` |
 | `bph-runtime-panel-name` | `boomi.css` |
 | `bph-runtime-panel-meta` | `boomi.css` |
+| `bph-runtime-panel-item:hover` | `boomi.css` |
+| `bph-runtime-panel-expand-icon` | `boomi.css` |
+| `bph-runtime-panel-expanded .bph-runtime-panel-expand-icon` | `boomi.css` |
+| `bph-runtime-panel-detail` | `boomi.css` |
+| `bph-runtime-panel-expanded .bph-runtime-panel-detail` | `boomi.css` |
+| `bph-runtime-panel-detail-row` | `boomi.css` |
+| `bph-runtime-panel-detail-label` | `boomi.css` |
+| `bph-runtime-panel-detail-value` | `boomi.css` |
+| `bph-runtime-panel-detail-id` | `boomi.css` |
+| `bph-runtime-panel-detail-id:hover` | `boomi.css` |
+| `bph-runtime-panel-detail-id.bph-runtime-copied` | `boomi.css` |
 
 ---

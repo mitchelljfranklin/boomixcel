@@ -130,6 +130,7 @@
 
 ⭐ **Other**
 - Options gear icon in the masthead — quick access to BoomiXcel settings without scrolling to the footer
+- Runtime Status Panel — server-rack icon in the masthead opens a slide-out panel showing all runtimes' status, version, type, and expandable detail (configurable)
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
@@ -434,7 +435,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/nativeEditorResize.js` | content | Adds a corner drag-resize handle to Boomi's native inline script editor dialog (ACE-based) |
 | `content/packagedComponentsResize.js` | content | Adds a corner drag-resize handle to the Included Components dialog with auto-recenter on finish |
 | `content/packageNotesAutoApply.js` | content | Copies Latest Notes from the first Included Components table row into Package Notes |
-| `content/runtimePanel.js` | content | Runtime status dots in footer + slide-out panel on build canvas |
+| `content/runtimePanel.js` | content | Runtime status panel — masthead button + slide-out panel with expandable runtime details |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo |
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |

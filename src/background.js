@@ -197,6 +197,15 @@ async function handleGetRuntimeStatus(accountId) {
         type: atom.type || 'ATOM',
         hostName: atom.hostName || '',
         currentVersion: atom.currentVersion || '',
+        description: atom.description || '',
+        instanceId: atom.instanceId || '',
+        cloudId: atom.cloudId || '',
+        cloudName: atom.cloudName || '',
+        cloudMoleculeName: atom.cloudMoleculeName || '',
+        cloudOwnerName: atom.cloudOwnerName || '',
+        isCloudAttachment: !!atom.isCloudAttachment,
+        dateInstalled: atom.dateInstalled || '',
+        purgeHistoryDays: atom.purgeHistoryDays,
       };
     });
 
