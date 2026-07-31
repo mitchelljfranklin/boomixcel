@@ -15,6 +15,7 @@ var TOGGLE_LIST = [
   { key: "copy_component_dependents_default", label: "Default Copy Dependents", defaultVal: "on" },
   { key: "package_notes_auto_apply", label: "Package Notes Auto-Apply", defaultVal: "off" },
   { key: "runtime_status_panel", label: "Runtime Status Panel", defaultVal: "on" },
+  { key: "component_references", label: "Component References", defaultVal: "off" },
   { key: "run_process_from_deployment", label: "Run Process From Deployment", defaultVal: "off" },
 ];
 
@@ -34,6 +35,15 @@ function renderToggles() {
       var label = document.createElement("span");
       label.className = "toggle-label";
       label.textContent = item.label;
+
+      var apiDependentKeys = ["runtime_status_panel", "run_process_from_deployment", "component_references"];
+      if (apiDependentKeys.indexOf(item.key) !== -1 && !items["boomi_api_token"]) {
+        var warning = document.createElement("span");
+        warning.className = "bph-api-warning";
+        warning.title = "Requires Boomi API token — configure in Options \u2192 API";
+        warning.textContent = "\u26A0";
+        label.appendChild(warning);
+      }
 
       var toggle = document.createElement("label");
       toggle.className = "toggle";

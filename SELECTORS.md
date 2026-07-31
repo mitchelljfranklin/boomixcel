@@ -102,6 +102,18 @@ Regenerate with: `node scripts/gen-selectors.js`
 | Selector | Source |
 |---|---|
 | `hide_canvas_grid` | `canvas.js` |
+| `.bph-component-info-btn` | `componentInfo.js` |
+| `.bph-compinfo-copy` | `componentInfo.js` |
+| `.component_header .name_label` | `componentInfo.js` |
+| `gwt-Anchor bph-component-info-btn` | `componentInfo.js` |
+| `BoomiPlatformOverlay` | `componentInfo.js` |
+| `.bph-component-refs-btn` | `componentReferences.js` |
+| `.BoomiPlatformOverlay .popupContent` | `componentReferences.js` |
+| `.bph-monitor-link` | `componentReferences.js` |
+| `.BoomiPlatformOverlay .bph-refs-loading` | `componentReferences.js` |
+| `.component_header .links` | `componentReferences.js` |
+| `gwt-Anchor svg-anchor bph-component-refs-btn` | `componentReferences.js` |
+| `BoomiPlatformOverlay` | `componentReferences.js` |
 | `boomiConnect` | `connectionOperations.js` |
 | `connectorText` | `connectionOperations.js` |
 | `connectorVal` | `connectionOperations.js` |
@@ -248,6 +260,9 @@ Regenerate with: `node scripts/gen-selectors.js`
 
 | Class | Source |
 |---|---|
+| `bph-compinfo-copyjson` | `componentInfo.js` |
+| `bph-compinfo-close` | `componentInfo.js` |
+| `bph-refs-close` | `componentReferences.js` |
 | `bph-copyprop-item` | `copySetProperty.js` |
 | `bph-copy-fallback-textarea` | `copySetProperty.js` |
 | `bph-endpoint-flash-testonly` | `endpointGlow.js` |
@@ -666,6 +681,11 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `html.qm-u-theme-dark .bph-runtime-panel-item` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-name` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-meta` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-refs-type-dependent` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-refs-type-independent` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-refs-type-unknown` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-refs-tree-node::after` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-refs-section summary` | `boomi.css` |
 
 ### BoomiXcel-added classes (`bph-*` / `bpe-*`)
 
@@ -725,5 +745,37 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bph-runtime-panel-detail-id` | `boomi.css` |
 | `bph-runtime-panel-detail-id:hover` | `boomi.css` |
 | `bph-runtime-panel-detail-id.bph-runtime-copied` | `boomi.css` |
+| `bph-component-info-btn` | `boomi.css` |
+| `bph-component-info-btn:hover` | `boomi.css` |
+| `bph-component-info-btn svg` | `boomi.css` |
+| `bph-compinfo-table` | `boomi.css` |
+| `bph-compinfo-table td` | `boomi.css` |
+| `bph-compinfo-table td:first-child` | `boomi.css` |
+| `bph-compinfo-copy` | `boomi.css` |
+| `bph-compinfo-copy:hover` | `boomi.css` |
+| `bph-component-refs-btn` | `boomi.css` |
+| `bph-component-refs-btn:hover` | `boomi.css` |
+| `bph-component-refs-btn svg` | `boomi.css` |
+| `bph-refs-loading` | `boomi.css` |
+| `bph-refs-section` | `boomi.css` |
+| `bph-refs-section summary` | `boomi.css` |
+| `bph-refs-list` | `boomi.css` |
+| `bph-refs-list li` | `boomi.css` |
+| `bph-refs-link` | `boomi.css` |
+| `bph-refs-link:hover` | `boomi.css` |
+| `bph-refs-type` | `boomi.css` |
+| `bph-refs-type-dependent` | `boomi.css` |
+| `bph-refs-type-independent` | `boomi.css` |
+| `bph-refs-type-unknown` | `boomi.css` |
+| `bph-refs-tree` | `boomi.css` |
+| `bph-refs-tree-node` | `boomi.css` |
+| `bph-refs-tree-node::before` | `boomi.css` |
+| `bph-refs-tree-node::after` | `boomi.css` |
+| `bph-refs-tree-node:last-child::after` | `boomi.css` |
+| `bph-refs-tree .bph-refs-tree` | `boomi.css` |
+| `bph-refs-tree-details` | `boomi.css` |
+| `bph-refs-tree-details summary` | `boomi.css` |
+| `bph-refs-depth` | `boomi.css` |
+| `bph-api-warning` | `boomi.css` |
 
 ---

@@ -62,6 +62,8 @@ const CONTENT_ORDER = [
   "copyComponentDefaults.js",
   "packageNotesAutoApply.js",
   "runtimePanel.js",
+  "componentInfo.js",
+  "componentReferences.js",
 ];
 
 function getConcatenatedSource() {

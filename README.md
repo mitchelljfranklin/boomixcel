@@ -436,6 +436,8 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/packagedComponentsResize.js` | content | Adds a corner drag-resize handle to the Included Components dialog with auto-recenter on finish |
 | `content/packageNotesAutoApply.js` | content | Copies Latest Notes from the first Included Components table row into Package Notes |
 | `content/runtimePanel.js` | content | Runtime status panel — masthead button + slide-out panel with expandable runtime details |
+| `content/componentInfo.js` | content | Component info button (ℹ️) — modal with name, ID, account, branch, URL, copy-to-clipboard |
+| `content/componentReferences.js` | content | Component references button (🔗) — shows "Used By" and "References" with click-to-open links |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo |
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |

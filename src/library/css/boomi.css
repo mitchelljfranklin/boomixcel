@@ -1566,3 +1566,231 @@ html.qm-u-theme-dark .bph-runtime-panel-name {
 html.qm-u-theme-dark .bph-runtime-panel-meta {
     color: #9aa0a6;
 }
+
+/* ── Popup API warning ─────────────────────────────────────────────── */
+
+/* ── Component Info ───────────────────────────────────────────────── */
+
+.bph-component-info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    color: #5f6368;
+    transition: color 0.15s ease;
+    vertical-align: middle;
+}
+
+.bph-component-info-btn:hover {
+    color: #1a73e8;
+}
+
+.bph-component-info-btn svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.bph-compinfo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+}
+
+.bph-compinfo-table td {
+    padding: 6px 10px 6px 0;
+    vertical-align: middle;
+}
+
+.bph-compinfo-table td:first-child {
+    white-space: nowrap;
+    padding-right: 16px;
+}
+
+.bph-compinfo-copy {
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 6px;
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+    user-select: none;
+}
+
+.bph-compinfo-copy:hover {
+    opacity: 1;
+}
+
+}
+
+/* ── Component References ──────────────────────────────────────────── */
+
+.bph-component-references-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    color: #5f6368;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    vertical-align: middle;
+}
+
+.bph-component-references-btn:hover {
+    color: #1a73e8;
+}
+
+.bph-component-references-btn svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: #8c8c8c;
+}
+
+.bph-references-loading {
+    text-align: center;
+    padding: 20px;
+    color: #5f6368;
+}
+
+.bph-references-section {
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.bph-references-section summary {
+    cursor: pointer;
+    padding: 4px 0;
+    text-align: left;
+}
+
+.bph-references-list {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 16px;
+}
+
+.bph-references-list li {
+    padding: 3px 0;
+}
+
+.bph-references-link {
+    font-family: monospace;
+    font-size: 11px;
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.bph-references-link:hover {
+    text-decoration: underline;
+}
+
+.bph-references-type {
+    font-size: 10px;
+    margin-left: 8px;
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+.bph-references-type-dependent {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.bph-references-type-independent {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.bph-references-type-unknown {
+    background: #f5f5f5;
+    color: #9aa0a6;
+}
+
+html.qm-u-theme-dark .bph-references-type-dependent {
+    background: #1b5e20;
+    color: #a5d6a7;
+}
+
+html.qm-u-theme-dark .bph-references-type-independent {
+    background: #4e342e;
+    color: #ffcc80;
+}
+
+html.qm-u-theme-dark .bph-references-type-unknown {
+    background: #333;
+    color: #666;
+}
+
+.bph-references-tree {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 0;
+}
+
+.bph-references-tree-node {
+    padding: 3px 0 3px 18px;
+    position: relative;
+}
+
+.bph-references-tree-node::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 10px;
+    height: 1px;
+    background: #dadce0;
+}
+
+.bph-references-tree-node::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #dadce0;
+}
+
+.bph-references-tree-node:last-child::after {
+    height: 12px;
+}
+
+.bph-references-tree .bph-references-tree {
+    margin-left: 0;
+}
+
+.bph-references-tree-details {
+    margin: 0;
+}
+
+.bph-references-tree-details summary {
+    cursor: pointer;
+    padding: 2px 0;
+}
+
+html.qm-u-theme-dark .bph-references-tree-node::before,
+html.qm-u-theme-dark .bph-references-tree-node::after {
+    background: #555;
+}
+
+html.qm-u-theme-dark .bph-references-section summary {
+    color: #e8eaed;
+}
+
+.bph-references-depth {
+    font-size: 10px;
+    color: #9aa0a6;
+    margin-left: 4px;
+}
+
+.bph-references-modal {
+    max-width: 700px;
+}
+
+.bph-api-warning {
+    font-size: 12px;
+    margin-left: 6px;
+    cursor: help;
+    opacity: 0.7;
+}

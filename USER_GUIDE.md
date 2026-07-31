@@ -206,6 +206,17 @@ Normally when you click **Lock & Edit** on a component tab, Boomi hides the Clos
 ### Copy Component ID/URL
 A copy button appears on the build canvas header, letting you quickly copy a component's ID or URL to your clipboard.
 
+### Component Info Button
+An info icon (ℹ️) appears next to the component name in the build canvas header. Click it to open a modal showing the component's name, ID, account ID, branch, and page URL. Click the 📋 icon next to any field to copy it to your clipboard, or click **Copy All as JSON** to copy everything as a formatted JSON object. No API configuration required — all data is parsed from the current page URL.
+
+### Component References
+A link icon (🔗) appears next to the component name on the build canvas (requires Boomi API token). Click it to open a modal with two collapsible sections:
+
+- **Used By** — all parent components that reference this component
+- **References** — all child components this component references
+
+Each entry shows the component ID (clickable to open in a new tab) and its reference type (DEPENDENT or INDEPENDENT). An **Open All** link opens every child component in separate tabs at once. Enable from the Options page under Build Enhancements.
+
 ### Copy Component Defaults
 When copying a component, BoomiXcel can auto-populate the component name and set default checkbox states. Configurable from the Options page:
 

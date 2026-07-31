@@ -2,6 +2,7 @@ var toggleRuntimePanel = null;
 
 var enableRuntimePanel = function () {
   if (BoomiPlatform.runtime_status_panel === "off") return;
+  if (!BoomiPlatform.boomi_api_token) return;
   if (window.location.hash.indexOf("#build") !== 0) return;
 
   var panelOpen = false;
@@ -56,12 +57,12 @@ var enableRuntimePanel = function () {
     body.appendChild(heading);
 
     for (var j = 0; j < runtimes.length; j++) {
-      var r = runtimes[j];
+      var runtime = runtimes[j];
       var item = document.createElement("div");
       item.className = "bph-runtime-panel-item";
 
       var statusDot = document.createElement("span");
-      statusDot.className = "bph-runtime-panel-status bph-runtime-status-" + r.status.toLowerCase();
+      statusDot.className = "bph-runtime-panel-status bph-runtime-status-" + runtime.status.toLowerCase();
       statusDot.textContent = "\u25CF";
       item.appendChild(statusDot);
 
@@ -70,13 +71,13 @@ var enableRuntimePanel = function () {
 
       var nameEl = document.createElement("div");
       nameEl.className = "bph-runtime-panel-name";
-      nameEl.textContent = r.name;
+      nameEl.textContent = runtime.name;
       info.appendChild(nameEl);
 
       var meta = document.createElement("div");
       meta.className = "bph-runtime-panel-meta";
-      meta.textContent = r.type + (r.currentVersion ? " \u00B7 v" + r.currentVersion : "");
-      if (r.statusDetail) meta.textContent += " \u00B7 " + r.statusDetail;
+      meta.textContent = runtime.type + (runtime.currentVersion ? " \u00B7 v" + runtime.currentVersion : "");
+      if (runtime.statusDetail) meta.textContent += " \u00B7 " + runtime.statusDetail;
       info.appendChild(meta);
 
       item.appendChild(info);
@@ -92,17 +93,17 @@ var enableRuntimePanel = function () {
       detail.className = "bph-runtime-panel-detail";
 
       var rows = [];
-      rows.push(["Status", r.status + (r.statusDetail ? " (" + r.statusDetail + ")" : "")]);
-      rows.push(["Type", r.isCloudAttachment ? "Cloud Attachment" : r.type]);
-      rows.push(["Version", r.currentVersion]);
-      if (r.hostName) rows.push(["Host", r.hostName]);
-      if (r.description) rows.push(["Description", r.description]);
-      if (r.instanceId) rows.push(["Instance ID", r.instanceId]);
-      if (r.cloudMoleculeName) rows.push(["Cloud Cluster", r.cloudMoleculeName]);
-      if (r.cloudName) rows.push(["Cloud", r.cloudName]);
-      if (r.cloudOwnerName) rows.push(["Cloud Owner", r.cloudOwnerName]);
-      if (r.dateInstalled) {
-        var installDate = new Date(r.dateInstalled).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+      rows.push(["Status", runtime.status + (runtime.statusDetail ? " (" + runtime.statusDetail + ")" : "")]);
+      rows.push(["Type", runtime.isCloudAttachment ? "Cloud Attachment" : runtime.type]);
+      rows.push(["Version", runtime.currentVersion]);
+      if (runtime.hostName) rows.push(["Host", runtime.hostName]);
+      if (runtime.description) rows.push(["Description", runtime.description]);
+      if (runtime.instanceId) rows.push(["Instance ID", runtime.instanceId]);
+      if (runtime.cloudMoleculeName) rows.push(["Cloud Cluster", runtime.cloudMoleculeName]);
+      if (runtime.cloudName) rows.push(["Cloud", runtime.cloudName]);
+      if (runtime.cloudOwnerName) rows.push(["Cloud Owner", runtime.cloudOwnerName]);
+      if (runtime.dateInstalled) {
+        var installDate = new Date(runtime.dateInstalled).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
         rows.push(["Date Installed", installDate]);
       }
 
@@ -132,7 +133,7 @@ var enableRuntimePanel = function () {
       copyRow.appendChild(copyLabel);
       var copyValue = document.createElement("span");
       copyValue.className = "bph-runtime-panel-detail-value bph-runtime-panel-detail-id";
-      copyValue.textContent = r.id;
+      copyValue.textContent = runtime.id;
       copyValue.title = "Click to copy ID";
       copyValue.addEventListener("click", function (clickEvent) {
         var text = clickEvent.target.textContent;
@@ -207,10 +208,9 @@ var enableRuntimePanel = function () {
   document.addEventListener("click", function (clickEvent) {
     if (!panelOpen) return;
     var panel = document.querySelector(".bph-runtime-panel");
-    var mastheadBtn = document.querySelector(".bph-masthead-runtime-link");
+    var mastheadButton = document.querySelector(".bph-masthead-runtime-link");
     if (!panel) return;
-    // Close if click is outside the panel AND outside the masthead button
-    if (!panel.contains(clickEvent.target) && !(mastheadBtn && mastheadBtn.contains(clickEvent.target))) {
+    if (!panel.contains(clickEvent.target) && !(mastheadButton && mastheadButton.contains(clickEvent.target))) {
       toggleRuntimePanel();
     }
   });
