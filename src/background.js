@@ -33,6 +33,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       .catch(err => sendResponse({ success: false, error: err.message }));
     return true;
   }
+  if (msg.type === 'GET_COMPONENT_XML') {
+    handleGetComponentXml(msg.accountId, msg.componentId)
+      .then(sendResponse)
+      .catch(err => sendResponse({ success: false, error: err.message }));
+    return true;
+  }
 });
 
 // ── Rename on download ────────────────────────────────────────────────────────
@@ -363,6 +369,33 @@ async function handleGetComponentReferences(accountId, componentId, parentDepth,
     var children = await walkChildren(componentId, maxChildDepth);
 
     return { success: true, parents: parents, children: children, accountId: accountId };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+// ── Component XML API ──────────────────────────────────────────────────────────
+
+async function handleGetComponentXml(accountId, componentId) {
+  var { boomi_api_token, boomi_api_email } = await chrome.storage.sync.get(['boomi_api_token', 'boomi_api_email']);
+  if (!boomi_api_token || !boomi_api_email) {
+    return { success: false, error: 'Boomi API token or email not configured.' };
+  }
+
+  var authHeader = 'Basic ' + btoa('BOOMI_TOKEN.' + boomi_api_email + ':' + boomi_api_token);
+  var apiBase = 'https://api.boomi.com/api/rest/v1/' + accountId;
+
+  try {
+    var fetchResponse = await fetch(apiBase + '/Component/' + componentId, {
+      headers: { 'Authorization': authHeader, 'Accept': 'application/xml' },
+    });
+
+    if (!fetchResponse.ok) {
+      return { success: false, error: 'Component fetch failed (HTTP ' + fetchResponse.status + ')' };
+    }
+
+    var xml = await fetchResponse.text();
+    return { success: true, xml: xml };
   } catch (err) {
     return { success: false, error: err.message };
   }

@@ -28,11 +28,17 @@ var init_set_properties_extractor = (process) => {
       return;
     }
     extracting = true;
-    let button = nav.querySelector(".bph-extract-setproperties");
+    var button = nav.querySelector(".bph-extract-setproperties");
     button.classList.add("bph-extracting");
     showToast("Extracting Set Properties...", 5000, "info");
+
     try {
-      let results = await extractAllSetProperties();
+      var results;
+      if (BoomiPlatform.boomi_api_token) {
+        results = await extractSetPropertiesViaApi();
+      } else {
+        results = await extractAllSetProperties();
+      }
       if (results.length === 0) {
         showToast("No Set Properties shapes found on the canvas.", 3000, "warning");
         return;
@@ -81,6 +87,135 @@ function dispatchMouseClick(element) {
   element.dispatchEvent(new MouseEvent('mousedown', options));
   element.dispatchEvent(new MouseEvent('mouseup', options));
   element.dispatchEvent(new MouseEvent('click', options));
+}
+
+async function extractSetPropertiesViaApi() {
+  var hash = window.location.hash;
+  var componentMatch = hash.match(/componentIdOnFocus=([^;&]+)/);
+  var componentId = "";
+  if (componentMatch) {
+    componentId = componentMatch[1];
+  } else {
+    var componentsMatch = hash.match(/components=([^;&]+)/);
+    if (componentsMatch) componentId = componentsMatch[1].split(",").pop();
+  }
+  if (!componentId) return [];
+
+  var accountId = getUrlParameter("accountId") || "";
+  if (!accountId) {
+    var accountMatch = hash.match(/accountId=([^;&]+)/);
+    if (accountMatch) accountId = accountMatch[1];
+  }
+  if (!accountId) return [];
+
+  return new Promise(function (resolve) {
+    chrome.runtime.sendMessage(
+      { type: "GET_COMPONENT_XML", accountId: accountId, componentId: componentId },
+      function (response) {
+        console.log("[SetProps API] response:", response ? "received" : "none", "success:", response && response.success);
+        if (!response || !response.success || !response.xml) {
+          console.log("[SetProps API] failed or no XML — falling back to DOM");
+          resolve([]);
+          return;
+        }
+        console.log("[SetProps API] XML length:", response.xml.length);
+        var parsed = parseSetPropertiesFromXml(response.xml);
+        console.log("[SetProps API] parsed", parsed.length, "properties from XML");
+        resolve(parsed);
+      },
+    );
+  });
+}
+
+function parseSetPropertiesFromXml(xml) {
+  var results = [];
+
+  var parser = new DOMParser();
+  var xmlDocument;
+  try {
+    xmlDocument = parser.parseFromString(xml, "text/xml");
+  } catch (e) {
+    console.log("[SetProps XML] DOMParser failed:", e.message);
+    return results;
+  }
+
+  // Check for parse errors
+  var parseError = xmlDocument.querySelector("parsererror");
+  if (parseError) {
+    console.log("[SetProps XML] XML parse error:", parseError.textContent);
+    return results;
+  }
+
+  // Find all documentproperties shapes
+  var shapes = xmlDocument.querySelectorAll('shape[shapetype="documentproperties"]');
+  console.log("[SetProps XML] documentproperties shapes found:", shapes.length);
+
+  for (var i = 0; i < shapes.length; i++) {
+    var shape = shapes[i];
+    var userLabel = shape.getAttribute("userlabel") || shape.getAttribute("name") || "";
+
+    // Find all documentproperty elements inside this shape
+    var documentProperties = shape.querySelectorAll("documentproperty");
+    for (var j = 0; j < documentProperties.length; j++) {
+      var documentProperty = documentProperties[j];
+      var nameAttr = documentProperty.getAttribute("name") || "";
+      var propertyId = documentProperty.getAttribute("propertyId") || "";
+
+      // Parse the display name: "Dynamic Process Property - DDP_ONE" or "Static - DDP_ONE"
+      var parts = nameAttr.split(" - ");
+      var propertyType = parts.length > 1 ? parts[0] : nameAttr;
+      var propertyName = parts.length > 1 ? parts[1] : nameAttr;
+
+      // Extract parameter values from sourcevalues
+      var paramValues = [];
+      var sourceValues = documentProperty.querySelector("sourcevalues");
+      if (sourceValues) {
+        var parameterValues = sourceValues.querySelectorAll("parametervalue");
+        for (var k = 0; k < parameterValues.length; k++) {
+          var paramValue = parameterValues[k];
+          var valueType = paramValue.getAttribute("valueType") || "";
+          var valueText = "";
+
+          var staticParam = paramValue.querySelector("staticparameter");
+          if (staticParam) {
+            valueText = staticParam.getAttribute("staticproperty") || "";
+          } else {
+            var processParam = paramValue.querySelector("processparameter");
+            if (processParam) {
+              valueText = processParam.getAttribute("processproperty") || "";
+            } else {
+              var profileElement = paramValue.querySelector("profileelement");
+              if (profileElement) {
+                valueText = profileElement.getAttribute("elementName") || profileElement.getAttribute("elementId") || "";
+              } else {
+                var dateParam = paramValue.querySelector("dateparameter");
+                if (dateParam) {
+                  valueText = dateParam.getAttribute("dateparametertype") || "";
+                } else {
+                  valueText = valueType || "";
+                }
+              }
+            }
+          }
+
+          if (valueText) {
+            paramValues.push(valueText);
+          } else if (valueType) {
+            paramValues.push(valueType);
+          }
+        }
+      }
+
+      results.push({
+        displayName: userLabel,
+        propertyType: propertyType,
+        propertyName: propertyName,
+        parameters: paramValues,
+      });
+    }
+  }
+
+  return results;
 }
 
 async function extractAllSetProperties() {
