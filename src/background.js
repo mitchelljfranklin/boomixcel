@@ -292,24 +292,22 @@ async function handleGetComponentReferences(accountId, componentId, parentDepth,
       });
       if (!fetchResponse.ok) return null;
       var xml = await fetchResponse.text();
-      var info = { name: null, version: null };
-      // Extract name and version from XML attributes
+      var info = { name: null, version: null, type: null, folderFullPath: null, modifiedDate: null, deleted: false };
       var tagMatch = xml.match(/<bns:Component[^>]*>/);
       if (tagMatch) {
         var nameMatch = tagMatch[0].match(/name="([^"]*)"/);
         var versionMatch = tagMatch[0].match(/version="(\d+)"/);
+        var typeMatch = tagMatch[0].match(/type="([^"]*)"/);
+        var folderMatch = tagMatch[0].match(/folderFullPath="([^"]*)"/);
+        var dateMatch = tagMatch[0].match(/modifiedDate="([^"]*)"/);
+        var deletedMatch = tagMatch[0].match(/deleted="([^"]*)"/);
         if (nameMatch) info.name = nameMatch[1];
         if (versionMatch) info.version = parseInt(versionMatch[1], 10);
+        if (typeMatch) info.type = typeMatch[1];
+        if (folderMatch) info.folderFullPath = folderMatch[1];
+        if (dateMatch) info.modifiedDate = dateMatch[1];
+        if (deletedMatch) info.deleted = deletedMatch[1] === "true";
       }
-      if (!info.version) {
-        var vMatch = xml.match(/version="(\d+)"/);
-        if (vMatch) info.version = parseInt(vMatch[1], 10);
-      }
-      if (!info.name) {
-        var nMatch = xml.match(/name="([^"]*)"/);
-        if (nMatch) info.name = nMatch[1];
-      }
-      if (!info.version) info.version = null;
       return info;
     } catch (e) {
       return null;
@@ -328,6 +326,10 @@ async function handleGetComponentReferences(accountId, componentId, parentDepth,
       result.push({
         id: parentId,
         name: info ? info.name : null,
+        componentType: info ? info.type : null,
+        folderFullPath: info ? info.folderFullPath : null,
+        modifiedDate: info ? info.modifiedDate : null,
+        deleted: info ? info.deleted : false,
         version: refs[i].parentVersion || 0,
         type: refs[i].type || '',
         children: await walkParents(parentId, depth - 1),
@@ -356,6 +358,10 @@ async function handleGetComponentReferences(accountId, componentId, parentDepth,
       result.push({
         id: childId,
         name: childInfo ? childInfo.name : null,
+        componentType: childInfo ? childInfo.type : null,
+        folderFullPath: childInfo ? childInfo.folderFullPath : null,
+        modifiedDate: childInfo ? childInfo.modifiedDate : null,
+        deleted: childInfo ? childInfo.deleted : false,
         type: refs[i].type || '',
         parentVersion: refs[i].parentVersion || 0,
         children: await walkChildren(childId, depth - 1),

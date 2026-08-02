@@ -110,6 +110,9 @@ function parseProcessDataFromXml(xml) {
     decisions: [],
     maps: [],
     scripts: [],
+    processProperties: {},
+    environmentOverrides: [],
+    flow: [],
     inventory: {},
     componentName: "",
   };
@@ -152,6 +155,58 @@ function parseProcessDataFromXml(xml) {
       case "dataprocess":
         extractScripting(shape, displayName, shapeX, shapeY, data.scripts);
         break;
+    }
+    // Collect dragpoints for flow
+    var dragpoints = shape.querySelectorAll("dragpoint");
+    for (var di = 0; di < dragpoints.length; di++) {
+      var dragpoint = dragpoints[di];
+      var toShape = dragpoint.getAttribute("toShape") || "";
+      if (!toShape || toShape === "unset") continue;
+      var identifier = dragpoint.getAttribute("identifier") || "";
+      var text = dragpoint.getAttribute("text") || "";
+      data.flow.push({
+        fromShape: displayName,
+        fromShapeType: shapetype,
+        toShape: toShape,
+        identifier: identifier,
+        label: text,
+      });
+    }
+    var processParameters = shape.querySelectorAll("processparameter");
+    for (var pi = 0; pi < processParameters.length; pi++) {
+      var param = processParameters[pi];
+      var propertyName = param.getAttribute("processproperty") || "";
+      if (!propertyName) continue;
+      var propertyDefault = param.getAttribute("processpropertydefaultvalue") || "";
+      if (!data.processProperties[propertyName]) {
+        data.processProperties[propertyName] = [];
+      }
+      data.processProperties[propertyName].push({
+        shapeName: displayName,
+        shapeType: shapetype,
+        defaultValue: propertyDefault,
+      });
+    }
+  }
+
+  // Extract environment overrides
+  var overridesSection = xmlDocument.querySelector("processOverrides");
+  if (overridesSection) {
+    var processOverrides = overridesSection.querySelectorAll("processOverride");
+    for (var oi = 0; oi < processOverrides.length; oi++) {
+      var processOverride = processOverrides[oi];
+      var environment = processOverride.getAttribute("environment") || "";
+      var environmentOverrides = processOverride.querySelectorAll("override");
+      for (var oj = 0; oj < environmentOverrides.length; oj++) {
+        var override = environmentOverrides[oj];
+        var property = override.getAttribute("property") || "";
+        var value = override.getAttribute("value") || "";
+        data.environmentOverrides.push({
+          environment: environment,
+          propertyName: property,
+          value: value,
+        });
+      }
     }
   }
 
@@ -464,14 +519,17 @@ function showSetPropertiesModal(results) {
 
 function showProcessAnalysisModal(data) {
   var tabs = [];
-  if (data.setProperties.length > 0) tabs.push({ id: "setprops", label: "Set Properties (" + data.setProperties.length + ")", content: renderSetPropertiesTab(data) });
-  if (data.notifications.length > 0) tabs.push({ id: "notifications", label: "Notify (" + data.notifications.length + ")", content: renderNotificationsTab(data) });
-  if (data.messages.length > 0) tabs.push({ id: "messages", label: "Messages (" + data.messages.length + ")", content: renderMessagesTab(data) });
-  if (data.sqlQueries.length > 0) tabs.push({ id: "sql", label: "SQL (" + data.sqlQueries.length + ")", content: renderSqlTab(data) });
-  if (data.decisions.length > 0) tabs.push({ id: "decisions", label: "Decisions (" + data.decisions.length + ")", content: renderDecisionsTab(data) });
-  if (data.maps.length > 0) tabs.push({ id: "maps", label: "Maps (" + data.maps.length + ")", content: renderMapsTab(data) });
-  if (data.scripts.length > 0) tabs.push({ id: "scripts", label: "Scripts (" + data.scripts.length + ")", content: renderScriptsTab(data) });
-  if (Object.keys(data.inventory).length > 0) tabs.push({ id: "inventory", label: "Inventory (" + Object.keys(data.inventory).length + " types)", content: renderInventoryTab(data) });
+  if (data.setProperties.length > 0) tabs.push({ id: "setprops", label: "Set Properties", content: renderSetPropertiesTab(data) });
+  if (data.notifications.length > 0) tabs.push({ id: "notifications", label: "Notify", content: renderNotificationsTab(data) });
+  if (data.messages.length > 0) tabs.push({ id: "messages", label: "Messages", content: renderMessagesTab(data) });
+  if (data.sqlQueries.length > 0) tabs.push({ id: "sql", label: "SQL", content: renderSqlTab(data) });
+  if (data.decisions.length > 0) tabs.push({ id: "decisions", label: "Decisions", content: renderDecisionsTab(data) });
+  if (data.maps.length > 0) tabs.push({ id: "maps", label: "Maps", content: renderMapsTab(data) });
+  if (data.scripts.length > 0) tabs.push({ id: "scripts", label: "Scripts", content: renderScriptsTab(data) });
+  if (Object.keys(data.processProperties).length > 0) tabs.push({ id: "properties", label: "Properties", content: renderPropertiesTab(data) });
+  if (data.flow.length > 0) tabs.push({ id: "flow", label: "Flow", content: renderFlowTab(data) });
+  if (data.environmentOverrides.length > 0) tabs.push({ id: "overrides", label: "Overrides", content: renderOverridesTab(data) });
+  if (Object.keys(data.inventory).length > 0) tabs.push({ id: "inventory", label: "Inventory", content: renderInventoryTab(data) });
 
   var titleAlt = data.componentName ? data.componentName : "Process Analysis";
 
@@ -578,6 +636,21 @@ function getTabExportTsv(tabId, data) {
       return "Shape Name\tX\tY\tMap ID\n" + data.maps.map(function (mapEntry) { return mapEntry.displayName + "\t" + mapEntry.shapeX + "\t" + mapEntry.shapeY + "\t" + mapEntry.mapId; }).join("\n");
     case "scripts":
       return "Shape Name\tX\tY\tLanguage\tCode\n" + data.scripts.map(function (scriptEntry) { return scriptEntry.displayName + "\t" + scriptEntry.shapeX + "\t" + scriptEntry.shapeY + "\t" + scriptEntry.language + "\t" + scriptEntry.code; }).join("\n");
+    case "properties":
+      var propNames = Object.keys(data.processProperties).sort();
+      return "Property Name\tUses\tShape References\n" + propNames.map(function (pn) {
+        var shapes = data.processProperties[pn].map(function (u) { return (u.shapeName || "(unnamed)") + " (" + u.shapeType + ")"; }).join("; ");
+        return pn + "\t" + data.processProperties[pn].length + "\t" + shapes;
+      }).join("\n");
+    case "flow":
+      return "From Shape\tFrom Type\tTo Shape\tBranch\n" + data.flow.map(function (f) {
+        var label = f.identifier ? (f.label || f.identifier) : "";
+        return f.fromShape + "\t" + f.fromShapeType + "\t" + f.toShape + "\t" + label;
+      }).join("\n");
+    case "overrides":
+      return "Environment\tProperty\tValue\n" + data.environmentOverrides.map(function (o) {
+        return o.environment + "\t" + o.propertyName + "\t" + o.value;
+      }).join("\n");
     case "inventory":
       return "Shape Type\tCount\n" + Object.keys(data.inventory).map(function (type) { return type + "\t" + data.inventory[type]; }).join("\n");
     default: return "";
@@ -653,4 +726,32 @@ function renderInventoryTab(data) {
     return '<tr><td>' + type + '</td><td>' + data.inventory[type] + '</td></tr>';
   }).join('');
   return '<table class="bpe-setprops-table bpe-analysis-inventory-table"><thead><tr><th>Shape Type</th><th>Count</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+function renderPropertiesTab(data) {
+  var propertyNames = Object.keys(data.processProperties).sort();
+  var rows = propertyNames.map(function (propertyName) {
+    var usages = data.processProperties[propertyName];
+    var usageCells = usages.map(function (usage) {
+      var shapeLabel = usage.shapeName || '(unnamed)';
+      return '<span class="bph-property-usage">' + escapeHtml(shapeLabel) + ' <small>(' + usage.shapeType + ')</small></span>';
+    }).join(' ');
+    return '<tr><td>' + escapeHtml(propertyName) + '</td><td>' + usages.length + '</td><td>' + usageCells + '</td></tr>';
+  }).join('');
+  return '<table class="bpe-setprops-table"><thead><tr><th>Property Name</th><th>Uses</th><th>Used In</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+function renderFlowTab(data) {
+  var rows = data.flow.map(function (flow) {
+    var label = flow.identifier ? ' [' + flow.identifier + (flow.label ? ': ' + flow.label : '') + ']' : '';
+    return '<tr><td>' + escapeHtml(flow.fromShape) + ' <small>(' + flow.fromShapeType + ')</small></td><td>\u2192</td><td>' + escapeHtml(flow.toShape) + label + '</td></tr>';
+  }).join('');
+  return '<table class="bpe-setprops-table"><thead><tr><th>From</th><th></th><th>To</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+function renderOverridesTab(data) {
+  var rows = data.environmentOverrides.map(function (override) {
+    return '<tr><td>' + escapeHtml(override.environment) + '</td><td>' + escapeHtml(override.propertyName) + '</td><td>' + escapeHtml(override.value) + '</td></tr>';
+  }).join('');
+  return '<table class="bpe-setprops-table"><thead><tr><th>Environment</th><th>Property</th><th>Value</th></tr></thead><tbody>' + rows + '</tbody></table>';
 }

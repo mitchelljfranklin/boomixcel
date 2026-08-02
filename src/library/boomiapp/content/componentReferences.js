@@ -92,19 +92,40 @@ function renderReferencesModal(apiResponse) {
       var node = nodes[i];
       var displayName = node.name || node.id;
       var hasChildren = node.children && node.children.length > 0;
+      var deletedClass = node.deleted ? ' bph-references-deleted' : '';
+
+      // Tooltip with folder + date
+      var tooltipParts = [];
+      if (node.folderFullPath) tooltipParts.push(node.folderFullPath);
+      if (node.modifiedDate) {
+        var dateString = node.modifiedDate.substring(0, 10);
+        tooltipParts.push(dateString);
+      }
+      var tooltip = tooltipParts.length > 0 ? ' title="' + tooltipParts.join(' \u00B7 ') + '"' : '';
+
+      // Build rich node line
+      var displayHtml = '<a class="bph-references-link' + deletedClass + '" href="' + buildUrl(node.id) + '" target="_blank"' + tooltip + '>' + displayName + '</a>';
+      if (node.componentType) {
+        displayHtml += ' <span class="bph-references-component-type">' + formatComponentType(node.componentType) + '</span>';
+      }
+      if (node.version) {
+        displayHtml += ' <span class="bph-references-version">v' + node.version + '</span>';
+      }
+      displayHtml += ' <span class="bph-references-type bph-references-type-' + (node.type ? node.type.toLowerCase() : "unknown") + '">' + (node.type || "\u2014") + '</span>';
+      if (node.deleted) {
+        displayHtml += ' <span class="bph-references-deleted-badge">deleted</span>';
+      }
+      if (hasChildren) {
+        displayHtml += ' <span class="bph-references-depth">(' + node.children.length + ")</span>";
+      }
 
       html += '<li class="bph-references-tree-node">';
       if (hasChildren) {
-        html += '<details class="bph-references-tree-details"><summary>';
-        html += '<a class="bph-references-link" href="' + buildUrl(node.id) + '" target="_blank">' + displayName + '</a>';
-        html += ' <span class="bph-references-type bph-references-type-' + (node.type ? node.type.toLowerCase() : "unknown") + '">' + (node.type || "—") + '</span>';
-        html += ' <span class="bph-references-depth">(' + node.children.length + ")</span>";
-        html += '</summary>';
+        html += '<details class="bph-references-tree-details"><summary>' + displayHtml + '</summary>';
         html += renderTree(node.children, depth + 1);
         html += '</details>';
       } else {
-        html += '<a class="bph-references-link" href="' + buildUrl(node.id) + '" target="_blank">' + displayName + '</a>';
-        html += ' <span class="bph-references-type bph-references-type-' + (node.type ? node.type.toLowerCase() : "unknown") + '">' + (node.type || "—") + '</span>';
+        html += displayHtml;
       }
       html += '</li>';
     }
@@ -126,6 +147,53 @@ function renderReferencesModal(apiResponse) {
     (parents.length === 0 && children.length === 0
       ? '<div class="qm-c-alert qm-c-alert--info">No references found for this component.</div>'
       : "");
+}
+
+function formatComponentType(typeName) {
+  if (!typeName) return "";
+  // Map internal type names to readable labels
+  var typeMap = {
+    process: "Process",
+    webservice: "API Service",
+    "webservice.external": "API Proxy",
+    flowservice: "Flow Service",
+    processroute: "Process Route",
+    "transform.map": "Map",
+    "transform.function": "Map Function",
+    "connector-action": "Connector Action",
+    "connector-settings": "Connection",
+    crossref: "Cross Reference",
+    processproperty: "Process Property",
+    queue: "Queue",
+    tradingpartner: "Trading Partner",
+    tpgroup: "Processing Group",
+    tporganization: "Organization",
+    tpcommoptions: "Comm Channel",
+    certificate: "Certificate",
+    "certificate.pgp": "PGP Certificate",
+    "profile.db": "DB Profile",
+    "profile.edi": "EDI Profile",
+    "profile.flatfile": "Flat File Profile",
+    "profile.xml": "XML Profile",
+    "profile.json": "JSON Profile",
+    documentcache: "Document Cache",
+    customlibrary: "Custom Library",
+    "script.processing": "Process Script",
+    "script.mapping": "Map Script",
+    xslt: "XSLT Stylesheet",
+    documentproperties: "Set Properties",
+    notify: "Notify",
+    message: "Message",
+    programcmd: "Program Command",
+    decision: "Decision",
+    dataprocess: "Data Process",
+    branch: "Branch",
+    start: "Start",
+    stop: "Stop",
+    map: "Map",
+    connectoraction: "Connector Action",
+  };
+  return typeMap[typeName] || typeName;
 }
 
 function countNodes(nodes) {

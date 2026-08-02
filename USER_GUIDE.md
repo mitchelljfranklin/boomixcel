@@ -74,7 +74,8 @@ The options page organizes settings into categories shown in a left-hand sidebar
 | **Editing** | Default scripting language for new shapes, code editor popout theme |
 | **Process Reporting** | Auto-refresh interval, dashboard default time range, WARNING log-line highlighting, default log minimum status, table text wrapping |
 | **Navigation & Shortcuts** | Full-screen shortcut key + modifiers, default process filters |
-| **Deployment** | Deployment notes auto-apply, run process from deployment, Boomi API token and email |
+| **Deployment** | Deployment notes auto-apply, run process from deployment |
+| **API** | Boomi API token and email — required for Runtime Status Panel, Run Process From Deployment, and other API-powered features |
 | **Reminders** | Post-deployment schedule reminder |
 
 A **↺ Reset** button restores all defaults. A yellow dot appears when you have unsaved changes.
@@ -126,6 +127,9 @@ A list icon (📋) in the build toolbar scans your process and presents a multi-
 - **Decisions** — shape name, comparison type, and decision values with type badges.
 - **Maps** — shape name and the referenced Map component ID.
 - **Scripts** — shape name, language, and the Custom Scripting code.
+- **Properties** — inventory of all dynamic process properties and where they're used, grouped by property name.
+- **Flow** — shape-to-shape connections showing the process routing.
+- **Overrides** — per-environment property value overrides.
 - **Inventory** — a count of every shape type in the process.
 
 Each tab has an **Export Current Tab** button, and an **Export All** button copies every tab's data as multi-section TSV. Shape coordinates are available as tooltips on shape names.
@@ -329,7 +333,7 @@ When enabled (off by default), clicking **Create Packaged Component** captures w
 ### Run Process From Deployment
 When enabled (off by default), after a successful deployment a **Run Deployment Now** button appears on the success dialog. Clicking it (after a confirmation prompt) uses the Boomi Platform API to submit the process for execution on the matching runtime, then opens Process Reporting in a new tab to show the results.
 
-**Requires a Boomi API token and email.** Generate a token from **Settings → API Tokens** in Boomi. Enter your Boomi account email and the generated token into the Deployment section of the BoomiXcel options page. The credentials are stored in `chrome.storage.sync` and shared across your signed-in browsers.
+**Requires a Boomi API token and email.** Generate a token from **Settings → API Tokens** in Boomi. Enter your Boomi account email and the generated token into the **API** section of the BoomiXcel options page. The credentials are stored in `chrome.storage.sync` and shared across your signed-in browsers.
 
 ---
 

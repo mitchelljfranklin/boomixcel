@@ -179,6 +179,11 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `parsererror` | `setPropertiesExtractor.js` |
 | `Component` | `setPropertiesExtractor.js` |
 | `shape` | `setPropertiesExtractor.js` |
+| `dragpoint` | `setPropertiesExtractor.js` |
+| `processparameter` | `setPropertiesExtractor.js` |
+| `processOverrides` | `setPropertiesExtractor.js` |
+| `processOverride` | `setPropertiesExtractor.js` |
+| `override` | `setPropertiesExtractor.js` |
 | `documentproperty` | `setPropertiesExtractor.js` |
 | `notify` | `setPropertiesExtractor.js` |
 | `notifyMessage` | `setPropertiesExtractor.js` |
@@ -187,7 +192,6 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `sqltoexecute` | `setPropertiesExtractor.js` |
 | `decision` | `setPropertiesExtractor.js` |
 | `decision > decisionvalue` | `setPropertiesExtractor.js` |
-| `processparameter` | `setPropertiesExtractor.js` |
 | `profileelement` | `setPropertiesExtractor.js` |
 | `map` | `setPropertiesExtractor.js` |
 | `dataprocess > step` | `setPropertiesExtractor.js` |
@@ -218,6 +222,9 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `decisions` | `setPropertiesExtractor.js` |
 | `maps` | `setPropertiesExtractor.js` |
 | `scripts` | `setPropertiesExtractor.js` |
+| `properties` | `setPropertiesExtractor.js` |
+| `flow` | `setPropertiesExtractor.js` |
+| `overrides` | `setPropertiesExtractor.js` |
 | `inventory` | `setPropertiesExtractor.js` |
 | `BoomiPlatformOverlay` | `setPropertiesExtractor.js` |
 | `.testModeCover` | `shapePopup.js` |
@@ -723,11 +730,16 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `html.qm-u-theme-dark .bph-references-type-unknown` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-references-tree-node::after` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-references-section summary` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-references-component-type` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-references-version` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-references-link.bph-references-deleted` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-references-deleted-badge` | `boomi.css` |
 | `html.qm-u-theme-dark .bpe-analysis-tabs` | `boomi.css` |
 | `html.qm-u-theme-dark .bpe-analysis-tab-btn` | `boomi.css` |
 | `html.qm-u-theme-dark .bpe-analysis-tab-btn:hover` | `boomi.css` |
 | `html.qm-u-theme-dark .bpe-analysis-tab-active` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-decision-value` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-property-usage` | `boomi.css` |
 
 ### BoomiXcel-added classes (`bph-*` / `bpe-*`)
 
@@ -818,6 +830,10 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bph-references-tree-details` | `boomi.css` |
 | `bph-references-tree-details summary` | `boomi.css` |
 | `bph-references-depth` | `boomi.css` |
+| `bph-references-component-type` | `boomi.css` |
+| `bph-references-version` | `boomi.css` |
+| `bph-references-link.bph-references-deleted` | `boomi.css` |
+| `bph-references-deleted-badge` | `boomi.css` |
 | `bph-references-modal` | `boomi.css` |
 | `bpe-analysis-tabs` | `boomi.css` |
 | `bpe-analysis-tab-btn` | `boomi.css` |
@@ -827,6 +843,10 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bpe-analysis-tab-pane-active` | `boomi.css` |
 | `bpe-analysis-content` | `boomi.css` |
 | `bph-decision-value` | `boomi.css` |
+| `bpe-analysis-content-cell` | `boomi.css` |
+| `bpe-analysis-code-cell` | `boomi.css` |
+| `bpe-analysis-inventory-table` | `boomi.css` |
+| `bph-property-usage` | `boomi.css` |
 | `bph-api-warning` | `boomi.css` |
 
 ---
