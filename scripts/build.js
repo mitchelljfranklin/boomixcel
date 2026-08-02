@@ -61,6 +61,9 @@ const CONTENT_ORDER = [
   "logDefaultStatus.js",
   "copyComponentDefaults.js",
   "packageNotesAutoApply.js",
+  "runtimePanel.js",
+  "componentInfo.js",
+  "componentReferences.js",
 ];
 
 function getConcatenatedSource() {

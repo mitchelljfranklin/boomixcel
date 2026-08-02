@@ -34,6 +34,9 @@ var FILE_AREA_MAP = {
   connectionOperations:     "Build Canvas",
   copyComponentDefaults:    "Build Canvas",
   packageNotesAutoApply:    "Build Canvas",
+  runtimePanel:             "Build Canvas",
+  componentInfo:             "Build Canvas",
+  componentReferences:         "Build Canvas",
 
   // Process Reporting — execution monitoring
   customRefresh:            "Process Reporting",

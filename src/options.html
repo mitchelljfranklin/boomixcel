@@ -27,6 +27,7 @@
                         <button type="button" class="options-nav-item" data-pane="reporting" role="tab" aria-selected="false" aria-controls="pane-reporting">Process Reporting <span class="nav-changed-badge" data-badge-for="reporting"></span></button>
                         <button type="button" class="options-nav-item" data-pane="navigation" role="tab" aria-selected="false" aria-controls="pane-navigation">Navigation &amp; Shortcuts <span class="nav-changed-badge" data-badge-for="navigation"></span></button>
                         <button type="button" class="options-nav-item" data-pane="deployment" role="tab" aria-selected="false" aria-controls="pane-deployment">Deployment <span class="nav-changed-badge" data-badge-for="deployment"></span></button>
+                        <button type="button" class="options-nav-item" data-pane="api" role="tab" aria-selected="false" aria-controls="pane-api">API <span class="nav-changed-badge" data-badge-for="api"></span></button>
                         <button type="button" class="options-nav-item" data-pane="reminders" role="tab" aria-selected="false" aria-controls="pane-reminders">Reminders <span class="nav-changed-badge" data-badge-for="reminders"></span></button>
                     </nav>
                     <div class="options-panes">
@@ -79,6 +80,20 @@
                                     <label class="toggle"><input type="checkbox" id="package_notes_auto_apply" name="package_notes_auto_apply" class="option toggle-input" data-default="off"><span class="slider"></span></label>
                                 </div>
                                 <small class="helper">Auto-copies the Latest Notes from the first component in the Included Components table into the Package Notes field when creating a packaged component.</small>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="runtime_status_panel" class="toggle-label-row mb-0">Runtime Status Panel</label>
+                                    <label class="toggle"><input type="checkbox" id="runtime_status_panel" name="runtime_status_panel" class="option toggle-input" data-default="on"><span class="slider"></span></label>
+                                </div>
+                                <small class="helper">Shows runtime status dots in the footer and a slide-out panel on the right edge of the build canvas with runtime name, status, version, and type.</small>
+                            </div>
+                            <div class="option-item">
+                                <div class="toggle-row">
+                                    <label for="component_references" class="toggle-label-row mb-0">Component References</label>
+                                    <label class="toggle"><input type="checkbox" id="component_references" name="component_references" class="option toggle-input" data-default="off"><span class="slider"></span></label>
+                                </div>
+                                <small class="helper">Adds a link icon (🔗) next to the component name showing what references this component and what it references, with click-to-open links. <strong>Requires Boomi API token.</strong></small>
                             </div>
                             <div class="option-item">
                                 <div class="toggle-row">
@@ -251,8 +266,13 @@
                                     <label for="run_process_from_deployment" class="toggle-label-row mb-0">Run Process From Deployment</label>
                                     <label class="toggle"><input type="checkbox" id="run_process_from_deployment" name="run_process_from_deployment" class="option toggle-input" data-default="off"><span class="slider"></span></label>
                                 </div>
-                                <small class="helper">After a successful deployment, adds a button to immediately navigate to Process Reporting and execute the deployed process on the matching runtime.</small>
+                                <small class="helper">After a successful deployment, adds a button to immediately navigate to Process Reporting and execute the deployed process on the matching runtime. <strong>Requires Boomi API token</strong> — configure in the API tab.</small>
                             </div>
+                        </section>
+
+                        <section class="options-pane" id="pane-api" data-pane="api" role="tabpanel" aria-label="API">
+                            <h2 class="options-pane-title">API</h2>
+                            <p class="options-pane-intro">Configure your Boomi Platform API access. Required by the Runtime Status Panel, Run Process From Deployment, and other API-powered features.</p>
                             <div class="option-item">
                                 <label for="boomi_api_email">Boomi API Email:</label>
                                 <input type="email" id="boomi_api_email" name="boomi_api_email" class="option form-control" data-default="" placeholder="you@company.com" autocomplete="off">
@@ -261,7 +281,7 @@
                             <div class="option-item">
                                 <label for="boomi_api_token">Boomi API Token:</label>
                                 <input type="password" id="boomi_api_token" name="boomi_api_token" class="option form-control" data-default="" placeholder="Enter your Boomi API token" autocomplete="off">
-                                <small class="helper">Required for Run Process From Deployment. Username format: BOOMI_TOKEN.you@company.com. Generate a token from Boomi Settings &rarr; API Tokens.</small>
+                                <small class="helper">Generate a token from Boomi <strong>Settings → API Tokens</strong>. Username format: BOOMI_TOKEN.you@company.com. The token is stored in chrome.storage.sync and shared across your signed-in browsers.</small>
                             </div>
                         </section>
 

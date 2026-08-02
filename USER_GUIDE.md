@@ -74,7 +74,8 @@ The options page organizes settings into categories shown in a left-hand sidebar
 | **Editing** | Default scripting language for new shapes, code editor popout theme |
 | **Process Reporting** | Auto-refresh interval, dashboard default time range, WARNING log-line highlighting, default log minimum status, table text wrapping |
 | **Navigation & Shortcuts** | Full-screen shortcut key + modifiers, default process filters |
-| **Deployment** | Deployment notes auto-apply, run process from deployment, Boomi API token and email |
+| **Deployment** | Deployment notes auto-apply, run process from deployment |
+| **API** | Boomi API token and email — required for Runtime Status Panel, Run Process From Deployment, and other API-powered features |
 | **Reminders** | Post-deployment schedule reminder |
 
 A **↺ Reset** button restores all defaults. A yellow dot appears when you have unsaved changes.
@@ -116,8 +117,24 @@ Remove the canvas dot grid for a cleaner workspace (configurable — pairs well 
 ### View in Process Reporting
 Quick access to Process Reporting from two entry points: a heartbeat SVG icon next to the Description link on the build page, and a menu item with a separator line in the chevron context menu on deployed process lists (Atom/Runtime). Both open Process Reporting in a new tab and auto-apply a process name filter (Add Filter → Process → type name → select checkbox → Apply). A confirming toast shows "Filtered for: {name}" when the filter is applied.
 
-### Extract Set Properties
-A list icon (📋) in the build toolbar scans every Set Properties shape on the canvas (visible or not), clicks each one, reads all property names and parameter values, and displays them in a modal table. The table has 4 columns: **Property Shape Name**, **Property Type**, **Property Name**, and **Parameters**. Property names that appear in multiple shapes are highlighted with a yellow background and amber left border for easy spotting (configurable via the **Highlight Duplicate Property Names** toggle — on by default, available in the Build Canvas section of the options page and the quick-settings popup). An **Export to Clipboard** button sits in the modal's button bar alongside Close, always visible without scrolling. A toast notification confirms the extraction is in progress.
+### Process Analysis
+A list icon (📋) in the build toolbar scans your process and presents a multi-tab analysis modal. When your Boomi API token is configured, the extension fetches the component XML in a single API call and parses all shape types. Tabs that have data include:
+
+- **Set Properties** — property name, type, property ID, and parameter values with type prefixes (e.g., "static: You found me"). Property names appearing in multiple shapes are highlighted (configurable toggle).
+- **Notifications** — shape name, title, severity level (INFO/WARNING/ERROR), and message body.
+- **Messages** — shape name and message content.
+- **SQL Queries** — shape name and the SQL text from Program Command shapes.
+- **Decisions** — shape name, comparison type, and decision values with type badges.
+- **Maps** — shape name and the referenced Map component ID.
+- **Scripts** — shape name, language, and the Custom Scripting code.
+- **Properties** — inventory of all dynamic process properties and where they're used, grouped by property name.
+- **Flow** — shape-to-shape connections showing the process routing.
+- **Overrides** — per-environment property value overrides.
+- **Inventory** — a count of every shape type in the process.
+
+Each tab has an **Export Current Tab** button, and an **Export All** button copies every tab's data as multi-section TSV. Shape coordinates are available as tooltips on shape names.
+
+When the API token is not configured, only Set Properties are extracted via a DOM-clicking approach (the original behavior).
 
 ### Copy a Property Name or Value
 Inside a Set Properties step, a **Copy** icon appears next to the Add/Edit/Delete buttons in the **Properties to Set** list. Select a property, click **Copy**, and choose from the popup menu:
@@ -128,6 +145,9 @@ A toast confirms each copy. If no property is selected, a reminder toast appears
 
 ### Chooser Input Tooltips
 When you mouse over any chooser panel input (fields where you click "Choose..." to select a value), a tooltip shows the full selected text if it's too long to fit in the field. No more guessing what you selected when the name gets cut off.
+
+### Runtime Status Panel
+A server-rack icon added to the masthead icon row (next to the BoomiXcel gear icon) opens a slide-out panel on the right side of the build canvas showing all your runtimes at a glance. Each runtime displays its **status** (online/offline/warning), **type** (Atom/Cloud/Molecule), **version**, and **hostname**. Click any runtime to expand detailed information including Runtime ID (click to copy), status detail, instance ID, cloud cluster, cloud owner, and install date. Click anywhere outside the panel to close it. Polls every 60 seconds. Configurable via the **Runtime Status Panel** toggle (on by default) in the Options page under Build Enhancements.
 
 ---
 
@@ -202,6 +222,17 @@ Normally when you click **Lock & Edit** on a component tab, Boomi hides the Clos
 
 ### Copy Component ID/URL
 A copy button appears on the build canvas header, letting you quickly copy a component's ID or URL to your clipboard.
+
+### Component Info Button
+An info icon (ℹ️) appears next to the component name in the build canvas header. Click it to open a modal showing the component's name, ID, account ID, branch, and page URL. Click the 📋 icon next to any field to copy it to your clipboard, or click **Copy All as JSON** to copy everything as a formatted JSON object. No API configuration required — all data is parsed from the current page URL.
+
+### Component References
+A link icon (🔗) appears next to the component name on the build canvas (requires Boomi API token). Click it to open a modal with two collapsible sections:
+
+- **Used By** — all parent components that reference this component
+- **References** — all child components this component references
+
+Each entry shows the component ID (clickable to open in a new tab) and its reference type (DEPENDENT or INDEPENDENT). An **Open All** link opens every child component in separate tabs at once. Enable from the Options page under Build Enhancements.
 
 ### Copy Component Defaults
 When copying a component, BoomiXcel can auto-populate the component name and set default checkbox states. Configurable from the Options page:
@@ -302,7 +333,7 @@ When enabled (off by default), clicking **Create Packaged Component** captures w
 ### Run Process From Deployment
 When enabled (off by default), after a successful deployment a **Run Deployment Now** button appears on the success dialog. Clicking it (after a confirmation prompt) uses the Boomi Platform API to submit the process for execution on the matching runtime, then opens Process Reporting in a new tab to show the results.
 
-**Requires a Boomi API token and email.** Generate a token from **Settings → API Tokens** in Boomi. Enter your Boomi account email and the generated token into the Deployment section of the BoomiXcel options page. The credentials are stored in `chrome.storage.sync` and shared across your signed-in browsers.
+**Requires a Boomi API token and email.** Generate a token from **Settings → API Tokens** in Boomi. Enter your Boomi account email and the generated token into the **API** section of the BoomiXcel options page. The credentials are stored in `chrome.storage.sync` and shared across your signed-in browsers.
 
 ---
 

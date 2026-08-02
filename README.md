@@ -130,6 +130,7 @@
 
 ⭐ **Other**
 - Options gear icon in the masthead — quick access to BoomiXcel settings without scrolling to the footer
+- Runtime Status Panel — server-rack icon in the masthead opens a slide-out panel showing all runtimes' status, version, type, and expandable detail (configurable)
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
@@ -434,6 +435,9 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/nativeEditorResize.js` | content | Adds a corner drag-resize handle to Boomi's native inline script editor dialog (ACE-based) |
 | `content/packagedComponentsResize.js` | content | Adds a corner drag-resize handle to the Included Components dialog with auto-recenter on finish |
 | `content/packageNotesAutoApply.js` | content | Copies Latest Notes from the first Included Components table row into Package Notes |
+| `content/runtimePanel.js` | content | Runtime status panel — masthead button + slide-out panel with expandable runtime details |
+| `content/componentInfo.js` | content | Component info button (ℹ️) — modal with name, ID, account, branch, URL, copy-to-clipboard |
+| `content/componentReferences.js` | content | Component references button (🔗) — tree view with type badges, version, DEPENDENT/INDEPENDENT, deleted indicators |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo |
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |
@@ -441,7 +445,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/runProcessFromDeployment.js` | content | After deployment, offers to navigate to Process Reporting and auto-execute the process |
 | `content/logHighlight.js` | content | Highlights WARNING-level rows yellow in the Show Log dialog (re-applies on lazy-load and paging) |
 | `content/logDefaultStatus.js` | content | Sets the default "Minimum Status to Show" in the Show Log dialog when it opens |
-| `content/setPropertiesExtractor.js` | content | Extracts all Set Properties shape configurations from the canvas into a modal table with TSV export |
+| `content/setPropertiesExtractor.js` | content | Process Analysis button — multi-tab: Set Properties, Notify, Messages, SQL, Decisions, Maps, Scripts, Properties, Flow, Overrides + Inventory |
 | `content/copySetProperty.js` | content | Copy Property icon in the Set Properties step panel — copy a selected property's name or value(s) via a popup menu |
 | `content/svgAssets.js` | content | Shared SVG icon strings |
 | `content/modalHelper.js` | content | Boomi-style modal dialog helper |

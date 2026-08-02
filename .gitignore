@@ -8,3 +8,6 @@ OLD/
 
 # Mac system files
 .DS_Store
+
+# Development planning (not for release)
+devoptions.md

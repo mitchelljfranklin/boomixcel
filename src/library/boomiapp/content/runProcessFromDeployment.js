@@ -14,6 +14,7 @@ function bphRunFromDeploymentValid() {
 
 setInterval(function () {
   if (BoomiPlatform.run_process_from_deployment !== "on") return;
+  if (!BoomiPlatform.boomi_api_token) return;
   if (!bphRunFromDeploymentValid()) return;
 
   switch (runFromDeploymentStage) {
@@ -76,6 +77,7 @@ function runFromDeploymentCapture() {
 
 document.addEventListener("mousedown", function (event) {
   if (BoomiPlatform.run_process_from_deployment !== "on") return;
+  if (!BoomiPlatform.boomi_api_token) return;
   if (!bphRunFromDeploymentValid()) return;
 
   var nextButton = event.target.closest('[data-locator="button-next-select-versions"]');
