@@ -81,12 +81,18 @@ document.arrive(
   },
 );
 
+// Strip a trailing "~version" suffix from a component ID so the reporting
+// page loads the process itself rather than a specific revision.
+function stripComponentVersion(componentId) {
+  return componentId ? componentId.split("~")[0] : componentId;
+}
+
 // Inject "View in Process Reporting" link icon next to the Description link on the Build page
 document.arrive('[data-locator="link-description"]', { existing: true }, function (descLink) {
   var linksDiv = descLink.closest('.links');
   if (!linksDiv || linksDiv.querySelector('.bph-monitor-link')) return;
 
-  var currentId = getUrlParameter("componentIdOnFocus");
+  var currentId = stripComponentVersion(getUrlParameter("componentIdOnFocus"));
   if (!currentId) return;
 
   var processReportingEl = document.querySelector('[data-locator="link-process-reporting"]');
@@ -103,7 +109,7 @@ document.arrive('[data-locator="link-description"]', { existing: true }, functio
   link.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" style="width: 24px; height: 24px;"><title>View in Process Reporting</title><path d="M22 12H18L15 21L9 3L6 12H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   link.addEventListener('mouseenter', function () {
-    var currentId = getUrlParameter("componentIdOnFocus");
+    var currentId = stripComponentVersion(getUrlParameter("componentIdOnFocus"));
     if (!currentId) return;
     var processReportingEl = document.querySelector('[data-locator="link-process-reporting"]');
     var accountId =
