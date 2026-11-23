@@ -1,4 +1,4 @@
-- **New:** **Export JSON Profile** — download a Draft 4 JSON Schema and a sample JSON document from any JSON Profile component. Boomi has no native JSON profile export. The button appears left - next to the JSON Profile Name .
+- **New:** **Export JSON Profile** — download a Draft 4 JSON Schema and a sample JSON document from any JSON Profile component. Boomi has no native JSON profile export. The button appears to the left of the component name on JSON Profile tabs and uses the focused component.
 - **New:** Clearer API setup guidance — API-powered actions stay visible and explain how to add a Boomi API token when it's missing. The confusing toolbar `!` badge is gone, and the popup shows a banner when the API isn't configured.
 - **Improved:** Process Analysis now explains when it's using the limited DOM-only view and what configuring an API token unlocks.
 - **Fixed:** Options page text encoding — emoji and arrow characters now render correctly.
