@@ -1242,6 +1242,21 @@ body.bph-resizing {
     padding: 0 !important;
 }
 
+.bpe-setprops-api-notice {
+    margin: 0 0 12px;
+    padding: 10px 14px;
+    border-left: 3px solid #f0a400;
+    background: #fff8e5;
+    color: #6b4a00;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+html.qm-u-theme-dark .bpe-setprops-api-notice {
+    background: #3a2f1a;
+    color: #e8c97a;
+}
+
 .bpe-setprops-container {
     max-height: 420px;
     display: flex;
@@ -1952,4 +1967,69 @@ html.qm-u-theme-dark .bph-property-usage {
     margin-left: 6px;
     cursor: help;
     opacity: 0.7;
+}
+
+/* ── JSON Profile Export ───────────────────────────────────────────── */
+
+.bph-json-export-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    color: #5f6368;
+    transition: color 0.15s ease;
+    vertical-align: middle;
+}
+
+.bph-json-export-btn:hover {
+    color: #1a73e8;
+}
+
+.bph-json-export-btn svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.bph-json-export-summary {
+    margin: 0 0 0.75rem;
+    opacity: 0.8;
+}
+
+.bph-api-setup-summary {
+    margin: 0 0 0.75rem;
+    opacity: 0.8;
+}
+
+.bph-api-setup-steps {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25rem;
+}
+
+.bph-api-setup-steps li {
+    margin-bottom: 0.4rem;
+}
+
+.bph-json-export-preview {
+    max-height: 340px;
+    overflow: auto;
+    margin: 0;
+    padding: 0.75rem;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 12px;
+    line-height: 1.45;
+    white-space: pre;
+}
+
+html.qm-u-theme-dark .bph-json-export-preview {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+html.qm-u-theme-dark .bph-json-export-btn {
+    color: #9aa0a6;
+}
+
+html.qm-u-theme-dark .bph-json-export-btn:hover {
+    color: #8ab4f8;
 }

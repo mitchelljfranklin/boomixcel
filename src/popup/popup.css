@@ -43,6 +43,15 @@ body {
   opacity: 0.8;
 }
 
+.popup-api-banner {
+  padding: 8px 14px;
+  background: #fff4e5;
+  border-bottom: 1px solid #f0c36d;
+  color: #7a4a00;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .toggle-list {
   flex: 1;
   padding: 4px 0;

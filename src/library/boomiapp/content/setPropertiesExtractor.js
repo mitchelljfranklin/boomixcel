@@ -42,7 +42,7 @@ var init_set_properties_extractor = (process) => {
           showToast("Failed to fetch process data from API.", 3000, "error");
         }
       } else {
-        showToast("Extracting Set Properties via DOM...", 5000, "info");
+        showToast("Extracting Set Properties via DOM (limited view)...", 5000, "info");
         var results = await extractAllSetProperties();
         if (results.length === 0) {
           showToast("No Set Properties shapes found on the canvas.", 3000, "warning");
@@ -476,7 +476,15 @@ function showSetPropertiesModal(results) {
   }).join('');
 
   var propertyIdHeader = hasPropertyIds ? '<th>Property ID</th>' : '';
+  var noticeHtml = [
+    '<div class="bpe-setprops-api-notice">',
+    '<strong>Limited view.</strong> Without a Boomi API token, only Set Properties can be read from the page. ',
+    'Add your token in <strong>Options \u2192 API</strong> for a faster analysis that also includes Notify, Messages, SQL, Decisions, Maps, Scripts, Properties, Flow, Overrides, and Inventory.',
+    '</div>',
+  ].join('');
+
   var bodyHtml = [
+    noticeHtml,
     '<div class="bpe-setprops-container">',
     '<table class="bpe-setprops-table">',
     '<thead><tr><th>Property Shape Name</th><th>Property Type</th><th>Property Name</th>' + propertyIdHeader + '<th>Parameters</th></tr></thead>',

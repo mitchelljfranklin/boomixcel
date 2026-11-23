@@ -24,6 +24,11 @@ function renderToggles() {
   list.innerHTML = "";
 
   chrome.storage.sync.get(null, function (items) {
+    var apiBanner = document.getElementById("apiBanner");
+    if (apiBanner) {
+      apiBanner.hidden = !!(items["boomi_api_token"] && items["boomi_api_email"]);
+    }
+
     TOGGLE_LIST.forEach(function (item) {
       var val = items[item.key];
       if (val === undefined) val = item.defaultVal;
