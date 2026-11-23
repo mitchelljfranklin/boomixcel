@@ -15,7 +15,7 @@
     <a href="https://github.com/mitchelljfranklin/BoomiXcel/releases">
       <img src="https://img.shields.io/github/v/release/mitchelljfranklin/BoomiXcel?color=blue&style=for-the-badge" alt="Version">
     </a>
-    <a href="https://github.com/mitchelljfranklin/BoomiXcel/blob/main/LICENSE">
+    <a href="https://github.com/mitchelljfranklin/BoomiXcel/blob/master/LICENSE">
       <img src="https://img.shields.io/badge/license-GPLv3-blue?style=for-the-badge" alt="License">
     </a>
     <a href="https://github.com/mitchelljfranklin/BoomiXcel">
@@ -134,6 +134,8 @@
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
+- Export a JSON profile as a Draft 4 JSON Schema and a sample JSON document — Boomi has no native JSON profile export (requires Boomi API token)
+- Clear API setup guidance — API-powered actions stay visible and explain how to configure a token; the popup shows a banner when the API isn't configured
 - Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export (duplicate property names highlighted — configurable toggle)
 - Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to `<ProcessName>_<timestamp>.<ext>`
@@ -207,7 +209,7 @@ No. Boomi Xcel is an independent, community-built extension. Boomi has no affili
 <details>
 <summary><b>Does it collect or transmit any data?</b></summary>
 
-No. The extension runs entirely in your browser — no analytics, no telemetry, no external servers. Your preferences are stored locally via `chrome.storage.sync` and synced across your signed-in browsers. See [PRIVACY.md](PRIVACY.md) for full details.
+No. There are no analytics, no telemetry, and no third-party servers. The extension runs in your browser and stores preferences locally via `chrome.storage.sync`. If you configure a Boomi API token, API-powered features call Boomi's own API (`api.boomi.com`) on your behalf — nothing is sent anywhere else. See [PRIVACY.md](PRIVACY.md) for full details.
 </details>
 
 <details>
@@ -248,6 +250,7 @@ It depends on your organization's browser policies. Some IT departments block th
 | `storage` | Save your preferences and sync them across browsers |
 | `downloads` | Rename downloaded documents to `<ProcessName>_<timestamp>.<ext>` |
 | Host: `https://platform.boomi.com/*` | The extension only runs on Boomi pages |
+| Host: `https://api.boomi.com/*` | Reads/updates Boomi data only when you configure an API token (Runtime Status, Component References, Run Process From Deployment, JSON Profile Export) |
 
 No other sites are accessed.
 </details>
@@ -394,7 +397,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 ### Script reference
 
 <details>
-<summary>📂 <b>Click to expand — full script reference (54 files)</b></summary>
+<summary>📂 <b>Click to expand — full script reference (60 files)</b></summary>
 
 | Script | Context | Purpose |
 |---|---|---|
@@ -438,6 +441,8 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/runtimePanel.js` | content | Runtime status panel — masthead button + slide-out panel with expandable runtime details |
 | `content/componentInfo.js` | content | Component info button (ℹ️) — modal with name, ID, account, branch, URL, copy-to-clipboard |
 | `content/componentReferences.js` | content | Component references button (🔗) — tree view with type badges, version, DEPENDENT/INDEPENDENT, deleted indicators |
+| `content/jsonProfileSchema.js` | content | Converts `profile.json` Component XML into a Draft 4 JSON Schema and a sample JSON document |
+| `content/jsonProfileExport.js` | content | Export JSON Profile button — fetches the profile via the Component API and downloads the schema/sample |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo |
 | `content/boomiGpt.js` | content | Revision History checkbox → Boomi GPT compare prompt + auto-submit |
 | `content/viewInReporting.js` | content | Deployed process menu → Process Reporting with auto-filter |
@@ -450,6 +455,7 @@ Load the extension unpacked from `src/` in `chrome://extensions` (Developer Mode
 | `content/svgAssets.js` | content | Shared SVG icon strings |
 | `content/modalHelper.js` | content | Boomi-style modal dialog helper |
 | `content/toastHelper.js` | content | Toast notification utility |
+| `content/apiSetup.js` | content | Shared Boomi API token setup modal — shown when an API-dependent action runs without a configured token |
 | `content/defaultScriptingLanguage.js` | content | Auto-selects default scripting language for new shapes |
 | `page/fullscreen.js` | page | Full-screen toggle (page context required) |
 | `options.js` | options | Options page save/restore |
@@ -539,14 +545,14 @@ Contributions are welcome. Please [open an issue](https://github.com/mitchelljfr
 
 ### Making changes
 
-1. Fork and create a branch from `main` (`git checkout -b feature/your-feature`)
+1. Fork and create a branch from `master` (`git checkout -b feature/your-feature`)
 2. See the [Architecture](#architecture) section above for where to place new files:
    - **Content-context** → `src/library/boomiapp/content/`, add to `CONTENT_ORDER` in `scripts/build.js`
    - **Page-context** (Fullscreen API only) → `src/library/boomiapp/page/`, add to `web_accessible_resources` in `src/manifest.json`
 3. Verify the extension loads and works on `https://platform.boomi.com/`
 4. Run `npm run build` and confirm it finishes without errors
 5. Commit with a clear message describing what changed and why
-6. Push and open a pull request against the `main` branch
+6. Push and open a pull request against the `master` branch
 
 ---
 
@@ -558,7 +564,7 @@ Join the [Boomi Discord — #boomi-xcel](https://discord.gg/XcXRrYHVUa) for upda
 
 ## 🔒 Privacy
 
-**Boomi Xcel does not collect, transmit, or store any data from your Boomi platform environment.** The extension runs entirely in your browser — no analytics, no telemetry, no external servers. Your preferences are saved locally and synced across your signed-in browsers via `chrome.storage.sync`. For full details, see [PRIVACY.md](PRIVACY.md).
+**Boomi Xcel does not collect, transmit, or store any data from your Boomi platform environment for its own purposes.** There are no analytics, no telemetry, and no third-party servers. Preferences are saved locally and synced via `chrome.storage.sync`. Optional Boomi API credentials are used only to call Boomi's own API (`api.boomi.com`). For full details, see [PRIVACY.md](PRIVACY.md).
 
 ---
 

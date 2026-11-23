@@ -711,6 +711,7 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `.shape_palette_widget, .gwt-Shape` | `listenerGlobal.js` |
 | `${selector}:not(.bph-load-done)` | `listenerGlobal.js` |
 | `body.bph-resizing` | `boomi.css` |
+| `html.qm-u-theme-dark .bpe-setprops-api-notice` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-item:hover` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-expand-icon` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-runtime-panel-expanded .bph-runtime-panel-expand-icon` | `boomi.css` |
@@ -740,6 +741,9 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `html.qm-u-theme-dark .bpe-analysis-tab-active` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-decision-value` | `boomi.css` |
 | `html.qm-u-theme-dark .bph-property-usage` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-json-export-preview` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-json-export-btn` | `boomi.css` |
+| `html.qm-u-theme-dark .bph-json-export-btn:hover` | `boomi.css` |
 
 ### BoomiXcel-added classes (`bph-*` / `bpe-*`)
 
@@ -755,10 +759,18 @@ Regenerate with: `node scripts/gen-selectors.js`
 
 | Selector | Source |
 |---|---|
+| `BoomiPlatformOverlay` | `apiSetup.js` |
 | `br` | `copyXml.js` |
 | `.form_title_label:not(.no_display)` | `copyXml.js` |
 | `.form_header` | `copyXml.js` |
 | `div.gwt-HTML` | `copyXml.js` |
+| `.type_label` | `jsonProfileExport.js` |
+| `.bph-json-export-btn` | `jsonProfileExport.js` |
+| `.name_label` | `jsonProfileExport.js` |
+| `.component_header .name_label` | `jsonProfileExport.js` |
+| `gwt-Anchor bph-json-export-btn` | `jsonProfileExport.js` |
+| `BoomiPlatformOverlay` | `jsonProfileExport.js` |
+| `parsererror` | `jsonProfileSchema.js` |
 | `.hover-menu-hidden-hotspot.left-arrow::after` | `boomi.css` |
 | `.connectionsspanlink` | `boomi.css` |
 | `.connectionsspanlink:hover` | `boomi.css` |
@@ -778,7 +790,12 @@ Regenerate with: `node scripts/gen-selectors.js`
 
 | Class | Source |
 |---|---|
+| `bph-api-setup-close` | `apiSetup.js` |
+| `bph-json-export-schema` | `jsonProfileExport.js` |
+| `bph-json-export-sample` | `jsonProfileExport.js` |
+| `bph-json-export-close` | `jsonProfileExport.js` |
 | `bph-copy-tooltip` | `boomi.css` |
+| `bpe-setprops-api-notice` | `boomi.css` |
 | `bph-runtime-panel` | `boomi.css` |
 | `bph-runtime-panel-body` | `boomi.css` |
 | `bph-runtime-panel-heading` | `boomi.css` |
@@ -848,5 +865,13 @@ Regenerate with: `node scripts/gen-selectors.js`
 | `bpe-analysis-inventory-table` | `boomi.css` |
 | `bph-property-usage` | `boomi.css` |
 | `bph-api-warning` | `boomi.css` |
+| `bph-json-export-btn` | `boomi.css` |
+| `bph-json-export-btn:hover` | `boomi.css` |
+| `bph-json-export-btn svg` | `boomi.css` |
+| `bph-json-export-summary` | `boomi.css` |
+| `bph-api-setup-summary` | `boomi.css` |
+| `bph-api-setup-steps` | `boomi.css` |
+| `bph-api-setup-steps li` | `boomi.css` |
+| `bph-json-export-preview` | `boomi.css` |
 
 ---
