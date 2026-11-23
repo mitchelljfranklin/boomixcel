@@ -2,7 +2,6 @@ var toggleRuntimePanel = null;
 
 var enableRuntimePanel = function () {
   if (BoomiPlatform.runtime_status_panel === "off") return;
-  if (!BoomiPlatform.boomi_api_token) return;
   if (window.location.hash.indexOf("#build") !== 0) return;
 
   var panelOpen = false;
@@ -191,6 +190,10 @@ var enableRuntimePanel = function () {
 
     link.addEventListener("click", function (clickEvent) {
       clickEvent.preventDefault();
+      if (!isBoomiApiConfigured()) {
+        showBoomiApiSetupModal("Runtime Status Panel");
+        return;
+      }
       if (toggleRuntimePanel) toggleRuntimePanel();
     });
 
@@ -222,8 +225,10 @@ var enableRuntimePanel = function () {
     });
   }
 
-  refresh();
-  pollingInterval = setInterval(refresh, 60000);
+  if (isBoomiApiConfigured()) {
+    refresh();
+    pollingInterval = setInterval(refresh, 60000);
+  }
 };
 
 // BoomiPlatform loads asynchronously

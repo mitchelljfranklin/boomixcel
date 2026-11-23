@@ -2,7 +2,7 @@
 
 ## Project summary
 
-BoomiXcel — a browser extension (Chrome + Firefox) that injects JS/CSS into `https://platform.boomi.com/*` to enhance the Boomi integration platform's web UI.
+BoomiXcel — a browser extension (Chrome + Firefox + Edge) that injects JS/CSS into `https://platform.boomi.com/*` to enhance the Boomi integration platform's web UI. There is no test suite, linter, or typechecker — `npm run build` (plus the CI job) is the only automated verification.
 
 ## Popup
 
@@ -17,12 +17,14 @@ When adding a new on/off toggle, add its `{ key, label, defaultVal }` to `TOGGLE
 ## Build step
 
 ```bash
-npm install          # install esbuild
+npm install          # install esbuild + archiver
 npm run build        # bundle content scripts → content/bundle.js + browser zips
 npm run watch        # rebuild on file changes
 npm run release      # same as build + creates a GitHub release with the zips
 npm run releaseall   # same as release + commits artifacts + pushes branch + opens + merges PR to master
 ```
+
+**CI:** `.github/workflows/build.yml` runs `npm ci` + `npm run build` on Node 18/20/22 for pushes and PRs to `master` or `main`, then asserts all three zips exist and validates the generated Firefox MV2 manifest. A build that fails locally fails CI — there is no other check.
 
 The `--release` flag (or `npm run release`) creates a GitHub release using the `gh` CLI. The release is tagged `v{version}` from `package.json`. Release notes are taken from `updateNotification.md` (the same file that feeds the in-app changelog) under a `## What's New in v{version}` heading, with a **Full Changelog** compare link (last `v*` tag → new version) appended; if `updateNotification.md` is empty/missing, a short fallback line is used instead. All build zips are attached as assets. Requires `gh auth login` or a `GITHUB_TOKEN` environment variable.
 
@@ -83,7 +85,7 @@ content/*.js (in bundle)
 
 ### Storage split
 
-- **`chrome.storage.sync`** — user preferences from the options page (feature toggles, refresh interval, shortcut keys, filter choices). Read directly by `listenerGlobal.js` and cached in bundle-scope `BoomiPlatform`.
+- **`chrome.storage.sync`** — user preferences from the options page (feature toggles, refresh interval, shortcut keys, filter choices). Read directly by `listenerGlobal.js` and cached in bundle-scope `BoomiPlatform`. Also stores the optional Boomi API credentials (`boomi_api_email`, `boomi_api_token`) used by API-powered features.
 - **`chrome.storage.local`** — transient UI state: `bph_custom_refresh_active` for refresh persistence, `bph_suppress_reload_dialog` for suppressing the reload prompt from popup changes, `bph_deployment_notes_temp` for holding captured package notes until the deployment notes field appears.
 - **`localStorage`** — version-tracking key (`bph_update_notification_version`) used by `content/updateNotification.js` to suppress the changelog popup after first view. Legacy keys (`boomiplatenhanUpdateNot{version}`) from the old approach are auto-cleaned on first run.
 
@@ -148,6 +150,8 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/runtimePanel.js` | content | Runtime status panel — masthead button + slide-out panel on the build canvas showing Atom/Cloud/Molecule status, version, and type with expandable detail. Queries `Atom/query` via background service worker. Click-outside closes the panel. Reads `runtime_status_panel` from BoomiPlatform config. |
 | `content/componentInfo.js` | content | Component info button (ℹ️) in the build canvas header. Opens a modal with component name, ID, account, branch, and page URL — all parsed from the page URL. Click-to-copy per field + "Copy All as JSON" button. |
 | `content/componentReferences.js` | content | Component references button (🔗) in the build canvas header. Opens a modal showing "Used By" (parents) and "References" (children) from the ComponentReference API with recursive tree walk, component type badges, version, DEPENDENT/INDEPENDENT labels, deleted indicators, and folder/date tooltips. Reads `component_references` from BoomiPlatform config. |
+| `content/jsonProfileSchema.js` | content | Converts a Boomi JSON profile (`profile.json`) Component XML into a Draft 4 JSON Schema and a representative sample JSON document. Handles objects, repeating/absolute arrays, data types, required fields, descriptions, and length bounds. |
+| `content/jsonProfileExport.js` | content | Export JSON Profile button in the component header — only rendered when the sibling `.type_label` is "JSON Profile" (a `MutationObserver` re-syncs if GWT reuses the header). Resolves the active component from `componentIdOnFocus`, fetches it via the existing `GET_COMPONENT_XML` handler, validates `type="profile.json"`, and downloads `<name>.schema.json` / `<name>.sample.json` from a `renderBoomiModal()` dialog. |
 | `content/brandLogo.js` | content | Replaces the Boomi masthead brand logo with a custom image (reads BoomiPlatform config) |
 | `content/boomiGpt.js` | content | Revision History checkbox selection for Boomi GPT compare prompts. Check 2 revisions → builds a "compare {id} version X and Y" prompt, updates the GPT link, and auto-submits on the BoomiAI page. |
 | `content/viewInReporting.js` | content | Adds "View in Process Reporting" menu item to deployed process context menus and a quick-link icon on the build page. Opens Process Reporting in a new tab and auto-applies a process name filter via polling state machine. |
@@ -160,6 +164,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 | `content/svgAssets.js` | content | Shared SVG icon strings used across multiple content scripts |
 | `content/modalHelper.js` | content | Shared Boomi-style modal dialog renderer and cleanup utilities |
 | `content/toastHelper.js` | content | Shared toast notification utility used across content scripts and the options page |
+| `content/apiSetup.js` | content | Shared "Boomi API token required" setup modal — `isBoomiApiConfigured()` and `showBoomiApiSetupModal(featureName)`. API-dependent actions stay visible and call this on click instead of hiding when the token is missing. |
 | `content/defaultScriptingLanguage.js` | content | Auto-selects default scripting language for Data Process, Custom Scripting, and Business Rules shapes — reads `default_scripting_language` from BoomiPlatform config |
 | `page/fullscreen.js` | page | Full-screen toggle via keyboard shortcut (page context required) |
 | `options.js` | (options page) | Options page save/restore logic |
@@ -167,7 +172,7 @@ document.arrive(".qm-c-servicenav", function (nav) {
 
 ## Versioning
 
-BoomiXcel uses a four-part version in `package.json` — `MAJOR.MINOR.SUBMINOR.BUILD` (currently `2.2.0.0`). The build injects this into all generated manifests.
+BoomiXcel uses a four-part version in `package.json` — `MAJOR.MINOR.SUBMINOR.BUILD` (currently `2.6.0.0`) — which is also duplicated in `src/manifest.json` (the build overwrites the manifest value from `package.json`).
 
 - **MAJOR** — significant changes: new product direction, rebrands, or breaking architecture/tech-stack shifts. (e.g. `1.x.x.x` → `2.x.x.x` for the "BoomiXcel" rebrand and the esbuild bundling overhaul.)
 - **MINOR** — new features or enhancements within the current major (e.g. adding a new content-script feature).
@@ -344,6 +349,10 @@ The outline strips all text content, keeps structural elements with their `class
 
 The AI assistant can then read the snapshot to understand the DOM structure before writing any code.
 
+### Ad-hoc DOM debugging snippets
+
+`scripts/monitor-dom.js` and `scripts/trace-dirty.js` (plus `scripts/trace-dirty-v2.js`) follow the same pattern as `capture-dom.js` — run them to print a console-ready snippet you paste into the F12 console on a live Boomi page. Use `monitor-dom.js` to log every canvas DOM mutation with old/new values, and the `trace-dirty.js` variants to catch what sets `window.onbeforeunload` / `document.title` (the GWT dirty-flag trigger) with a callstack.
+
 ## Before committing — mandatory doc verification
 
 After `npm run build` succeeds and **before any git commit**:
@@ -356,3 +365,5 @@ After `npm run build` succeeds and **before any git commit**:
 ## No auto-push after build
 
 Running `npm run build` produces artifacts (`bundle.js`, manifests, zips) and bumps version references. These build outputs must be reviewed before pushing. **Do not auto-push after a build.** Always commit explicitly with a reviewed diff, then push on demand.
+
+The repository default branch is `master`, and `npm run releaseall` opens/merges its release PR against `master`.

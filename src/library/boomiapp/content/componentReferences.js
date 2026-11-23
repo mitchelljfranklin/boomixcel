@@ -1,7 +1,6 @@
 document.arrive(".component_header .links", { existing: true }, function (linksDiv) {
   if (linksDiv.querySelector(".bph-component-references-btn")) return;
   if (BoomiPlatform.component_references !== "on") return;
-  if (!BoomiPlatform.boomi_api_token) return;
 
   var referencesBtn = document.createElement("a");
   referencesBtn.className = "gwt-Anchor svg-anchor bph-component-references-btn";
@@ -11,6 +10,11 @@ document.arrive(".component_header .links", { existing: true }, function (linksD
 
   referencesBtn.addEventListener("pointerdown", function (buttonClickEvent) {
     buttonClickEvent.stopPropagation();
+
+    if (!isBoomiApiConfigured()) {
+      showBoomiApiSetupModal("Component References");
+      return;
+    }
 
     var accountId = getUrlParameter("accountId") || "";
 

@@ -56,8 +56,12 @@ Click the BoomiXcel icon in your browser toolbar to open a compact settings popu
 | Auto-Apply Component Name | Auto-fills the component name field when copying a component |
 | Package Notes Auto-Apply | Copies Latest Notes into the Package Notes field when creating a packaged component |
 | Run Process From Deployment | After deployment, adds a button to auto-execute the process in Process Reporting |
+| Runtime Status Panel | Adds a masthead button that opens a runtime health slide-out panel |
+| Component References | Adds the Used By / References (🔗) button to component headers |
 
 Changes save immediately. Click **Reload Page** to apply them to the current Boomi tab, or **Full Settings** to open the complete options page.
+
+If the Boomi API token isn't configured, a banner at the top of the popup reminds you that some features need it.
 
 ---
 
@@ -78,7 +82,20 @@ The options page organizes settings into categories shown in a left-hand sidebar
 | **API** | Boomi API token and email — required for Runtime Status Panel, Run Process From Deployment, and other API-powered features |
 | **Reminders** | Post-deployment schedule reminder |
 
+API-powered features stay visible even before a token is configured. If you use one without a token, BoomiXcel shows a short setup guide with the steps to add it. The quick-settings popup also displays a banner reminding you that some features need a token.
+
 A **↺ Reset** button restores all defaults. A yellow dot appears when you have unsaved changes.
+
+### API Token
+
+Some features use the Boomi Platform API. To enable them:
+
+1. In Boomi, open **Settings → API Tokens** and generate a token.
+2. Open the **API** tab in BoomiXcel Options.
+3. Enter your **Boomi API Email** and the **API Token**, then click **Save**.
+4. Reload the Boomi tab.
+
+If you use an API-powered action without a token configured, BoomiXcel shows a short setup guide with these steps. API actions stay visible even before setup, so you can discover them. The token is stored in `chrome.storage.sync`, shared across your signed-in browsers, and sent only to `api.boomi.com`.
 
 ---
 
@@ -134,7 +151,7 @@ A list icon (📋) in the build toolbar scans your process and presents a multi-
 
 Each tab has an **Export Current Tab** button, and an **Export All** button copies every tab's data as multi-section TSV. Shape coordinates are available as tooltips on shape names.
 
-When the API token is not configured, only Set Properties are extracted via a DOM-clicking approach (the original behavior).
+When the API token is not configured, only Set Properties are extracted via a DOM-clicking approach, and the results dialog explains that adding a token unlocks the faster full analysis (Notifications, Messages, SQL, Decisions, Maps, Scripts, Properties, Flow, Overrides, Inventory).
 
 ### Copy a Property Name or Value
 Inside a Set Properties step, a **Copy** icon appears next to the Add/Edit/Delete buttons in the **Properties to Set** list. Select a property, click **Copy**, and choose from the popup menu:
@@ -147,7 +164,7 @@ A toast confirms each copy. If no property is selected, a reminder toast appears
 When you mouse over any chooser panel input (fields where you click "Choose..." to select a value), a tooltip shows the full selected text if it's too long to fit in the field. No more guessing what you selected when the name gets cut off.
 
 ### Runtime Status Panel
-A server-rack icon added to the masthead icon row (next to the BoomiXcel gear icon) opens a slide-out panel on the right side of the build canvas showing all your runtimes at a glance. Each runtime displays its **status** (online/offline/warning), **type** (Atom/Cloud/Molecule), **version**, and **hostname**. Click any runtime to expand detailed information including Runtime ID (click to copy), status detail, instance ID, cloud cluster, cloud owner, and install date. Click anywhere outside the panel to close it. Polls every 60 seconds. Configurable via the **Runtime Status Panel** toggle (on by default) in the Options page under Build Enhancements.
+A server-rack icon added to the masthead icon row (next to the BoomiXcel gear icon) opens a slide-out panel on the right side of the build canvas showing all your runtimes at a glance. Each runtime displays its **status** (online/offline/warning), **type** (Atom/Cloud/Molecule), **version**, and **hostname**. Click any runtime to expand detailed information including Runtime ID (click to copy), status detail, instance ID, cloud cluster, cloud owner, and install date. Click anywhere outside the panel to close it. Polls every 60 seconds. Configurable via the **Runtime Status Panel** toggle (on by default) in the Options page under Build Canvas.
 
 ---
 
@@ -232,7 +249,15 @@ A link icon (🔗) appears next to the component name on the build canvas (requi
 - **Used By** — all parent components that reference this component
 - **References** — all child components this component references
 
-Each entry shows the component ID (clickable to open in a new tab) and its reference type (DEPENDENT or INDEPENDENT). An **Open All** link opens every child component in separate tabs at once. Enable from the Options page under Build Enhancements.
+Each entry shows the component ID (clickable to open in a new tab) and its reference type (DEPENDENT or INDEPENDENT). An **Open All** link opens every child component in separate tabs at once. Enable from the Options page under Build Canvas.
+
+### Export JSON Profile
+Boomi has no native way to export a JSON profile. When you open a JSON Profile component, a download icon appears next to the component name (requires a Boomi API token; the icon only appears for JSON Profile types). Click it to generate two files:
+
+- **JSON Schema** — a Draft 4 schema you can re-import into another JSON profile or use with any schema-aware tool
+- **Sample JSON** — a representative document with placeholder values, useful as a request payload template
+
+The modal previews the schema and offers a download button for each format. If the open component is not a JSON profile, a message explains that instead. If the API token is not configured yet, the button opens a short setup guide explaining how to add it in **Options → API**.
 
 ### Copy Component Defaults
 When copying a component, BoomiXcel can auto-populate the component name and set default checkbox states. Configurable from the Options page:

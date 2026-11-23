@@ -1,4 +1,4 @@
-Boomi Xcel v2.5.1.0
+Boomi Xcel v2.6.0.0
 The Boomi Integration Platform Extension
 
 A browser extension that enhances the Boomi Integration Platform web UI at platform.boomi.com with powerful productivity tools, visual improvements, and workflow optimizations.
@@ -72,6 +72,8 @@ Shortcut	Action
 - View in Process Reporting — quick-link icon on build page + context menu item on deployed processes (auto-applied filter)
 - Revision History checkbox selection → Boomi GPT compare prompts for side-by-side revision analysis
 - Copy component ID/URL from the build canvas
+- Export a JSON profile as a Draft 4 JSON Schema and a sample JSON document — Boomi has no native JSON profile export (requires Boomi API token)
+- Clear API setup guidance — API-powered actions stay visible and explain how to configure a token; the popup shows a banner when the API isn't configured
 - Extract all Set Properties shape configurations from the build canvas into a modal table with TSV export (duplicate property names highlighted — configurable toggle)
 - Copy a Set Properties property name or its value(s) — select a property in the step panel, click Copy, and choose name or value(s)
 - Automatically rename downloaded documents to <ProcessName>_<timestamp>.<ext>

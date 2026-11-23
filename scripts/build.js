@@ -16,6 +16,7 @@ const CONTENT_ORDER = [
   "svgAssets.js",
   "modalHelper.js",
   "toastHelper.js",
+  "apiSetup.js",
   "pageInit.js",
   "favicon.js",
   "headerActions.js",
@@ -64,6 +65,8 @@ const CONTENT_ORDER = [
   "runtimePanel.js",
   "componentInfo.js",
   "componentReferences.js",
+  "jsonProfileSchema.js",
+  "jsonProfileExport.js",
 ];
 
 function getConcatenatedSource() {
@@ -92,7 +95,7 @@ function extractUpdateChangelog() {
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim();
     if (!line) continue;
-    var htmlLine = convertMarkdownLinks(line);
+    var htmlLine = convertChangelogInlineMarkdown(line);
     if (line.startsWith("- ")) {
       items.push("<li><p>" + htmlLine.substring(2) + "</p></li>");
     } else if (!intro) {
@@ -106,8 +109,10 @@ function extractUpdateChangelog() {
   return "var UPDATE_CHANGELOG_HTML = " + JSON.stringify(html) + ";\n";
 }
 
-function convertMarkdownLinks(text) {
-  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+function convertChangelogInlineMarkdown(text) {
+  return text
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
 function decodeHtmlEntities(text) {
